@@ -1,0 +1,21 @@
+{
+    "version": "3.1.14",
+    "modules": {
+        "code": true,
+        "git": true,
+        "iHFM": true,
+        "linear": true,
+        "pushover": true,
+        "branding": true,
+        "brisa": true,
+        "automato": true,
+        "screenshot": true,
+        "core": true,
+        "projecter": true,
+        "github": true,
+        "t_resize": true,
+        "sonhos": true,
+        "ix_tagger": true,
+        "mopgled": true
+    }
+}

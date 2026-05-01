@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="ix.BLZ-S logo">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF1744"/>
+      <stop offset="100%" stop-color="#FF8A65"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="#12060A"/>
+  <circle cx="256" cy="256" r="170" fill="url(#g)" opacity="0.2"/>
+  <path d="M148 286c0-56 45-101 101-101 45 0 83 29 96 69h-59c-8-10-19-16-33-16-26 0-48 22-48 48s22 48 48 48c14 0 25-6 33-16h59c-13 40-51 69-96 69-56 0-101-45-101-101z" fill="#FF1744"/>
+  <rect x="336" y="220" width="32" height="132" rx="8" fill="#FFBF17"/>
+  <rect x="382" y="184" width="32" height="168" rx="8" fill="#FFBF17" opacity="0.9"/>
+</svg>

@@ -1,0 +1,57 @@
+<!-- # ╔═════════════════════════════════════════════════════════════════════════════╗ -->
+<!-- # ║    ▄▄███▄▄    ┌────────────────────────────────────────────────────────────┐║ -->
+<!-- # ║  ▄█▛▘‾ ‾▝▜█▄  │ Base – V1.0.1                                              │║ -->
+<!-- # ║ ██▘       ▝██ │                                                            │║ -->
+<!-- # ║ ██▖       ▗██ ├────────────────────────────────────────────────────────────┤║ -->
+<!-- # ║ ███▄_   _▄███ │ By Ir.On                                                   │║ -->
+<!-- # ║ █████████████ │ Agent: Copilot | Sessao: branch:main                       │║ -->
+<!-- # ║ ██ ▀ ████████ │ commit:f563b5b                                             │║ -->
+<!-- # ║ ██ ● ██▀██▀██ │ Ultima modificacao: 2026-02-11 - 12:13                     │║ -->
+<!-- # ║ ▜▛   ██ ▜▛ ██ │ ironix.com.br                                              │║ -->
+<!-- # ║      ██    ▜▛ ├────────────────────────────────────────────────────────────┤║ -->
+<!-- # ║      ▜▛       │ Caminho:                                                   │║ -->
+<!-- # ║               │ _docs/mopgled/project_template/templates/base.html         │║ -->
+<!-- # ║               ├────────────────────────────────────────────────────────────┤║ -->
+<!-- # ║               │ Detalhes:                                                  │║ -->
+<!-- # ║               │ * V1.0.1 - [sem detalhes]                                  │║ -->
+<!-- # ║               │                                                            │║ -->
+<!-- # ║               └────────────────────────────────────────────────────────────┘║ -->
+<!-- # ╚═════════════════════════════════════════════════════════════════════════════╝ -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ page_title or "App" }}{% endblock %}</title>
+  {% set use_cdn = app_config.get('MOPGLED_USE_CDN', False) %}
+  {% if use_cdn %}
+    {% include 'mopgled/head_include.html' ignore missing %}
+  {% else %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='mopgled.css') }}">
+  {% endif %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body>
+  <header class="px-4 py-3 border-bottom">
+    <div class="d-flex align-items-center justify-content-between">
+      <strong>ix.BZP-DealScore-UTM-Sync</strong>
+      <a href="{{ url_for('auth.logout') }}" class="text-muted">Sair</a>
+    </div>
+  </header>
+
+  <main class="container py-4">
+    {% block content %}
+    <h1 class="mb-3">Controle</h1>
+    <p>Projeto inicial pronto para evoluir.</p>
+    {% endblock %}
+  </main>
+
+  {% if use_cdn %}
+    {% include 'mopgled/scripts_include.html' ignore missing %}
+  {% else %}
+    <script type="module" src="{{ url_for('static', filename='mopgled.js') }}"></script>
+  {% endif %}
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

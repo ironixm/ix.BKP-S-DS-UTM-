@@ -1,0 +1,247 @@
+"""Adapter para Agendor v3 REST com a MESMA assinatura de pd_api.py.
+
+Mapeamento Pipedrive → Agendor:
+  person/{id}        ↔ people/{id}
+  organization/{id}  ↔ organizations/{id}
+  deal/{id}          ↔ deals/{id}
+  deal_notes         ↔ deals/{id}/activities (filtradas por type=note)
+
+Auth: Authorization: Token <AGENDOR_TOKEN>
+Base: https://api.agendor.com.br/v3
+"""
+from __future__ import annotations
+import os, time, requests
+
+BASE_URL = os.environ.get("AGENDOR_BASE_URL", "https://api.agendor.com.br/v3").rstrip("/")
+TOKEN = os.environ.get("AGENDOR_TOKEN", "").strip()
+
+SESSION = requests.Session()
+if TOKEN:
+    SESSION.headers.update({"Authorization": f"Token {TOKEN}",
+                            "Content-Type": "application/json"})
+
+_last_t = 0.0
+_MIN_INT = 0.25  # ~4 req/s
+
+
+def _request(path: str, params=None, method="GET", json=None):
+    global _last_t
+    elapsed = time.time() - _last_t
+    if elapsed < _MIN_INT:
+        time.sleep(_MIN_INT - elapsed)
+    for attempt in range(4):
+        _last_t = time.time()
+        r = SESSION.request(method, f"{BASE_URL}{path}",
+                            params=params, json=json, timeout=20)
+        if r.status_code == 429:
+            wait = int(r.headers.get("Retry-After", 5))
+            print(f"  ⏳ 429 Agendor — aguardando {wait}s")
+            time.sleep(min(wait + 1, 60)); continue
+        if r.status_code == 404:
+            return None
+        r.raise_for_status()
+        if r.status_code == 204 or not r.text:
+            return {}
+        return r.json()
+    r.raise_for_status()
+    return r.json()
+
+
+# =====================================================
+# NORMALIZAÇÃO Agendor → formato esperado pelo BLZ
+# =====================================================
+
+def _normalize_person(p: dict | None) -> dict | None:
+    """Agendor people → Pipedrive-like person dict (email/phone arrays)."""
+    if not p: return None
+    emails, phones = [], []
+    for e in (p.get("contact") or {}).get("email") or []:
+        if isinstance(e, dict): emails.append({"value": e.get("email") or e.get("value") or ""})
+        elif isinstance(e, str): emails.append({"value": e})
+    if (p.get("contact") or {}).get("whatsapp"):
+        phones.append({"value": p["contact"]["whatsapp"]})
+    if (p.get("contact") or {}).get("mobile"):
+        phones.append({"value": p["contact"]["mobile"]})
+    return {
+        "id": p.get("id"),
+        "name": p.get("name") or "",
+        "email": emails,
+        "phone": phones,
+        "_raw_agendor": p,
+    }
+
+
+def _normalize_org(o: dict | None) -> dict | None:
+    if not o: return None
+    return {
+        "id": o.get("id"),
+        "name": o.get("name") or "",
+        "_raw_agendor": o,
+    }
+
+
+def _normalize_deal(d: dict | None) -> dict | None:
+    if not d: return None
+    stage = d.get("dealStage") or {}
+    person = d.get("people") or [None]
+    if isinstance(person, list):
+        person = person[0] if person else None
+    org = d.get("organization") or {}
+    return {
+        "id": d.get("id"),
+        "title": d.get("description") or d.get("title") or "",
+        "value": d.get("value") or 0,
+        "currency": "BRL",
+        "status": _map_status(d.get("status")),
+        "stage_id": stage.get("id") if isinstance(stage, dict) else None,
+        "stage_name": stage.get("name") if isinstance(stage, dict) else None,
+        "person_id": (person or {}).get("id") if isinstance(person, dict) else None,
+        "person_name": (person or {}).get("name") if isinstance(person, dict) else None,
+        "org_id": org.get("id") if isinstance(org, dict) else None,
+        "org_name": org.get("name") if isinstance(org, dict) else None,
+        "_raw_agendor": d,
+    }
+
+
+def _map_status(s):
+    """Agendor status → pipedrive-like."""
+    if isinstance(s, dict):
+        s = s.get("name") or s.get("text") or ""
+    s = (s or "").lower()
+    if "ganh" in s or "won" in s: return "won"
+    if "perd" in s or "lost" in s: return "lost"
+    return "open"
+
+
+# =====================================================
+# PERSON
+# =====================================================
+
+def get_person(person_id):
+    data = _request(f"/people/{person_id}")
+    return _normalize_person((data or {}).get("data") or data)
+
+
+def update_person(person_id, payload):
+    return _request(f"/people/{person_id}", method="PUT", json=payload)
+
+
+# =====================================================
+# ORGANIZATION
+# =====================================================
+
+def get_organization(org_id):
+    data = _request(f"/organizations/{org_id}")
+    return _normalize_org((data or {}).get("data") or data)
+
+
+def update_organization(org_id, payload):
+    return _request(f"/organizations/{org_id}", method="PUT", json=payload)
+
+
+# =====================================================
+# DEAL
+# =====================================================
+
+def get_deal(deal_id):
+    data = _request(f"/deals/{deal_id}")
+    return _normalize_deal((data or {}).get("data") or data)
+
+
+def update_deal(deal_id, payload):
+    """Aceita payload Pipedrive-like e converte para Agendor."""
+    ag_payload = {}
+    if "title" in payload:        ag_payload["description"] = payload["title"]
+    if "value" in payload:        ag_payload["value"] = payload["value"]
+    if "stage_id" in payload:     ag_payload["dealStage"] = payload["stage_id"]
+    if "status" in payload:
+        st = payload["status"]
+        ag_payload["status"] = "won" if st == "won" else ("lost" if st == "lost" else "ongoing")
+    # Custom fields: caller deve passar ag_payload["customFields"] explicitamente
+    if "customFields" in payload: ag_payload["customFields"] = payload["customFields"]
+    return _request(f"/deals/{deal_id}", method="PUT", json=ag_payload)
+
+
+def get_deals_by_filter(filter_id, start=0, limit=100):
+    """Agendor não tem 'filters' como Pipedrive. Retorna deals paginados."""
+    return get_deals(start=start, limit=limit)
+
+
+def get_deals(start=0, limit=100, status="all_not_deleted", sort=None):
+    page = (start // limit) + 1 if limit else 1
+    params = {"page": page, "per_page": limit}
+    data = _request("/deals", params=params) or {}
+    items = data.get("data") or data.get("deals") or []
+    return {
+        "data": [_normalize_deal(d) for d in items],
+        "additional_data": {"pagination": {
+            "more_items_in_collection": bool((data.get("pagination") or {}).get("next")),
+            "next_start": start + len(items),
+        }},
+    }
+
+
+def get_deals_count_by_filter(filter_id):
+    data = _request("/deals", params={"page": 1, "per_page": 1}) or {}
+    return (data.get("pagination") or {}).get("total") or 0
+
+
+# =====================================================
+# NOTES (Activities type=note no Agendor)
+# =====================================================
+
+def get_deal_notes(deal_id):
+    data = _request(f"/deals/{deal_id}/activities") or {}
+    items = data.get("data") or []
+    notes = []
+    for a in items:
+        if (a.get("activityType") or {}).get("name") == "note" or a.get("type") == "note":
+            notes.append({
+                "id": a.get("id"),
+                "content": a.get("text") or a.get("description") or "",
+                "add_time": a.get("createdAt") or "",
+                "user": (a.get("user") or {}).get("name") or "",
+            })
+    return notes
+
+
+def add_note(deal_id, content, pinned=1):
+    body = {"text": content, "type": "note"}
+    return _request(f"/deals/{deal_id}/activities", method="POST", json=body)
+
+
+def update_note(note_id, content):
+    return _request(f"/activities/{note_id}", method="PUT", json={"text": content})
+
+
+def delete_note(note_id):
+    return _request(f"/activities/{note_id}", method="DELETE")
+
+
+def dedup_auto_notes_for_deal(deal_id, keep: str = "newest") -> dict:
+    """Stub: Agendor activities são imutáveis em geral. Retorna no-op."""
+    return {"deleted": 0, "kept": 0, "skipped": True, "reason": "agendor-noop"}
+
+
+# =====================================================
+# PRODUCTS (Agendor: produtos vinculados a deal)
+# =====================================================
+
+def get_products(limit=100):
+    data = _request("/products", params={"per_page": limit}) or {}
+    return {"data": data.get("data") or []}
+
+
+def search_product(term):
+    data = _request("/products", params={"q": term, "per_page": 20}) or {}
+    return {"data": data.get("data") or []}
+
+
+def get_deal_products(deal_id):
+    data = _request(f"/deals/{deal_id}/products") or {}
+    return {"data": data.get("data") or []}
+
+
+def add_product_to_deal(deal_id, product_id, item_price, quantity=1):
+    body = {"product": product_id, "value": item_price, "quantity": quantity}
+    return _request(f"/deals/{deal_id}/products", method="POST", json=body)

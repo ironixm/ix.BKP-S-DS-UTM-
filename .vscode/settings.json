@@ -1,0 +1,11 @@
+{
+  "workbench.iconTheme": "material-icon-theme",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "README.md": "CHANGELOG.md, JOBS.md, SONHOS.md, AGENT.md, AGENTS.md, CLAUDE.md",
+    "pyproject.toml": "poetry.lock, requirements*.txt",
+    ".env": ".env.*, .env.wp",
+    "main.py": "logger.py, parsers.py, mappings.py, pd_api.py, notes_builder.py, ltv.py"
+  }
+}

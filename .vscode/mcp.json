@@ -1,0 +1,14 @@
+{
+    "servers": {
+        "ix-wp": {
+            "type": "stdio",
+            "command": "/usr/local/bin/node",
+            "args": [
+                "/Users/IronMascarenhas_1/.copilot/mcp-launcher.js"
+            ],
+            "env": {
+                "TZ": "America/Sao_Paulo"
+            }
+        }
+    }
+}

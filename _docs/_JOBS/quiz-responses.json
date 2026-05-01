@@ -1,0 +1,26 @@
+{
+  "project-setup": {
+    "projectName": "ix.BZL-S(DS+UTM)",
+    "projectType": "other",
+    "stack": "GAS/Python/GSheets/PipeDrive",
+    "keepColors": "false",
+    "brandColor": "#FF1744",
+    "brandScheme": "auto",
+    "brandEmoji": "🐝",
+    "modules": [
+      "Core",
+      "Projecter",
+      "Linear",
+      "GitHub",
+      "iHFM",
+      "Branding",
+      "Pushover",
+      "t_resize",
+      "Sonhos",
+      "ix_tagger",
+      "Mopgled",
+      "ScreenShot"
+    ],
+    "_savedAt": "2026-04-16T18:35:21.133Z"
+  }
+}

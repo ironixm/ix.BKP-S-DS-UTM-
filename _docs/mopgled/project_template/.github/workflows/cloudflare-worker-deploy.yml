@@ -1,0 +1,36 @@
+name: Deploy Cloudflare Worker (madmode-worker)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "modulos/ix_cf_workers/workers/madmode/**"
+      - ".github/workflows/cloudflare-worker-deploy.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install wrangler
+        run: npm install -g wrangler
+
+      - name: Deploy worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        run: |
+          cd modulos/ix_cf_workers/workers/madmode
+          wrangler deploy

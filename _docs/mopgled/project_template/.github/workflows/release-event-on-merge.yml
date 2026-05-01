@@ -1,0 +1,65 @@
+name: Release Event on Main
+
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Notify release event
+        env:
+          MM_RELEASES_API_URL: ${{ secrets.MM_RELEASES_API_URL }}
+          MM_RELEASES_API_TOKEN: ${{ secrets.MM_RELEASES_API_TOKEN }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+          import subprocess
+          import sys
+          from urllib import request as urlrequest
+          from urllib.error import URLError, HTTPError
+
+          url = os.getenv("MM_RELEASES_API_URL")
+          token = os.getenv("MM_RELEASES_API_TOKEN")
+          if not url or not token:
+              print("MM_RELEASES_API_URL/token nao configurados.")
+              sys.exit(0)
+
+          subject = subprocess.check_output(["git", "log", "-1", "--pretty=%s"], text=True).strip()
+          body = subprocess.check_output(["git", "log", "-1", "--pretty=%b"], text=True).strip()
+          match = re.match(r"^(V\\d+\\.\\d+\\.\\d+)", subject)
+          if not match:
+              print("Commit sem versao valida.")
+              sys.exit(0)
+
+          payload = {
+              "version": match.group(1),
+              "event_type": "deploy",
+              "title": subject,
+              "body": body,
+              "set_current": True,
+          }
+          data = json.dumps(payload).encode("utf-8")
+          req = urlrequest.Request(
+              url,
+              data=data,
+              headers={
+                  "Content-Type": "application/json",
+                  "X-Release-Token": token,
+              },
+              method="POST",
+          )
+          try:
+              with urlrequest.urlopen(req, timeout=10) as resp:
+                  resp.read()
+          except (HTTPError, URLError) as exc:
+              print(f"Falha ao notificar: {exc}")
+              sys.exit(1)
+          PY

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MadMode · Login</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body{font-family:ui-sans-serif,system-ui,sans-serif;background:#0b0d10;color:#e5e7eb}
+  .card{background:#11161c;border:1px solid #1f2937;border-radius:12px}
+  input{background:#0b0d10;border:1px solid #374151;color:#e5e7eb;padding:.55rem .75rem;border-radius:8px;width:100%}
+  input:focus{outline:none;border-color:#10b981}
+  button{background:#10b981;color:#06291f;border:0;padding:.6rem 1rem;border-radius:8px;font-weight:600;width:100%}
+  button:hover{background:#34d399}
+  .err{background:#7f1d1d33;border:1px solid #b91c1c;color:#fca5a5;padding:.5rem .75rem;border-radius:8px;font-size:.85rem}
+</style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="card p-6 w-full max-w-sm">
+    <div class="flex items-center gap-2 mb-1">
+      <span class="text-2xl">🛠️</span>
+      <h1 class="text-xl font-bold tracking-tight">MadMode</h1>
+    </div>
+    <p class="text-xs text-gray-500 mb-5">Painel administrativo · ix.BKP-S</p>
+
+    {% if error %}<div class="err mb-4">{{ error }}</div>{% endif %}
+
+    <form method="POST" autocomplete="off" class="space-y-3">
+      <div>
+        <label class="block text-xs uppercase text-gray-400 mb-1">Usuário</label>
+        <input name="username" autofocus required>
+      </div>
+      <div>
+        <label class="block text-xs uppercase text-gray-400 mb-1">Senha</label>
+        <input name="password" type="password" required>
+      </div>
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
+</body>
+</html>

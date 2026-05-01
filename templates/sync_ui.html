@@ -1,0 +1,136 @@
+<!-- # ╔═════════════════════════════════════════════════════════════════╗ -->
+<!-- # ║    ▄▄███▄▄    ┌────────────────────────────────────────────────┐║ -->
+<!-- # ║  ▄█▛▘‾ ‾▝▜█▄  │ Sync Ui – V1.0.0                               │║ -->
+<!-- # ║ ██▘       ▝██ │                                                │║ -->
+<!-- # ║ ██▖       ▗██ ├────────────────────────────────────────────────┤║ -->
+<!-- # ║ ███▄_   _▄███ │ By Ir.On                                       │║ -->
+<!-- # ║ █████████████ │ Agent: Copilot | Sessao: branch:main           │║ -->
+<!-- # ║ ██ ▀ ████████ │ Ultima modificacao: 2026-02-11 - 12:55         │║ -->
+<!-- # ║ ██ ● ██▀██▀██ │ ironix.com.br                                  │║ -->
+<!-- # ║ ▜▛   ██ ▜▛ ██ ├────────────────────────────────────────────────┤║ -->
+<!-- # ║      ██    ▜▛ │ Caminho:                                       │║ -->
+<!-- # ║      ▜▛       │ templates/sync_ui.html                         │║ -->
+<!-- # ║               ├────────────────────────────────────────────────┤║ -->
+<!-- # ║               │ Detalhes:                                      │║ -->
+<!-- # ║               │ * V1.0.0 - [sem detalhes]                      │║ -->
+<!-- # ║               │                                                │║ -->
+<!-- # ║               └────────────────────────────────────────────────┘║ -->
+<!-- # ╚═════════════════════════════════════════════════════════════════╝ -->
+
+{% extends "base.html" %}
+
+{% block title %}
+ix.DealScore · Sync
+{% endblock %}
+
+{% block content %}
+
+<div class="container my-5 ix-container">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 mb-0">ix.DealScore · Sincronização</h1>
+    <a href="/dates-ui" class="btn btn-outline-secondary btn-sm">Datas dos Deals</a>
+  </div>
+
+  <div class="card shadow-sm mb-4 ix-card">
+    <div class="card-body">
+      <form id="sync-form" class="ix-form">
+
+        <div class="mb-3 ix-field">
+          <label class="form-label">Filter ID</label>
+          <input type="number" id="filter_id" required class="form-control">
+        </div>
+
+        <div class="mb-3 ix-field">
+          <label class="form-label">Start</label>
+          <input type="number" id="start" value="0" class="form-control">
+        </div>
+
+        <div class="mb-3 ix-field">
+          <label class="form-label">Limit</label>
+          <input type="number" id="limit" value="50" class="form-control">
+        </div>
+
+        <div class="mb-3 ix-field">
+          <label class="form-label">Limite de rolagens (deals)</label>
+          <input type="number" id="max_deals" class="form-control">
+        </div>
+
+        <div class="mb-3 ix-field">
+          <label class="form-label">Modo</label>
+          <select id="mode" class="form-select">
+            <option value="test">Teste</option>
+            <option value="write">Gravação</option>
+          </select>
+        </div>
+
+        <div class="mb-4 ix-field">
+          <label class="form-label">Intervalo (segundos)</label>
+          <input type="number" id="interval" value="30" class="form-control">
+        </div>
+
+        <div class="d-flex gap-2 ix-actions">
+          <button
+            type="submit"
+            id="btn-start"
+            class="btn btn-primary ix-btn-primary"
+          >
+            ▶ Iniciar
+          </button>
+
+          <button
+            type="button"
+            id="btn-pause"
+            class="btn btn-secondary ix-btn-secondary hidden"
+          >
+            ⏸ Pausar
+          </button>
+
+          <button
+            type="button"
+            id="btn-resume"
+            class="btn btn-primary ix-btn-primary hidden"
+          >
+            ▶ Continuar
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <div class="card shadow-sm hidden ix-card" id="progress-wrapper">
+    <div class="card-body">
+      <h3 class="h6 mb-3">Progresso</h3>
+
+      <div class="progress mb-3 ix-progress">
+        <div
+          class="progress-bar ix-progress-bar"
+          id="progress-bar"
+          role="progressbar"
+          style="width: 0%"
+        ></div>
+      </div>
+
+      <div id="sync-stats" class="mb-3"></div>
+
+      <pre class="ix-log" id="log"></pre>
+    </div>
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='sync_ui.js') }}"></script>
+
+{% endblock %}
+
+<!--
+  ▗▅▅▖   
+▄▛▘‾‾▝▜▄ 
+█▖    ▗█   © 2026 Copyright
+███▅▅███   Ir.On
+██●█████ 
+▜▛  █▜▛█   "Feito com muito carinho."
+    █  ▀ 
+    ▀    
+-->

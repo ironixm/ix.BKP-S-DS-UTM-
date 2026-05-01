@@ -1,0 +1,15 @@
+{
+    "mcpServers": {
+        "ix-wp": {
+            "type": "stdio",
+            "command": "node",
+            "args": [
+                "/Users/IronMascarenhas_1/.copilot/mcp-launcher.js"
+            ],
+            "env": {
+                "TZ": "America/Sao_Paulo",
+                "IXWP_WORKSPACE_ROOT": "/Users/IronMascarenhas_1/Projects/ix.BLZ-S(DS+UTM)"
+            }
+        }
+    }
+}

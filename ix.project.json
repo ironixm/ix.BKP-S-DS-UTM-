@@ -1,0 +1,61 @@
+{
+    "$schema": "1-dev/1-modulos/0-Core/ix.project.schema.json",
+    "name": "",
+    "codename": "ix.BLZ-S(DS+UTM)",
+    "version": "1.0.0",
+    "type": "library",
+    "status": "active",
+    "aliases": [],
+    "description": "ix.BLZ-S(DS+UTM) — Sincronização, enrich e análise de dados comerciais",
+    "pitch": null,
+    "readmePath": "README.md",
+    "tags": [],
+    "path": "/Users/IronMascarenhas_1/Projects/ix.BLZ-S(DS+UTM)",
+    "locale": "pt-BR",
+    "timezone": "America/Sao_Paulo",
+    "brand": {
+        "logo": null,
+        "icon": null,
+        "colors": {
+            "primary": null,
+            "secondary": null,
+            "accent": null
+        }
+    },
+    "linear": {
+        "team": null,
+        "project": "",
+        "prefix": null
+    },
+    "github": {
+        "repo": "ironixm/ix",
+        "url": "https://github.com/ironixm/ix.BLZ-S-DS-UTM-",
+        "branch": "main"
+    },
+    "stack": {
+        "languages": [
+            "Python",
+            "JavaScript",
+            "Shell"
+        ],
+        "frameworks": [],
+        "runtime": "Python",
+        "packageManager": "pip"
+    },
+    "urls": {
+        "docs": null,
+        "production": null,
+        "staging": null,
+        "marketplace": null,
+        "design": null
+    },
+    "ixwp": {
+        "profile": "ix-wp.profile.json",
+        "version": "3.1.14"
+    },
+    "meta": {
+        "createdAt": "2026-04-26T11:00:24-03:00",
+        "updatedAt": "2026-04-26T11:00:24-03:00",
+        "createdBy": "batch_ix_project.py"
+    }
+}

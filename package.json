@@ -1,0 +1,10 @@
+{
+  "name": "ix-blz-s-ds-utm",
+  "version": "1.0.0",
+  "description": "ix.BLZ-S(DS+UTM) — Sincronização, enrich e análise de dados comerciais",
+  "scripts": {
+    "build": "bash scripts/build_mopgled.sh",
+    "deploy": "bash modulos/mopgled/autosync.sh"
+  },
+  "private": true
+}

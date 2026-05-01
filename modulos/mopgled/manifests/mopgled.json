@@ -1,0 +1,22 @@
+{
+  "service": {
+    "name": "MopGled",
+    "api_base": "http://ix-renomeie.onrender.com/mopgled"
+  },
+  "app": {
+    "id": 11,
+    "name": "ix.BZP-DealScore-UTM-Sync",
+    "theme_id": "mopgled-T.1",
+    "mode": "single"
+  },
+  "cdn": {
+    "css_url": "http://ix-renomeie.onrender.com/mopgled/apps/11/css",
+    "js_url": "http://ix-renomeie.onrender.com/mopgled/apps/11/js",
+    "module_url": "http://ix-renomeie.onrender.com/mopgled/apps/11/module"
+  },
+  "generated_at": "2026-02-03T15:23:33.305871",
+  "defaults": {
+    "templates_dir": "templates",
+    "static_dir": "static"
+  }
+}

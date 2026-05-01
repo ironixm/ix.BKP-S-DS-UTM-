@@ -1,0 +1,29 @@
+# ===========================================================
+# .gitmessage — Template de commit ix.WP V2.0.0
+# ===========================================================
+# Formato: Vx.y.z - Modulo(tipo:) - Título - TIPO - DDMMYYHHMM
+#          Vx.y.z - ModuloX|ModuloY(tipo:) - Título - TIPO - DDMMYYHHMM
+#
+# Módulos separados por | quando commit afeta múltiplos módulos.
+#
+# tipo: (parênteses)  |  TIPO (sufixo)
+#   feat:    = FEAT     = Nova funcionalidade
+#   fix:     = FIX      = Correção de bug
+#   docs:    = DOCS     = Documentação
+#   refactor:= REFACTOR = Refatoração
+#   test:    = TEST     = Testes
+#   chore:   = CHORE    = Manutenção
+#   style:   = STYLE    = Formatação/estilo
+#   perf:    = PERF     = Performance
+#   ci:      = CI       = CI/CD
+#   build:   = BUILD    = Build system
+#
+# Exemplos (módulo único):
+#   V2.0.31 - Linear(feat:) - Sync bidirecional - FEAT - 2403261430
+#   V2.0.31 - iHFM(fix:) - Fix encoding UTF-8 - FIX - 2403261500
+#
+# Exemplos (multi-módulo):
+#   V2.0.31 - Branding|Wizard(fix:) - Paleta diferenciada - FIX - 2403261600
+#   V2.0.31 - Core|Github(refactor:) - Reestruturar provision - REFACTOR - 2403261700
+# ===========================================================
+

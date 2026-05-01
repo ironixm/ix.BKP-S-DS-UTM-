@@ -1,0 +1,110 @@
+<!-- # ╔═════════════════════════════════════════════════════════════════════════════╗ -->
+<!-- # ║    ▄▄███▄▄    ┌────────────────────────────────────────────────────────────┐║ -->
+<!-- # ║  ▄█▛▘‾ ‾▝▜█▄  │ Sync Ui – V1.0.0                                           │║ -->
+<!-- # ║ ██▘       ▝██ │                                                            │║ -->
+<!-- # ║ ██▖       ▗██ ├────────────────────────────────────────────────────────────┤║ -->
+<!-- # ║ ███▄_   _▄███ │ By Ir.On                                                   │║ -->
+<!-- # ║ █████████████ │ Agent: Copilot | Sessao: branch:main                       │║ -->
+<!-- # ║ ██ ▀ ████████ │ commit:f563b5b                                             │║ -->
+<!-- # ║ ██ ● ██▀██▀██ │ Ultima modificacao: 2026-02-03 - 15:41                     │║ -->
+<!-- # ║ ▜▛   ██ ▜▛ ██ │ ironix.com.br                                              │║ -->
+<!-- # ║      ██    ▜▛ ├────────────────────────────────────────────────────────────┤║ -->
+<!-- # ║      ▜▛       │ Caminho:                                                   │║ -->
+<!-- # ║               │ modulos/mopgled/backups/20260203_151326/templates/sync_... │║ -->
+<!-- # ║               ├────────────────────────────────────────────────────────────┤║ -->
+<!-- # ║               │ Detalhes:                                                  │║ -->
+<!-- # ║               │ * V1.0.0 - [sem detalhes]                                  │║ -->
+<!-- # ║               │                                                            │║ -->
+<!-- # ║               └────────────────────────────────────────────────────────────┘║ -->
+<!-- # ╚═════════════════════════════════════════════════════════════════════════════╝ -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <title>ix.DealScore · Sync</title>
+</head>
+
+<body>
+
+  <div class="ix-container">
+
+    <div class="ix-card">
+      <h1>ix.DealScore · Sincronização</h1>
+
+      <form id="sync-form" class="ix-form">
+
+        <div class="ix-field">
+          <label>Filter ID</label>
+          <input type="number" id="filter_id" required min="1" />
+        </div>
+
+        <div class="ix-field">
+          <label>Start</label>
+          <input type="number" id="start" value="0" />
+        </div>
+
+        <div class="ix-field">
+          <label>Limit</label>
+          <input type="number" id="limit" value="50" />
+        </div>
+
+        <div class="ix-field">
+          <label>Modo</label>
+          <select id="mode">
+            <option value="test">Teste</option>
+            <option value="write">Gravação</option>
+          </select>
+        </div>
+
+        <div class="ix-field">
+          <label>Intervalo (segundos)</label>
+          <input type="number" id="interval" value="30" min="5" />
+        </div>
+
+        <div class="ix-field ix-actions">
+          <button type="submit" id="btn-start" class="ix-btn-primary">
+            ▶ Iniciar
+          </button>
+
+          <button type="button" id="btn-pause" class="ix-btn-secondary hidden">
+            ⏸ Pausar
+          </button>
+
+          <button type="button" id="btn-resume" class="ix-btn-primary hidden">
+            ▶ Continuar
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="ix-card hidden" id="progress-wrapper">
+      <h3>Progresso</h3>
+
+      <div class="ix-progress">
+        <div class="ix-progress-bar" id="progress-bar"></div>
+      </div>
+      
+      <div id="sync-stats"></div>
+      
+      <pre class="ix-log" id="log"></pre>
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='sync_ui.js') }}"></script>
+
+</body>
+</html>
+
+<!--
+  ▗▅▅▖   
+▄▛▘‾‾▝▜▄ 
+█▖    ▗█   © 2026 Copyright
+███▅▅███   Ir.On
+██●█████ 
+▜▛  █▜▛█   "Feito com muito carinho."
+    █  ▀ 
+    ▀    
+-->

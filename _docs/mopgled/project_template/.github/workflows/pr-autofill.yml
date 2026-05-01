@@ -1,0 +1,152 @@
+name: ix.PR-Auto-Fill-V1.1
+
+on:
+  pull_request: 
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  autofill: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Analyze commits and extract metadata
+        id: analyze
+        run: |
+          base="origin/${{ github.base_ref }}"
+          git fetch origin ${{ github.base_ref }}
+          
+          # Get all commits since base
+          commits=$(git log --oneline --max-count=50 --no-merges "$base"...HEAD)
+          echo "commits<<EOF" >> $GITHUB_OUTPUT
+          echo "$commits" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
+          # Get files changed
+          files=$(git diff --name-status "$base"...HEAD)
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$files" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
+          # Get diff stats
+          stat=$(git diff --stat "$base"...HEAD)
+          echo "stat<<EOF" >> $GITHUB_OUTPUT
+          echo "$stat" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
+          # Get last commit info for date and initial parsing
+          last_commit_msg=$(git log -1 --format=%s)
+          last_commit_date=$(git log -1 --format=%cd --date=format:'%d%m%y%H%M')
+          
+          echo "last_commit_msg=$last_commit_msg" >> $GITHUB_OUTPUT
+          echo "last_commit_date=$last_commit_date" >> $GITHUB_OUTPUT
+
+      - name: Generate AI narrative
+        id: ai_narrative
+        env:
+          COMMITS_RAW: ${{ steps.analyze.outputs.commits }}
+          FILES_RAW: ${{ steps.analyze.outputs.files }}
+          STAT: ${{ steps.analyze.outputs.stat }}
+          LAST_COMMIT_MSG: ${{ steps.analyze.outputs.last_commit_msg }}
+          LAST_COMMIT_DATE: ${{ steps.analyze.outputs.last_commit_date }}
+          BRANCH: ${{ github.head_ref }}
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          python - <<'PY' > /tmp/ai_payload.json
+          import json, os
+
+          payload = {
+              "commits": os.environ.get("COMMITS_RAW", ""),
+              "files": os.environ.get("FILES_RAW", ""),
+              "stat": os.environ.get("STAT", ""),
+              "last_commit_msg": os.environ.get("LAST_COMMIT_MSG", ""),
+              "last_commit_date": os.environ.get("LAST_COMMIT_DATE", ""),
+              "branch": os.environ.get("BRANCH"),
+              "base_ref": os.environ.get("BASE_REF"),
+          }
+          print(json.dumps(payload, ensure_ascii=False))
+          PY
+          python modulos/AlixiaSync/submodulos/releases/ai_agent.py < /tmp/ai_payload.json > /tmp/ai_output.json
+          narrative=$(python - <<'PY'
+          import json
+          data = json.load(open("/tmp/ai_output.json", "r", encoding="utf-8"))
+          print(json.dumps(data))
+          PY
+          )
+          echo "narrative=$narrative" >> $GITHUB_OUTPUT
+
+      - name: Update PR title and body
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const narrative = JSON.parse(fs.readFileSync('/tmp/ai_output.json', 'utf8'));
+            const { title: generatedTitle, body: generatedBody } = narrative;
+            const { owner, repo } = context.repo;
+            const pullNumber = context.payload.pull_request.number;
+
+            // Buscar PR atual para verificar título e descrição existentes
+            const { data: currentPR } = await github.rest.pulls.get({
+              owner,
+              repo,
+              pull_number: pullNumber,
+            });
+
+            const currentTitle = currentPR.title || '';
+            const currentBody = currentPR.body || '';
+
+            // Função para avaliar se o conteúdo está bem preenchido
+            function isWellFilled(title, body) {
+              // Critérios para considerar "bem preenchido":
+              // 1. Título tem mais de 40 caracteres E segue padrão Vx.y.z
+              // 2. Body tem mais de 200 caracteres E contém seções estruturadas
+              
+              const titleMinLength = 40;
+              const bodyMinLength = 200;
+              const hasVersionPattern = /^V\d+\.\d+\.\d+/.test(title);
+              const hasStructuredContent = body.includes('##') || body.includes('- ['); // Markdown headers ou checklists
+              
+              const titleIsGood = title.length >= titleMinLength && hasVersionPattern;
+              const bodyIsGood = body.length >= bodyMinLength && hasStructuredContent;
+              
+              return titleIsGood && bodyIsGood;
+            }
+
+            // Decidir se deve atualizar
+            let shouldUpdate = false;
+            let updateReason = '';
+            
+            if (!currentTitle || currentTitle.trim() === '' || !currentBody || currentBody.trim() === '') {
+              shouldUpdate = true;
+              updateReason = 'PR vazia - preenchendo com conteúdo gerado';
+            } else if (!isWellFilled(currentTitle, currentBody)) {
+              shouldUpdate = true;
+              updateReason = 'Conteúdo pobre de detalhes - aprimorando com AI';
+            } else {
+              shouldUpdate = false;
+              updateReason = 'PR já bem preenchida (provavelmente pelo Copilot) - mantendo conteúdo atual';
+            }
+
+            core.info(`📋 Análise: ${updateReason}`);
+            core.info(`   Título atual: "${currentTitle.substring(0, 60)}..."`);
+            core.info(`   Body atual: ${currentBody.length} caracteres`);
+
+            if (shouldUpdate) {
+              await github.rest.pulls.update({
+                owner,
+                repo,
+                pull_number: pullNumber,
+                title: generatedTitle,
+                body: generatedBody.trim(),
+              });
+              core.info(`✅ PR atualizado: ${generatedTitle}`);
+            } else {
+              core.info(`⏭️ PR já tem descrição substancial. Mantendo descrição existente.`);
+              core.info(`   Descrição atual tem ${currentBody.length} caracteres.`);
+            }

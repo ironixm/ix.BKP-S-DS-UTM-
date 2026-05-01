@@ -1,0 +1,154 @@
+<!-- # ╔═════════════════════════════════════════════════════════════════╗ -->
+<!-- # ║    ▄▄███▄▄    ┌────────────────────────────────────────────────┐║ -->
+<!-- # ║  ▄█▛▘‾ ‾▝▜█▄  │ Dates Ui – V1.0.0                              │║ -->
+<!-- # ║ ██▘       ▝██ │                                                │║ -->
+<!-- # ║ ██▖       ▗██ ├────────────────────────────────────────────────┤║ -->
+<!-- # ║ ███▄_   _▄███ │ By Ir.On                                       │║ -->
+<!-- # ║ █████████████ │ Agent: Copilot | Sessao: branch:main           │║ -->
+<!-- # ║ ██ ▀ ████████ │ Ultima modificacao: 2026-02-11 - 12:55         │║ -->
+<!-- # ║ ██ ● ██▀██▀██ │ ironix.com.br                                  │║ -->
+<!-- # ║ ▜▛   ██ ▜▛ ██ ├────────────────────────────────────────────────┤║ -->
+<!-- # ║      ██    ▜▛ │ Caminho:                                       │║ -->
+<!-- # ║      ▜▛       │ templates/dates_ui.html                        │║ -->
+<!-- # ║               ├────────────────────────────────────────────────┤║ -->
+<!-- # ║               │ Detalhes:                                      │║ -->
+<!-- # ║               │ * V1.0.0 - [sem detalhes]                      │║ -->
+<!-- # ║               │                                                │║ -->
+<!-- # ║               └────────────────────────────────────────────────┘║ -->
+<!-- # ╚═════════════════════════════════════════════════════════════════╝ -->
+
+{% extends "base.html" %}
+
+{% block title %}
+ix.DealScore · Datas dos Deals
+{% endblock %}
+
+{% block content %}
+<div class="container my-5 ix-container">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 mb-0">ix.DealScore · Datas dos Deals</h1>
+    <a href="/sync-ui" class="btn btn-outline-secondary btn-sm">Voltar</a>
+  </div>
+
+  <div class="card shadow-sm mb-4 ix-card">
+    <div class="card-body">
+      <form id="dates-form" class="ix-form">
+        <div class="row g-3">
+          <div class="col-12 col-lg-6">
+            <label class="form-label">Periodo</label>
+            <div class="d-flex flex-column gap-2">
+              <label class="form-check">
+                <input class="form-check-input" type="radio" name="range_mode" value="last_days" checked>
+                <span class="form-check-label">Ultimos</span>
+              </label>
+              <input type="number" class="form-control" id="last_days" value="7" min="1">
+
+              <label class="form-check">
+                <input class="form-check-input" type="radio" name="range_mode" value="after_date">
+                <span class="form-check-label">Apos a data</span>
+              </label>
+              <input type="date" class="form-control" id="after_date">
+
+              <label class="form-check">
+                <input class="form-check-input" type="radio" name="range_mode" value="before_date">
+                <span class="form-check-label">Antes da data</span>
+              </label>
+              <input type="date" class="form-control" id="before_date">
+
+              <label class="form-check">
+                <input class="form-check-input" type="radio" name="range_mode" value="custom">
+                <span class="form-check-label">Periodo personalizado</span>
+              </label>
+              <div class="d-flex gap-2">
+                <input type="date" class="form-control" id="start_date">
+                <input type="date" class="form-control" id="end_date">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <label class="form-label">Entidade para buscar a data</label>
+            <div class="d-flex flex-column gap-2">
+              <label class="form-check">
+                <input class="form-check-input" type="radio" name="date_field" value="person_created" checked>
+                <span class="form-check-label">Data de criacao da Pessoa</span>
+              </label>
+              <label class="form-check">
+                <input class="form-check-input" type="radio" name="date_field" value="org_created">
+                <span class="form-check-label">Data de criacao da Empresa</span>
+              </label>
+              <label class="form-check">
+                <input class="form-check-input" type="radio" name="date_field" value="deal_created">
+                <span class="form-check-label">Data de criacao do Negocio</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 d-flex gap-2">
+          <button type="submit" class="btn btn-primary ix-btn-primary" id="btn-preview">Carregar dados</button>
+          <span class="text-muted" id="preview-status"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card shadow-sm ix-card">
+    <div class="card-body">
+      <div id="preview-summary" class="mb-3"></div>
+      <div class="table-responsive">
+        <table class="table table-sm align-middle" id="dates-table">
+          <thead>
+            <tr>
+              <th>Pessoa</th>
+              <th>Data Pessoa</th>
+              <th>Empresa</th>
+              <th>Data Empresa</th>
+              <th>Negocio</th>
+              <th>Data Negocio</th>
+              <th>Delta (dias)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="d-flex gap-2 mt-3">
+        <button class="btn btn-warning" id="btn-normalize" disabled>Normalizar datas</button>
+        <span class="text-muted" id="normalize-status"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ix-date-warn {
+    background: #fff3cd;
+  }
+
+  .ix-date-danger {
+    background: #f8d7da;
+  }
+
+  .ix-date-cell {
+    border-radius: 6px;
+    padding: 4px 8px;
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+  }
+</style>
+
+<script src="{{ url_for('static', filename='dates_ui.js') }}"></script>
+{% endblock %}
+
+<!--
+  ▗▅▅▖   
+▄▛▘‾‾▝▜▄ 
+█▖    ▗█   © 2026 Copyright
+███▅▅███   Ir.On
+██●█████ 
+▜▛  █▜▛█   "Feito com muito carinho."
+    █  ▀ 
+    ▀    
+-->

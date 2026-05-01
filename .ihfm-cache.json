@@ -1,0 +1,642 @@
+{
+  "AGENT.md": {
+    "hash": "a3338789b624d8c8",
+    "status": "done"
+  },
+  "SONHOS.md": {
+    "hash": "f7fde414618dbb42",
+    "status": "done"
+  },
+  "READEME.md": {
+    "hash": "6fa5b06580437541",
+    "status": "done"
+  },
+  "JOBS.md": {
+    "hash": "89b99debff47fe6b",
+    "status": "done"
+  },
+  "product_match.py": {
+    "hash": "8af46bd664ba6faa",
+    "status": "done"
+  },
+  "CHANGELOG.md": {
+    "hash": "e32b7574f5267535",
+    "status": "done"
+  },
+  "conversions.py": {
+    "hash": "c7aa90f3ab69364b",
+    "status": "done"
+  },
+  "pd_api.py": {
+    "hash": "4e29f7d9da184a17",
+    "status": "done"
+  },
+  "pyproject.toml": {
+    "hash": "86607769d8831629",
+    "status": "done"
+  },
+  "ltv.py": {
+    "hash": "1d106af31efe1096",
+    "status": "done"
+  },
+  "parsers.py": {
+    "hash": "acc2cbcef72f21cd",
+    "status": "done"
+  },
+  "logger.py": {
+    "hash": "c22e4fc2c38d931e",
+    "status": "done"
+  },
+  "notes_builder.py": {
+    "hash": "ae94b004dc7893ce",
+    "status": "done"
+  },
+  "README.md": {
+    "hash": "7815efbce9317c09",
+    "status": "done"
+  },
+  "docker-compose.yml": {
+    "hash": "dc868bb5151f9907",
+    "status": "done"
+  },
+  "AGENTS.md": {
+    "hash": "f869442e57fc61e7",
+    "status": "done"
+  },
+  "main.py": {
+    "hash": "5d6840d65fd8da2d",
+    "status": "done"
+  },
+  "_Start(▶︎)_.command": {
+    "hash": "82dbc907d2eaffed",
+    "status": "done"
+  },
+  "CLAUDE.md": {
+    "hash": "6074cbee617dc6cc",
+    "status": "done"
+  },
+  "mappings.py": {
+    "hash": "3448ea0bb13a56d9",
+    "status": "done"
+  },
+  "dealscore/deal_score.py": {
+    "hash": "64dee4675f235174",
+    "status": "done"
+  },
+  "dealscore/deal_score_rules.py": {
+    "hash": "97e40b0729d0c036",
+    "status": "done"
+  },
+  "_docs/deal_score_metodologia.md": {
+    "hash": "61fe0c1b138635b8",
+    "status": "done"
+  },
+  "_docs/merlin-meta-value-estimation.md": {
+    "hash": "ea268636f925ae89",
+    "status": "done"
+  },
+  "_docs/sonhos/sonhos-e-devaneios.md": {
+    "hash": "0628d337f68267e5",
+    "status": "done"
+  },
+  "_docs/mopgled/AGENT.md": {
+    "hash": "f0a35b97d1da2d4c",
+    "status": "done"
+  },
+  "_docs/mopgled/README.md": {
+    "hash": "9c49c78e64a2502d",
+    "status": "done"
+  },
+  "_docs/mopgled/instalador/install.sh": {
+    "hash": "d182ba31e4ee3206",
+    "status": "done"
+  },
+  "_docs/mopgled/instalador/install-py.py": {
+    "hash": "af4de97cc341a983",
+    "status": "done"
+  },
+  "_docs/mopgled/instalador/install-node.js": {
+    "hash": "6a0a874bf5d254fd",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/AGENT.md": {
+    "hash": "cede957f43ff5770",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/config.py": {
+    "hash": "6ef3bee237a7925d",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/requirements.txt": {
+    "hash": "0414418e7320d17f",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_Gera_requirements_txt.command": {
+    "hash": "eda8c2a18d10d59a",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/alembic.ini": {
+    "hash": "216962784b619dbf",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/README.md": {
+    "hash": "2a3f192ccd16aa4a",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/extensions.py": {
+    "hash": "b7042c0194e3cc63",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/app.py": {
+    "hash": "159e83918f3ed460",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_Start(▶︎)_.command": {
+    "hash": "3c6045b3eb5fb82b",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/wsgi.py": {
+    "hash": "43024a6183f5c92b",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/migrations/AGENT.md": {
+    "hash": "48581c60379a0ae3",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/migrations/env.py": {
+    "hash": "f7995db85a9e9926",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/core/AGENT.md": {
+    "hash": "d01481ab65aa44a4",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/core/auth.py": {
+    "hash": "d00b5e7c2acd7a5e",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/core/teardown.py": {
+    "hash": "a42d3278b4b88d65",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/core/routes_loader.py": {
+    "hash": "80846b35f8161ddd",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/core/health.py": {
+    "hash": "2513c92ae9d40107",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/core/__init__.py": {
+    "hash": "b3a79e1d1ce7a86f",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/core/factory.py": {
+    "hash": "99ef3fc194b635d3",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/core/routes_base.py": {
+    "hash": "d450cdf73a17ae17",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/core/filters.py": {
+    "hash": "2ab5b7d9f9483754",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_docs/AGENT.md": {
+    "hash": "b0b52fe8064c9ffd",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_docs/_logo_ansii_ir.on_cabeçalhão.txt": {
+    "hash": "04172e83453fae89",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_docs/_cHead.md": {
+    "hash": "a3567b0895e2ea88",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_docs/entrada/README.md": {
+    "hash": "1a2f0e039494c53b",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_docs/entrada/controle/README.md": {
+    "hash": "377a07261794d722",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_docs/entrada/mopgled/AGENT.md": {
+    "hash": "83725df153fc8af8",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_docs/agents/COPILLOT.md": {
+    "hash": "22b84cacf7330f62",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_docs/agents/CODEX.md": {
+    "hash": "399fac46a894d8b5",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_docs/playbooks/#9.1 Playbook Projecter-V-CODEX.md": {
+    "hash": "d71550e4870d18f1",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_docs/playbooks/#9.2 Playbook Projecter-V-COPILLOT.md": {
+    "hash": "9f94ac2952542096",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_docs/playbooks/#9 Playbook Projecter-V-Geral.md": {
+    "hash": "ce440f5a08661e7d",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_docs/Prompts/README.md": {
+    "hash": "397da67f6b997183",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/utils/foguete_azul.py": {
+    "hash": "17194c2620b83170",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/models/AGENT.md": {
+    "hash": "483e35aac70e4355",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/models/user.py": {
+    "hash": "cf14e1046025f383",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/models/log.py": {
+    "hash": "f7c0052004b1fddb",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/models/__init__.py": {
+    "hash": "41be5b217dc382e0",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_services/pushover/AGENT.md": {
+    "hash": "ab1ab1dca26d82d7",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_services/pushover/pushover.py": {
+    "hash": "ae60052819a245a8",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/_services/pushover/README.md": {
+    "hash": "a5e989a5f3483d61",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/static/AGENT.md": {
+    "hash": "3ed9abfc6be509d1",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/static/mopgled.js": {
+    "hash": "3a8a159702c4ccc4",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/static/mopgled.css": {
+    "hash": "4eec31c4077eceae",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/static/css/app.css": {
+    "hash": "eb049d9df1ab8d73",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/static/js/app.js": {
+    "hash": "8758f0007246e38e",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/.github/pull_request_template.md": {
+    "hash": "a154bde447b7e510",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/.github/copilot-instructions.md": {
+    "hash": "ca71c7fc77ffa83b",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/.github/COMMIT_CONVENTION.md": {
+    "hash": "fcc3bdb95e9892e6",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/.github/workflows/pr-autofill.yml": {
+    "hash": "6d46f3a248363f04",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/.github/workflows/parallel-sync-check.yml": {
+    "hash": "ac6a9911f625f0c5",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/.github/workflows/cloudflare-worker-deploy.yml": {
+    "hash": "1bbd0c73ce8a28c6",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/.github/workflows/commit-format.yml": {
+    "hash": "940a11546db1cf19",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/.github/workflows/parallel-merge-orchestrator.yml": {
+    "hash": "324bd4780458f5f1",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/.github/workflows/module-isolation-check.yml": {
+    "hash": "ab70cce7803f0cfb",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/.github/workflows/release-event-on-merge.yml": {
+    "hash": "3ed2219c1124eb8d",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/.github/workflows/migration-safety-check.yml": {
+    "hash": "54f7ec750b6fe297",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/templates/AGENT.md": {
+    "hash": "1df048287c8c9e41",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/templates/base.html": {
+    "hash": "4de5dceb852c8804",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/templates/login.html": {
+    "hash": "e67c564d7144b197",
+    "status": "done"
+  },
+  "_docs/mopgled/project_template/modulos/AGENT.md": {
+    "hash": "0283c40dd2942542",
+    "status": "done"
+  },
+  "_docs/mopgled/modulos/mopgled-client/AGENT.md": {
+    "hash": "d9f808bc71ebce89",
+    "status": "done"
+  },
+  "_docs/mopgled/modulos/mopgled-client/autosync_node.js": {
+    "hash": "76bc909d1cd5c53b",
+    "status": "done"
+  },
+  "_docs/mopgled/modulos/mopgled-client/README.md": {
+    "hash": "398f778e28873031",
+    "status": "done"
+  },
+  "_docs/mopgled/modulos/mopgled-client/instalar.py": {
+    "hash": "e3fad902e241613f",
+    "status": "done"
+  },
+  "_docs/mopgled/modulos/mopgled-client/autosync.sh": {
+    "hash": "558b0f909a73cf14",
+    "status": "done"
+  },
+  "_docs/mopgled/modulos/mopgled-client/assets/mopgled_head.html": {
+    "hash": "76897dbd89498443",
+    "status": "done"
+  },
+  "_docs/mopgled/modulos/mopgled-client/assets/mopgled_scripts.html": {
+    "hash": "8abae2675f04c205",
+    "status": "done"
+  },
+  "_docs/mopgled/modulos/mopgled-client/backups/20260211_151641/templates/mopgled/head_include.html": {
+    "hash": "e311fc4153361ab8",
+    "status": "done"
+  },
+  "_docs/mopgled/modulos/mopgled-client/backups/20260211_151641/templates/mopgled/scripts_include.html": {
+    "hash": "688eeeb3a3fc5386",
+    "status": "done"
+  },
+  "_docs/projeto/ix.BLZ-S-DS-UTM-ResumoProjeto-Status.md": {
+    "hash": "63b43e4e6e62e77f",
+    "status": "done"
+  },
+  "_docs/projeto/ix.BLZ-S-DS-UTM-PichElevator.md": {
+    "hash": "3d4b8864f5f65f72",
+    "status": "done"
+  },
+  "_docs/projeto/Projeto-ix.BLZ-S-DS-UTM-V1.0-190326.md": {
+    "hash": "4ffeebac50f22dcc",
+    "status": "done"
+  },
+  "_docs/projeto/_legados/Projeto-ix.BLZ-S-DS-UTM-V0.1.0.md": {
+    "hash": "679ee7d684048469",
+    "status": "done"
+  },
+  "_docs/projeto/_legados/ix.BLZ-S(DS+UTM)-Pitch__20260319-1425.md": {
+    "hash": "c6343b76aed5c8d9",
+    "status": "done"
+  },
+  "_docs/projeto/_legados/Projeto-ix.BLZ-S-DS-UTM-V1.0-190326__pre-enrich__20260319-1523.md": {
+    "hash": "bfa3e53d1080f585",
+    "status": "done"
+  },
+  "_docs/projeto/_legados/ix.BLZ-S-DS-UTM-PichElevator.md": {
+    "hash": "8aeddc4b11f3b232",
+    "status": "done"
+  },
+  "_docs/agents/COPILLOT.md": {
+    "hash": "13e259d7cc81e8d5",
+    "status": "done"
+  },
+  "_docs/agents/CODEX.md": {
+    "hash": "d7b1b80333591d25",
+    "status": "done"
+  },
+  "_docs/prompts/README.md": {
+    "hash": "2400623e81d0c71d",
+    "status": "done"
+  },
+  "_docs/prompts/260416-1830-EnrichV2-DealScoreFix-APIv2(Prompt).md": {
+    "hash": "380a06ee8b83ac82",
+    "status": "done"
+  },
+  "_docs/prompts/analise-dealscore-reais.md": {
+    "hash": "b2bb0f14c1553015",
+    "status": "done"
+  },
+  "_docs/prompts/datas-dos-deals.md": {
+    "hash": "a92dbc0e635397c9",
+    "status": "done"
+  },
+  "_docs/_JOBS/JOBS.md": {
+    "hash": "e4fb67e701473a26",
+    "status": "done"
+  },
+  "_services/pushover/AGENT.md": {
+    "hash": "6ab53b354c6e325b",
+    "status": "done"
+  },
+  "_services/pushover/pushover.py": {
+    "hash": "5caff46b1209eef0",
+    "status": "done"
+  },
+  "_services/pushover/README.md": {
+    "hash": "5f3f1faca3db35fe",
+    "status": "done"
+  },
+  "static/sync_ui.js": {
+    "hash": "3ef3fb22051ccd22",
+    "status": "done"
+  },
+  "static/dates_ui.js": {
+    "hash": "631a53954ddc6302",
+    "status": "done"
+  },
+  "static/sync_ui.css": {
+    "hash": "e3b0c44298fc1c14",
+    "status": "done"
+  },
+  "scripts/analyze_won_products.py": {
+    "hash": "d65d0353ad9a1f30",
+    "status": "done"
+  },
+  "scripts/batch_enrich.py": {
+    "hash": "121dfa4099aebca0",
+    "status": "done"
+  },
+  "scripts/build_deals_analysis_db.py": {
+    "hash": "612a9e4e8eaaf0c3",
+    "status": "done"
+  },
+  "scripts/map_fields.py": {
+    "hash": "4ec7034845608722",
+    "status": "done"
+  },
+  "scripts/clean_duplicate_notes.py": {
+    "hash": "b8923be5c862f78a",
+    "status": "done"
+  },
+  "scripts/analyze_ltv.py": {
+    "hash": "f0338f82729c4972",
+    "status": "done"
+  },
+  "scripts/batch_update_all_scores.py": {
+    "hash": "41b8ac25adb1b9ae",
+    "status": "done"
+  },
+  "scripts/build_mopgled.sh": {
+    "hash": "d795647d2cc59f9c",
+    "status": "done"
+  },
+  "scripts/gas-deploy/PipedrivePull.js": {
+    "hash": "a6dd291f8e888e78",
+    "status": "done"
+  },
+  ".github/copilot-instructions.md": {
+    "hash": "e0ce82bb7693b396",
+    "status": "done"
+  },
+  ".github/instructions/ix-wp-notifications.instructions.md": {
+    "hash": "6277d2a2cf6f39b5",
+    "status": "done"
+  },
+  ".github/instructions/ix-wp-git.instructions.md": {
+    "hash": "1739b13418ee0e59",
+    "status": "done"
+  },
+  ".github/instructions/ix-wp-core.instructions.md": {
+    "hash": "b7b319d3a1160f25",
+    "status": "done"
+  },
+  ".github/instructions/ix-wp-linear.instructions.md": {
+    "hash": "23cd97376d35f4e7",
+    "status": "done"
+  },
+  ".github/instructions/ix-wp-code.instructions.md": {
+    "hash": "9bfee9bfeabc28bf",
+    "status": "done"
+  },
+  ".github/instructions/ix-wp-automato.instructions.md": {
+    "hash": "74f6de3c7b0b8b23",
+    "status": "done"
+  },
+  ".github/instructions/ix-wp-brisa.instructions.md": {
+    "hash": "6d6982b2e845ca6d",
+    "status": "done"
+  },
+  ".github/instructions/ix-wp-iHFM.instructions.md": {
+    "hash": "1624e613874caad0",
+    "status": "done"
+  },
+  "templates/base.html": {
+    "hash": "0576c8d26928172b",
+    "status": "done"
+  },
+  "templates/dates_ui.html": {
+    "hash": "eea7607a38ad0c68",
+    "status": "done"
+  },
+  "templates/sync_ui.html": {
+    "hash": "468d01102f29502b",
+    "status": "done"
+  },
+  "templates/mopgled/head_include.html": {
+    "hash": "3554bf81fb295ee4",
+    "status": "done"
+  },
+  "templates/mopgled/scripts_include.html": {
+    "hash": "8f60df1de8121b00",
+    "status": "done"
+  },
+  "modulos/mopgled/AGENT.md": {
+    "hash": "b6a858d3733d9ade",
+    "status": "done"
+  },
+  "modulos/mopgled/autosync_node.js": {
+    "hash": "3f8f681ab4e590c6",
+    "status": "done"
+  },
+  "modulos/mopgled/README.md": {
+    "hash": "7f3d71e3ee960547",
+    "status": "done"
+  },
+  "modulos/mopgled/instalar.py": {
+    "hash": "ca87b4cc2efa310f",
+    "status": "done"
+  },
+  "modulos/mopgled/autosync.sh": {
+    "hash": "5598ff08a71f96e2",
+    "status": "done"
+  },
+  "modulos/mopgled/assets/mopgled_head.html": {
+    "hash": "262ecdd9c8914d3a",
+    "status": "done"
+  },
+  "modulos/mopgled/assets/mopgled_scripts.html": {
+    "hash": "b64384241fb7f039",
+    "status": "done"
+  },
+  "modulos/mopgled/backups/20260203_151954/templates/mopgled/head_include.html": {
+    "hash": "2be5068fb9a9a97e",
+    "status": "done"
+  },
+  "modulos/mopgled/backups/20260203_151954/templates/mopgled/scripts_include.html": {
+    "hash": "18f98b7aedb5135c",
+    "status": "done"
+  },
+  "modulos/mopgled/backups/20260203_152333/templates/base.html": {
+    "hash": "f0a0a80c562ae7c5",
+    "status": "done"
+  },
+  "modulos/mopgled/backups/20260203_152333/templates/mopgled/head_include.html": {
+    "hash": "c62135894bb69ca7",
+    "status": "done"
+  },
+  "modulos/mopgled/backups/20260203_152333/templates/mopgled/scripts_include.html": {
+    "hash": "8917297fe6d0e10e",
+    "status": "done"
+  },
+  "modulos/mopgled/backups/20260203_152006/templates/mopgled/head_include.html": {
+    "hash": "8f51311e789089cc",
+    "status": "done"
+  },
+  "modulos/mopgled/backups/20260203_152006/templates/mopgled/scripts_include.html": {
+    "hash": "87e736c1a21f8ec6",
+    "status": "done"
+  },
+  "modulos/mopgled/backups/20260203_151326/templates/sync_ui.html": {
+    "hash": "fbb890f7bdb21fa0",
+    "status": "done"
+  },
+  "modules/ix-delscore-sync.js": {
+    "hash": "628787fec8b4222c",
+    "status": "done"
+  },
+  "_docs/projeto/PROJETO_ix.BLZ-S-DS-UTM.md": {
+    "hash": "d9aace2d17495db1",
+    "status": "done"
+  }
+}

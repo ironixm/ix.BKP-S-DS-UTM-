@@ -1,0 +1,159 @@
+# ╔═════════════════════════════════════════════════════════════════════════════╗
+# ║    ▄▄███▄▄    ┌────────────────────────────────────────────────────────────┐║
+# ║  ▄█▛▘‾ ‾▝▜█▄  │ Parallel Sync Check – V1.0.0                               │║
+# ║ ██▘       ▝██ │                                                            │║
+# ║ ██▖       ▗██ ├────────────────────────────────────────────────────────────┤║
+# ║ ███▄_   _▄███ │ By Ir.On                                                   │║
+# ║ █████████████ │ Agent: Copilot | Sessao: branch:main                       │║
+# ║ ██ ▀ ████████ │ commit:f563b5b                                             │║
+# ║ ██ ● ██▀██▀██ │ Ultima modificacao: 2026-02-11 - 12:13                     │║
+# ║ ▜▛   ██ ▜▛ ██ │ ironix.com.br                                              │║
+# ║      ██    ▜▛ ├────────────────────────────────────────────────────────────┤║
+# ║      ▜▛       │ Caminho:                                                   │║
+# ║               │ _docs/mopgled/project_template/.github/workflows/parall... │║
+# ║               ├────────────────────────────────────────────────────────────┤║
+# ║               │ Detalhes:                                                  │║
+# ║               │ * V1.0.0 - [sem detalhes]                                  │║
+# ║               │                                                            │║
+# ║               └────────────────────────────────────────────────────────────┘║
+# ╚═════════════════════════════════════════════════════════════════════════════╝
+
+name: Parallel Sync Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - "core/**"
+      - "models/**"
+      - "services/**"
+      - "migrations/**"
+      - "static/css/**"
+      - "static/js/**"
+      - "templates/base.html"
+      - "extensions.py"
+      - "config.py"
+      - "wsgi.py"
+
+jobs:
+  check_dependencies:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Detect critical changes
+        id: critical
+        run: |
+          base_ref="${{ github.base_ref }}"
+          
+          # Detecta mudanças em pastas críticas
+          changed_critical=$(git diff --name-only origin/$base_ref...HEAD | grep -E "^(core|models|services|migrations|extensions|config|wsgi)" || echo "")
+          
+          if [ -z "$changed_critical" ]; then
+            echo "critical_changed=false" >> $GITHUB_OUTPUT
+            echo "⏭️  Sem mudanças em pastas críticas"
+            echo "✅ Check passou - nenhuma pasta crítica modificada"
+            exit 0
+          else
+            echo "critical_changed=true" >> $GITHUB_OUTPUT
+            echo "🔴 Mudanças críticas detectadas:"
+            echo "$changed_critical"
+            echo ""
+            # Usa {delimiter} para multiline
+            {
+              echo "files_changed<<GHEOF"
+              echo "$changed_critical"
+              echo "GHEOF"
+            } >> $GITHUB_OUTPUT
+          fi
+      
+      - name: List dependent modules
+        if: steps.critical.outputs.critical_changed == 'true'
+        id: dependents
+        run: |
+          # Define dependência de cada pasta crítica
+          # core/ → todos módulos dependem
+          # models/ → leads, renomeie, b_love, ix_dashboard
+          # services/ → ix_alerts, ix_patrol, ix_dashboard
+          # migrations/ → todos (requerem rodar antes)
+          
+          changed_files="${{ steps.critical.outputs.files_changed }}"
+          
+          dependent_modules=""
+          if echo "$changed_files" | grep -q "^core/"; then
+            dependent_modules="ALL_MODULES (core é crítico)"
+          elif echo "$changed_files" | grep -q "^models/"; then
+            dependent_modules="leads, renomeie, b_love, ix_dashboard"
+          elif echo "$changed_files" | grep -q "^services/"; then
+            dependent_modules="ix_alerts, ix_patrol, ix_dashboard"
+          fi
+          
+          echo "dependent_modules=$dependent_modules" >> $GITHUB_OUTPUT
+      
+      - name: Get current PRs in queue
+        id: pr_queue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prs = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              base: context.payload.pull_request.base.ref,
+              sort: 'created',
+              direction: 'asc',
+              per_page: 20
+            });
+            
+            const queue = prs.data.map(pr => `#${pr.number}`).join(', ');
+            core.setOutput('queue', queue);
+            core.setOutput('queue_size', prs.data.length);
+      
+      - name: Comment blocking notice
+        if: steps.critical.outputs.critical_changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🔴 **Parallel Sync Check - NOTICE**\n\n**Mudanças críticas detectadas**\n\n- **Arquivos modificados:** ${{ steps.critical.outputs.files_changed }}\n- **Módulos dependentes:** ${{ steps.dependents.outputs.dependent_modules }}\n- **PRs na fila:** ${{ steps.pr_queue.outputs.queue }} (total: ${{ steps.pr_queue.outputs.queue_size }})\n\n**⚠️ Ação necessária:**\n1. Esta PR será mergeada **PRIMEIRA** em relação aos módulos dependentes\n2. PRs com dependências de #${{ github.event.pull_request.number }} precisarão ser reabertas após o merge\n3. Não mergear PRs com módulos dependentes até esta PR estar em \`develop\`\n\n**Status:** Aguardando aprovação manual antes do merge.`
+            })
+      
+      - name: Add label
+        if: steps.critical.outputs.critical_changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['critical-path', 'merge-first']
+            })
+      
+      - name: Success (no critical changes)
+        if: steps.critical.outputs.critical_changed != 'true'
+        run: |
+          echo "✅ Parallel Sync Check passou - sem mudanças críticas"
+
+#   ▗▅▅▖   
+# ▄▛▘‾‾▝▜▄ 
+# █▖    ▗█   © 2026 Copyright
+# ███▅▅███   Ir.On
+# ██●█████ 
+# ▜▛  █▜▛█   "Feito com muito carinho."
+#     █  ▀ 
+#     ▀    

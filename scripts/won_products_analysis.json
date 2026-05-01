@@ -1,0 +1,4151 @@
+{
+  "generated_at": "2026-04-15T10:12:38.056161",
+  "cutoff": "2025-04-15",
+  "total_won": 477,
+  "with_products": 63,
+  "without_products": 414,
+  "products": {
+    "2": {
+      "name": "Mensalidade",
+      "count": 19,
+      "avg_price": 817.421052631579,
+      "total_value": 15531.0,
+      "score_avg": 117.0,
+      "score_min": -20,
+      "score_max": 181
+    },
+    "28": {
+      "name": "Consultoria",
+      "count": 5,
+      "avg_price": 3630.0,
+      "total_value": 18150.0,
+      "score_avg": 103.6,
+      "score_min": 10,
+      "score_max": 190
+    },
+    "24": {
+      "name": "mensalidade",
+      "count": 32,
+      "avg_price": 1307.75,
+      "total_value": 41848.0,
+      "score_avg": 115.125,
+      "score_min": -5,
+      "score_max": 203
+    },
+    "5": {
+      "name": "Setup Premium",
+      "count": 19,
+      "avg_price": 5858.210526315789,
+      "total_value": 111306.0,
+      "score_avg": 118.6842105263158,
+      "score_min": -5,
+      "score_max": 195
+    },
+    "27": {
+      "name": "Mensalidade",
+      "count": 6,
+      "avg_price": 690.6666666666666,
+      "total_value": 4144.0,
+      "score_avg": 74.16666666666667,
+      "score_min": 0,
+      "score_max": 150
+    },
+    "26": {
+      "name": "setup",
+      "count": 12,
+      "avg_price": 3812.5,
+      "total_value": 45750.0,
+      "score_avg": 124.58333333333333,
+      "score_min": 40,
+      "score_max": 203
+    },
+    "30": {
+      "name": "Mensalidade",
+      "count": 2,
+      "avg_price": 1049.0,
+      "total_value": 2098.0,
+      "score_avg": 125.5,
+      "score_min": 110,
+      "score_max": 141
+    },
+    "22": {
+      "name": "setup",
+      "count": 4,
+      "avg_price": 3490.25,
+      "total_value": 13961.0,
+      "score_avg": 123.0,
+      "score_min": 90,
+      "score_max": 150
+    },
+    "19": {
+      "name": "Setup Lite",
+      "count": 11,
+      "avg_price": 990.0,
+      "total_value": 10890.0,
+      "score_avg": 89.81818181818181,
+      "score_min": 20,
+      "score_max": 156
+    },
+    "20": {
+      "name": "COM",
+      "count": 1,
+      "avg_price": 990.0,
+      "total_value": 990.0,
+      "score_avg": 150.0,
+      "score_min": 150,
+      "score_max": 150
+    },
+    "23": {
+      "name": "setup",
+      "count": 9,
+      "avg_price": 3447.777777777778,
+      "total_value": 31030.0,
+      "score_avg": 125.22222222222223,
+      "score_min": 52,
+      "score_max": 176
+    },
+    "29": {
+      "name": "Mensalidade",
+      "count": 3,
+      "avg_price": 649.0,
+      "total_value": 1947.0,
+      "score_avg": 134.0,
+      "score_min": 110,
+      "score_max": 170
+    },
+    "10": {
+      "name": "BuzzPoints",
+      "count": 1,
+      "avg_price": 3588.0,
+      "total_value": 3588.0,
+      "score_avg": -5.0,
+      "score_min": -5,
+      "score_max": -5
+    },
+    "31": {
+      "name": "eventos",
+      "count": 1,
+      "avg_price": 990.0,
+      "total_value": 990.0,
+      "score_avg": 20.0,
+      "score_min": 20,
+      "score_max": 20
+    },
+    "None": {
+      "name": "?",
+      "count": 1,
+      "avg_price": 3900.0,
+      "total_value": 3900.0,
+      "score_avg": -20.0,
+      "score_min": -20,
+      "score_max": -20
+    }
+  },
+  "deals": [
+    {
+      "deal_id": 28604,
+      "title": "cliente de indicação - Mônica de Freitas",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28601,
+      "title": "cliente de indicação - Andre Rodrigues",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28593,
+      "title": "cliente de indicação - luis Garnes",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28589,
+      "title": "cliente de indicação - Juliano Anastacio",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28556,
+      "title": "cliente de indicação - Marcio Agra",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28559,
+      "title": "cliente de indicação - Gabriela Marinheiro",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28555,
+      "title": "cliente de indicação - Augusto Sousa",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28550,
+      "title": "cliente de indicação - Alexandre Souza",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28432,
+      "title": "Univalores",
+      "value": 5569.0,
+      "score": 180,
+      "products": 2,
+      "product_names": [
+        "Mensalidade",
+        "Consultoria"
+      ]
+    },
+    {
+      "deal_id": 28391,
+      "title": "App sistemas",
+      "value": 5569.0,
+      "score": 190,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "Consultoria"
+      ]
+    },
+    {
+      "deal_id": 28544,
+      "title": "cliente de indicação - Guilherme Dzieva",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28543,
+      "title": "Programa de Indicação - Juscelino GIrão",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28541,
+      "title": "cliente de indicação - Dr Wilian Silva",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28534,
+      "title": "cliente de indicação - Rafaella Sardilli",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28533,
+      "title": "Programa de Indicação - THIAGO HERRERO",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27870,
+      "title": "EcoFonte",
+      "value": 6749.0,
+      "score": 0,
+      "products": 2,
+      "product_names": [
+        "Setup Premium",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 28488,
+      "title": "cliente de indicação - joao da nestle",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28460,
+      "title": "cliente de indicação - Gabriel Aragão",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28452,
+      "title": "cliente de indicação - Rafael Fredini",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28449,
+      "title": "cliente de indicação - Marcos Aurelio",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28446,
+      "title": "cliente de indicação - Fernanda Naves",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28440,
+      "title": "cliente de indicação - Rafael paes",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28416,
+      "title": "cliente de indicação - Marcos Gonzales",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28395,
+      "title": "cliente de indicação - Gabriel Rodrigues",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28393,
+      "title": "cliente de indicação - Oswaldo Marinho",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28300,
+      "title": "Clinica Dr Brother",
+      "value": 5679.0,
+      "score": 48,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 28364,
+      "title": "Quintal Frango Frito e Pizza",
+      "value": 0.0,
+      "score": 104,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28338,
+      "title": "cliente de indicação - Lucas Kullman",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28333,
+      "title": "cliente de indicação - Camila Valverde",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28323,
+      "title": "cliente de indicação - iSABELLE PRADO",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28321,
+      "title": "cliente de indicação - Fabiano Donadon",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27769,
+      "title": "Base Viral",
+      "value": 6659.0,
+      "score": 141,
+      "products": 2,
+      "product_names": [
+        "Setup Premium",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 28280,
+      "title": "GARAGE SHOP/ GALA DISTRIBUIDORA",
+      "value": 1289.0,
+      "score": 90,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 28307,
+      "title": "cliente de indicação - Andrea Figueiredo",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28302,
+      "title": "cliente de indicação - Giovanna zaraga",
+      "value": 0.0,
+      "score": 15,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28017,
+      "title": "Mestre do Consórcio",
+      "value": 5619.0,
+      "score": 152,
+      "products": 2,
+      "product_names": [
+        "Mensalidade",
+        "Setup Premium"
+      ]
+    },
+    {
+      "deal_id": 28289,
+      "title": "cliente de indicação - Gregory Esteves",
+      "value": 0.0,
+      "score": 10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28286,
+      "title": "cliente de indicação - Gilberto Ehlke",
+      "value": 0.0,
+      "score": 10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27964,
+      "title": "COGECOM",
+      "value": 8010.0,
+      "score": 142,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 28258,
+      "title": "cliente de indicação - Paulo Ricardo",
+      "value": 0.0,
+      "score": 10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28256,
+      "title": "Programa de Indicação - Jeh Caio indicanfo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27698,
+      "title": "Acelera Concursos",
+      "value": 1839.0,
+      "score": 48,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "Setup Lite"
+      ]
+    },
+    {
+      "deal_id": 27602,
+      "title": "US Media",
+      "value": 6649.0,
+      "score": 142,
+      "products": 2,
+      "product_names": [
+        "Mensalidade",
+        "Setup Premium"
+      ]
+    },
+    {
+      "deal_id": 28245,
+      "title": "cliente de indicação - Sabrina Sato",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28240,
+      "title": "Indique e Ganhe - Welington Soares",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28172,
+      "title": "Flex Energy",
+      "value": 1839.0,
+      "score": 83,
+      "products": 2,
+      "product_names": [
+        "Setup Lite",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 28233,
+      "title": "ACELERA CONCURSOS LTDA",
+      "value": 1839.0,
+      "score": 10,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "Consultoria"
+      ]
+    },
+    {
+      "deal_id": 28018,
+      "title": "Aparelhos Inteligentes",
+      "value": 4749.0,
+      "score": 106,
+      "products": 2,
+      "product_names": [
+        "Setup Premium",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 28168,
+      "title": "Brocks Empreendimentos",
+      "value": 5705.0,
+      "score": 62,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "Setup Premium"
+      ]
+    },
+    {
+      "deal_id": 16094,
+      "title": "🌳 Zolve Labs",
+      "value": 1289.0,
+      "score": 150,
+      "products": 2,
+      "product_names": [
+        "COM",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 28232,
+      "title": "Indique e Ganhe - Carlos Calazans",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28225,
+      "title": "cliente de indicação - Fernando Point",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28223,
+      "title": "cliente de indicação - marlos Nunes",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28221,
+      "title": "cliente de indicação - CAMPANA LTDA",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28217,
+      "title": "Indique e Ganhe - Andre Oliveira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28191,
+      "title": "cliente de indicação - Airton Senna",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28188,
+      "title": "Indique e Ganhe - Caio Ferreira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28184,
+      "title": "cliente de indicação - Brainer Martins - Brocks",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28152,
+      "title": "cliente de indicação - Andre LTDA",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28137,
+      "title": "Aurum Educação",
+      "value": 5569.0,
+      "score": 28,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "Consultoria"
+      ]
+    },
+    {
+      "deal_id": 28146,
+      "title": "cliente de indicação - Gustavo Costa",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28142,
+      "title": "cliente de indicação - Giovane Marques",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28141,
+      "title": "cliente de indicação - Diego Faleiros",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28136,
+      "title": "cliente de indicação - Mario Borba",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27359,
+      "title": "Biologix",
+      "value": 1739.0,
+      "score": 110,
+      "products": 2,
+      "product_names": [
+        "Setup Lite",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 28134,
+      "title": "cliente de indicação - Amanda Freitas",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28108,
+      "title": "cliente de indicação - Andre Shultz",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28107,
+      "title": "Programa de Indicação uber - Rafael fontes",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28106,
+      "title": "cliente de indicação - Natalia Ayala",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28102,
+      "title": "cliente de indicação - Emerson Almeida",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28101,
+      "title": "cliente de indicação - Regiane Santos",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28100,
+      "title": "Indique e Ganhe - Daniel Marques",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27464,
+      "title": "Gaudium",
+      "value": 6649.0,
+      "score": 122,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 27153,
+      "title": "Cia Athletica unidade cotia",
+      "value": 4199.0,
+      "score": 122,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 28095,
+      "title": "Cia Athletica unidade mooca",
+      "value": 4199.0,
+      "score": 122,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 28094,
+      "title": "Indique e Ganhe - Lucas Noé",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 21462,
+      "title": "Ecolink",
+      "value": 5749.0,
+      "score": 92,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 28083,
+      "title": "Programa de Indicação - Zolve",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28081,
+      "title": "cliente de indicação - Carlos Sandrin",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27854,
+      "title": "Indique e Ganhe - João Gustavo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28057,
+      "title": "Programa de Indicação - Flavio Ener",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24046,
+      "title": "Convert Company Ltda",
+      "value": 5469.0,
+      "score": 110,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "Setup Premium"
+      ]
+    },
+    {
+      "deal_id": 28053,
+      "title": "cliente de indicação - Dra Camila Bezzon",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28050,
+      "title": "cliente de indicação - Thais Pereira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 21872,
+      "title": "FIESC",
+      "value": 7599.0,
+      "score": 118,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 27977,
+      "title": "Universidade Bilíngue",
+      "value": 1739.0,
+      "score": 141,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 28037,
+      "title": "cliente de indicação - Jarbas",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28032,
+      "title": "cliente de indicação - luiz Alfredo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27978,
+      "title": "Programa de Indicação - Adriana Congelados",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28029,
+      "title": "cliente de indicação - Guilherme Zoia",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28028,
+      "title": "cliente de indicação - Rafael Fontes",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28022,
+      "title": "cliente de indicação - Fabiola justino",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28021,
+      "title": "cliente de indicação - Tiago Almeida",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26766,
+      "title": "cVortex",
+      "value": 1739.0,
+      "score": 148,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "Setup Lite"
+      ]
+    },
+    {
+      "deal_id": 28012,
+      "title": "cliente de indicação - jober Chaves",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 28006,
+      "title": "cliente de indicação - WALTER ACRAS",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27989,
+      "title": "cliente de indicação - Brenda Calvacanti",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27987,
+      "title": "cliente de indicação - Fabiano",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27981,
+      "title": "cliente de indicação - Rodrigo G",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27971,
+      "title": "cliente de indicação - Cristiano Baggio",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27095,
+      "title": "Infleet",
+      "value": 1739.0,
+      "score": 110,
+      "products": 2,
+      "product_names": [
+        "Setup Lite",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 27568,
+      "title": "MOVSERV",
+      "value": 6059.0,
+      "score": 112,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "Setup Premium"
+      ]
+    },
+    {
+      "deal_id": 19338,
+      "title": "🌳 Amigo panda",
+      "value": 1289.0,
+      "score": 170,
+      "products": 2,
+      "product_names": [
+        "setup",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 27704,
+      "title": "Arboreal",
+      "value": 1739.0,
+      "score": 125,
+      "products": 2,
+      "product_names": [
+        "setup",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 25220,
+      "title": "EAD Radiante",
+      "value": 1889.0,
+      "score": 48,
+      "products": 2,
+      "product_names": [
+        "Setup Lite",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 27867,
+      "title": "cliente de indicação - juliana nunes",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27860,
+      "title": "cliente de indicação - Nanndo Garbelottti",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27856,
+      "title": "cliente de indicação - Ricardo gas",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27853,
+      "title": "cliente de indicação - kayque",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27760,
+      "title": "Abadi Santos",
+      "value": 12800.0,
+      "score": 118,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "Setup Premium"
+      ]
+    },
+    {
+      "deal_id": 27846,
+      "title": "cliente de indicação - Raphael lyrio",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 12734,
+      "title": "Kaspersky",
+      "value": 14376.0,
+      "score": -5,
+      "products": 3,
+      "product_names": [
+        "mensalidade",
+        "BuzzPoints",
+        "Setup Premium"
+      ]
+    },
+    {
+      "deal_id": 27839,
+      "title": "cliente de indicação - Thiago resende",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27838,
+      "title": "cliente de indicação - Lucas dos Anjos",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27830,
+      "title": "Indique e Ganhe - Ana Bintacos",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26622,
+      "title": "SUPERA Ginástica para o Cérebro",
+      "value": 9799.0,
+      "score": 181,
+      "products": 2,
+      "product_names": [
+        "Setup Premium",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 27836,
+      "title": "Indique e Ganhe - Felipe Esteves",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27706,
+      "title": "Carara Assessoria",
+      "value": 1889.0,
+      "score": 110,
+      "products": 2,
+      "product_names": [
+        "setup",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 27138,
+      "title": "Isaac Educação",
+      "value": 6799.0,
+      "score": 123,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "Setup Premium"
+      ]
+    },
+    {
+      "deal_id": 27781,
+      "title": "Iziluz",
+      "value": 1739.0,
+      "score": 20,
+      "products": 2,
+      "product_names": [
+        "Mensalidade",
+        "Setup Lite"
+      ]
+    },
+    {
+      "deal_id": 27811,
+      "title": "Indique e Ganhe - Alan Meneses",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27809,
+      "title": "cliente de indicação - Fernanda Ancre",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27808,
+      "title": "cliente de indicação - Gean",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27804,
+      "title": "cliente de indicação - Patricia pe sem dor",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27803,
+      "title": "Indique e Ganhe - Luana Stroppa",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27796,
+      "title": "cliente de indicação - Leonardo Pecorari",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27792,
+      "title": "cliente de indicação - Luiz Prioli",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27791,
+      "title": "Indique e Ganhe - Daniela Nakagym",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27786,
+      "title": "Total Contabilidade",
+      "value": 3749.0,
+      "score": 110,
+      "products": 2,
+      "product_names": [
+        "Consultoria",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 27787,
+      "title": "clientee indicação - Xuxa meneghael",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27714,
+      "title": "BASE VIRAL - Ocean Drop",
+      "value": 0.0,
+      "score": 50,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27782,
+      "title": "cliente de indicação - Monica cunha",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27736,
+      "title": "RDX Energia",
+      "value": 5469.0,
+      "score": 180,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 27766,
+      "title": "cliente de indicação - jean pierre",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27764,
+      "title": "cliente de indicação - Xuxa",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27758,
+      "title": "cliente de indicação - Stella jodar",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27753,
+      "title": "cliente de indicação - Gustavo Costa",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27183,
+      "title": "My Smart Clinic",
+      "value": 5469.0,
+      "score": 150,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 27723,
+      "title": "Club System",
+      "value": 5469.0,
+      "score": 195,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "Setup Premium"
+      ]
+    },
+    {
+      "deal_id": 27750,
+      "title": "cliente de indicação - JOEL SCHULZE",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27121,
+      "title": "Assistente de Viagem",
+      "value": 1289.0,
+      "score": 203,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 27749,
+      "title": "Indique e Ganhe - Thiago Gomes",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27740,
+      "title": "cliente de indicação - FELIPE CLUB SYSTEM",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27739,
+      "title": "Indique e Ganhe - Fabio Maciel",
+      "value": 5000.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 21337,
+      "title": "🌳 Editora Foco",
+      "value": 6099.0,
+      "score": 168,
+      "products": 2,
+      "product_names": [
+        "Setup Premium",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 27727,
+      "title": "cliente de indicação - PAULO V MUNIZ",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26349,
+      "title": "Aviva",
+      "value": 22319.0,
+      "score": 110,
+      "products": 2,
+      "product_names": [
+        "Setup Premium",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 24419,
+      "title": "🌳 Ceisc",
+      "value": 6799.0,
+      "score": 176,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 27144,
+      "title": "Mundial Vistos",
+      "value": 5619.0,
+      "score": 130,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 27663,
+      "title": "SK Consórcios",
+      "value": 5469.0,
+      "score": 110,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 27721,
+      "title": "cliente de indicação - Ygor Soledade",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26673,
+      "title": "VMS LTDA",
+      "value": 5469.0,
+      "score": 112,
+      "products": 2,
+      "product_names": [
+        "Mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 26698,
+      "title": "Indusbello",
+      "value": 4749.0,
+      "score": 166,
+      "products": 2,
+      "product_names": [
+        "Setup Premium",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 27710,
+      "title": "cliente de indicação - Mariana Capretti",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27164,
+      "title": "Impacto Automação",
+      "value": 3749.0,
+      "score": 145,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 27709,
+      "title": "cliente de indicação - Milena",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27708,
+      "title": "Indique e Ganhe - Debora Chaves",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27707,
+      "title": "cliente de indicação - Luciano vale",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26708,
+      "title": "Brazil Health",
+      "value": 1739.0,
+      "score": 28,
+      "products": 2,
+      "product_names": [
+        "Setup Lite",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 25207,
+      "title": "Clinica Sandra Romero",
+      "value": 5469.0,
+      "score": 122,
+      "products": 2,
+      "product_names": [
+        "Setup Premium",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 27693,
+      "title": "cliente de indicação - Daniela Pronutrir",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27692,
+      "title": "cliente de indicação - Cleber",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24538,
+      "title": "Pejota Contabilidade LTDA",
+      "value": 0.0,
+      "score": 110,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27147,
+      "title": "Moove",
+      "value": 1739.0,
+      "score": 52,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 27687,
+      "title": "cliente de indicação - Gustavo Valdivia",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27685,
+      "title": "cliente de indicação - Laila distribuira de bebida",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27682,
+      "title": "cliente de indicação - Bruna Cortez",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27681,
+      "title": "Programa de Indicação - teste",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27680,
+      "title": "cliente de indicação - Loren Souza",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27678,
+      "title": "Indique e Ganhe - Lana Bio",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27676,
+      "title": "Indique e Ganhe - Erick Nerds",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27675,
+      "title": "cliente de indicação - Wagner Heinke",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27664,
+      "title": "cliente de indicação - Leandro tempo certo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27662,
+      "title": "cliente de indicação - Marcell Vianna",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27661,
+      "title": "Indique e Ganhe - Elis Chamusca",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27660,
+      "title": "cliente de indicação - Hemely",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26773,
+      "title": "Community Creators Academy",
+      "value": 1739.0,
+      "score": 122,
+      "products": 2,
+      "product_names": [
+        "Setup Lite",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 26714,
+      "title": "Medic Services",
+      "value": 5469.0,
+      "score": 130,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "Setup Premium"
+      ]
+    },
+    {
+      "deal_id": 27190,
+      "title": "cliente de indicação - Wilton Pereira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27187,
+      "title": "cliente de indicação - Marcos Araujo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27179,
+      "title": "cliente de indicação - Marina Cintra",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27177,
+      "title": "Programa de Indicação - testetet",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27176,
+      "title": "cliente de indicação - Fabio De oliveira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27166,
+      "title": "cliente de indicação - Guilherme Barbudo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26619,
+      "title": "Sólides",
+      "value": 0.0,
+      "score": 145,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26401,
+      "title": "Liddera",
+      "value": 1739.0,
+      "score": 156,
+      "products": 2,
+      "product_names": [
+        "Setup Lite",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 27134,
+      "title": "cliente de indicação - Daniel Biondi",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27130,
+      "title": "cliente de indicação - Baltazar sanabria",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27098,
+      "title": "Indique e Ganhe - Bruna Conti",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27122,
+      "title": "cliente de indicação - herbert Vallim",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23941,
+      "title": "cliente de indicação - Graciely Mendes",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27115,
+      "title": "cliente de indicação - Carlos Stenzowski",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27112,
+      "title": "Indique e Ganhe - Enio Alves",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27110,
+      "title": "Indique e Ganhe - Christian Silva",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27090,
+      "title": "Axovi Educação",
+      "value": 990.0,
+      "score": 20,
+      "products": 1,
+      "product_names": [
+        "eventos"
+      ]
+    },
+    {
+      "deal_id": 27107,
+      "title": "cliente de indicação - Moises",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27104,
+      "title": "cliente de indicação - Carlos Skin laser",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27100,
+      "title": "cliente de indicação - Vitor Severo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27050,
+      "title": "Núcleo Dome",
+      "value": 6649.0,
+      "score": 122,
+      "products": 2,
+      "product_names": [
+        "Setup Premium",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 27067,
+      "title": "Natália Cymrot Dermatologia",
+      "value": 5249.0,
+      "score": 40,
+      "products": 2,
+      "product_names": [
+        "setup",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 27072,
+      "title": "cliente de indicação - camila neves",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22185,
+      "title": "cliente de indicação - Ricardo",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27070,
+      "title": "cliente de indicação - Damer Oliveira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26438,
+      "title": "Genialtec",
+      "value": 1739.0,
+      "score": 115,
+      "products": 2,
+      "product_names": [
+        "Setup Lite",
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 26332,
+      "title": "Clínica Adriano Trindade",
+      "value": 4879.0,
+      "score": 142,
+      "products": 2,
+      "product_names": [
+        "Mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 26644,
+      "title": "Itanet",
+      "value": 1739.0,
+      "score": 140,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 26651,
+      "title": "Método 3a",
+      "value": 6649.0,
+      "score": 132,
+      "products": 2,
+      "product_names": [
+        "mensalidade",
+        "setup"
+      ]
+    },
+    {
+      "deal_id": 27064,
+      "title": "cliente de indicação - Vanessa Mendes",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27062,
+      "title": "cliente de indicação - rosana xavier",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27060,
+      "title": "cliente de indicação - Flavio Sabugo",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27058,
+      "title": "Indique e Ganhe - Izabela Costa",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27033,
+      "title": "Programa de Indicação - Pedro Tribst",
+      "value": 0.0,
+      "score": -40,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27032,
+      "title": "cliente de indicação - Pedro Tribst",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27031,
+      "title": "cliente de indicação - João Marcelo Arita",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 27020,
+      "title": "cliente de indicação - Vivianne Fernandes",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26782,
+      "title": "cliente de indicação - Wendell Souza",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26775,
+      "title": "cliente de indicação - Juliana Fernandes",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26763,
+      "title": "cliente de indicação - BEATRIZ GOBRAX",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26755,
+      "title": "cliente de indicação - Michael Rede Educ",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26753,
+      "title": "cliente de indicação - SILVIO COSTA",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26736,
+      "title": "cliente de indicação - Diogo Flores",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26720,
+      "title": "cliente de indicação - jheinnifer Orige",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26715,
+      "title": "cliente de indicação - PEdro",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26713,
+      "title": "cliente de indicação - Bernadete Wagner",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26695,
+      "title": "cliente de indicação - Pedro Viana",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26691,
+      "title": "cliente de indicação - john Sousa",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26688,
+      "title": "cliente de indicação - Renan Energy",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26684,
+      "title": "cliente de indicação - GUSTAVO mAGALHAES",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26674,
+      "title": "cliente de indicação - harry laube",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26669,
+      "title": "cliente de indicação - Lucas Jonas",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26668,
+      "title": "cliente de indicação - Hayana",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26657,
+      "title": "Indique e Ganhe - Carlos Assis",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26624,
+      "title": "Indique e Ganhe - Pedro Dias",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26623,
+      "title": "cliente de indicação - Renato Ramos",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26613,
+      "title": "cliente de indicação - Karen Willers",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26605,
+      "title": "cliente de indicação - Rute Caroline",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26598,
+      "title": "cliente de indicação - Rodrigo Capelli",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26589,
+      "title": "cliente de indicação - Fabio Klabacher",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26588,
+      "title": "cliente de indicação - Karen Fernandes",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26585,
+      "title": "cliente de indicação - Paulo Vox",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26575,
+      "title": "Indique e Ganhe - Lucas Winter",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26574,
+      "title": "cliente de indicação - teste",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26544,
+      "title": "cliente de indicação - Alexandre Brusco",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26570,
+      "title": "cliente de indicação - Priscila Teste",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26565,
+      "title": "cliente de indicação - Renan Wellness",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26564,
+      "title": "cliente de indicação - ellen gomes",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26550,
+      "title": "cliente de indicação - Elisangela M",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26547,
+      "title": "cliente de indicação - Luis Plens",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26542,
+      "title": "cliente de indicação - Thais Rossini",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26541,
+      "title": "cliente de indicação - Novinho quatro",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26539,
+      "title": "cliente de indicação - Indicado novo tres",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26538,
+      "title": "cliente de indicação - Indica dnv",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26536,
+      "title": "cliente de indicação - Indicar o dois",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26535,
+      "title": "cliente de indicação - Webhook site",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26534,
+      "title": "cliente de indicação - joonas teste",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26533,
+      "title": "cliente de indicação - juliana",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26532,
+      "title": "cliente de indicação - Indicado webhook",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26288,
+      "title": "cliente de indicação - Emily teste",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26531,
+      "title": "cliente de indicação - jp teste",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26529,
+      "title": "cliente de indicação - Indicado um",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26527,
+      "title": "Programa de Indicação - amanda teste",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 21977,
+      "title": "cliente de indicação - Ricardo pimenta",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26496,
+      "title": "cliente de indicação - Kelly caetano",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26524,
+      "title": "Indique e Ganhe - Gleison burgarelli",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26516,
+      "title": "cliente de indicação - testegggg",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26515,
+      "title": "Programa de Indicação - Nielson Serrao",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26514,
+      "title": "cliente de indicação - teste teste",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26400,
+      "title": "cliente de indicação - Joana maria",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26512,
+      "title": "cliente de indicação - Rodrigo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26498,
+      "title": "Programa de Indicação - Marcel",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26494,
+      "title": "cliente de indicação - Amanda thais",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26487,
+      "title": "Indique e Ganhe - Heloá Campos",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26418,
+      "title": "Indique e Ganhe - Marcelo Maia",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26471,
+      "title": "Indique e Ganhe - Jadson Santana",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26470,
+      "title": "Indique e Ganhe - Eduarda Nogueira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26465,
+      "title": "Indique e Ganhe - Fabiano Hyppolito",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26454,
+      "title": "Indique e Ganhe - Gabriela Meneses",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26445,
+      "title": "Indique e Ganhe - condiminio geniale",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26431,
+      "title": "Indique e Ganhe - Patrick Santana",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26427,
+      "title": "cliente de indicação - Yohan Borges",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26423,
+      "title": "cliente de indicação - Joel",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26419,
+      "title": "cliente de indicação - Adriano Trindade",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26416,
+      "title": "cliente de indicação - Adriano",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26404,
+      "title": "cliente de indicação - Rodrigo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26402,
+      "title": "Indique e Ganhe - Alwex acria",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26399,
+      "title": "cliente de indicação - Felipe Dilly",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26394,
+      "title": "Indique e Ganhe - Keli Mello",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26381,
+      "title": "cliente de indicação - Gustavo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26373,
+      "title": "cliente de indicação - Silvio cahu",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26364,
+      "title": "cliente de indicação - Vall Bastistah",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26361,
+      "title": "cliente de indicação - Andrezza",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26360,
+      "title": "cliente de indicação - Andre Pacheco",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26330,
+      "title": "cliente de indicação - Evandro loyola",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26323,
+      "title": "cliente de indicação - Leticia anjos",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26320,
+      "title": "cliente de indicação - Bianca nonato",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26312,
+      "title": "cliente de indicação - Carlos Eduardo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26309,
+      "title": "cliente de indicação - Jackson Vieira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26304,
+      "title": "cliente de indicação - mariana Periolo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26297,
+      "title": "cliente de indicação - Rafael Formagio",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26287,
+      "title": "Indique e Ganhe - Rafaela Lessa",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26272,
+      "title": "Programa de Indicação - Djane",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26262,
+      "title": "cliente de indicação - ALEXANDRE BASSO",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26257,
+      "title": "Programa de Indicação - Fabiano Zerbato",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26102,
+      "title": "Programa de Indicação - Marcilio Reinaux",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26101,
+      "title": "Indique e Ganhe - Poliana Teodoro",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26090,
+      "title": "cliente de indicação - Saliciano Lima",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 26089,
+      "title": "Indique e Ganhe - Carlo Hauschild",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25254,
+      "title": "cliente de indicação - NATAN JENSEN",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25250,
+      "title": "cliente de indicação / Drogasil /- Renan Andrade",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25249,
+      "title": "Indique e Ganhe - Jessica Mariano",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25238,
+      "title": "cliente de indicação - Gleysson Pascoal",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25235,
+      "title": "cliente de indicação - Sthefany Silva",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25232,
+      "title": "cliente de indicação - Juliana",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25200,
+      "title": "cliente de indicação - LEONARDO MACHADO",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25189,
+      "title": "cliente de indicação - Breno Augusto",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25183,
+      "title": "cliente de indicação - carol teste",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25172,
+      "title": "cliente de indicação - Ana",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25015,
+      "title": "Indique e Ganhe - Ana Paula Suites",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25160,
+      "title": "cliente de indicação - Bruno",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25142,
+      "title": "cliente de indicação - thalia melo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25120,
+      "title": "cliente de indicação - Renan",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25072,
+      "title": "cliente de indicação - Paula Forli",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25133,
+      "title": "Indique e Ganhe - Camila Hungria",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25119,
+      "title": "cliente de indicação - Peterson Almeida",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25099,
+      "title": "cliente de indicação - ludimilla",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25082,
+      "title": "cliente de indicação - Marcia menin",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25073,
+      "title": "cliente de indicação - Paula Forli Teste",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25071,
+      "title": "cliente de indicação - Edmir Junior",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25064,
+      "title": "cliente de indicação - João TNP",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25036,
+      "title": "cliente de indicação - Felipe",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25033,
+      "title": "cliente de indicação - Daniel Martins",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25026,
+      "title": "cliente de indicação - Elton Eduardo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25019,
+      "title": "cliente de indicação - ulysses Vercosa",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24548,
+      "title": "Programa de Indicação - Thiago solar Z",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 25000,
+      "title": "cliente de indicação - rosana",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24936,
+      "title": "cliente de indicação - Aline honda",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24672,
+      "title": "cliente de indicação - Jefferson Santos",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24646,
+      "title": "cliente de indicação - Leo da Prime",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24640,
+      "title": "cliente de indicação - thiago garcia",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24639,
+      "title": "cliente de indicação - Gabriel Camara",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24613,
+      "title": "Programa de Indicação - Larissa Zeppenfeld",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24573,
+      "title": "cliente de indicação - LEO PULSAR",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24547,
+      "title": "Programa de Indicação - Roberto Magnani",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24527,
+      "title": "Programa de Indicação - suzana rodrigues",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24523,
+      "title": "Programa de Indicação - Wendel",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24519,
+      "title": "Programa de Indicação - Suzana Rodrigues",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24518,
+      "title": "Programa de Indicação - rubens",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24513,
+      "title": "cliente de indicação - Jorge Freire",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24506,
+      "title": "Programa de Indicação - Danilo Metalsol",
+      "value": 0.0,
+      "score": -40,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24479,
+      "title": "cliente de indicação - patricia Ricchetti",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24445,
+      "title": "cliente de indicação - Ana",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24428,
+      "title": "cliente de indicação - raphael morais",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24425,
+      "title": "cliente de indicação - Jefferson teste",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24417,
+      "title": "cliente de indicação - Bruna Targo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24414,
+      "title": "cliente de indicação - Eder Lebrão",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24408,
+      "title": "cliente de indicação - Izabella",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24393,
+      "title": "cliente de indicação - Jonatas",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24390,
+      "title": "cliente de indicação - Daniel Muniz",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24388,
+      "title": "Indique e Ganhe - Fabricio Saores",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24332,
+      "title": "cliente de indicação - Teste",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24331,
+      "title": "cliente de indicação - Antonio",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24328,
+      "title": "cliente de indicação - Cecília Santos",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24324,
+      "title": "cliente de indicação - Luiza",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24312,
+      "title": "cliente de indicação - Leandro",
+      "value": 0.0,
+      "score": 30,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24311,
+      "title": "cliente de indicação - Samuel Fabricio",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24308,
+      "title": "cliente de indicação - Cassio Mello",
+      "value": 0.0,
+      "score": 30,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24292,
+      "title": "cliente de indicação - Deise Alves",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24291,
+      "title": "cliente de indicação - Walisson sousa",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24290,
+      "title": "cliente de indicação - max DOSEA",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24283,
+      "title": "Indique e Ganhe - Danilo Mello",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24282,
+      "title": "cliente de indicação - Pablo Lucio",
+      "value": 0.0,
+      "score": 30,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24279,
+      "title": "cliente de indicação - Marcela DIGISAC",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24278,
+      "title": "cliente de indicação - Pedro Madaleno",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24277,
+      "title": "cliente de indicação - Rita Caldas",
+      "value": 0.0,
+      "score": 30,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24252,
+      "title": "cliente de indicação - Henrique Qualisafe",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24224,
+      "title": "Indique e Ganhe - Eddie da Silva",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24227,
+      "title": "cliente de indicação - Diogenes Dornelas",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24223,
+      "title": "cliente de indicação - Lucas Pires",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24210,
+      "title": "Programa de Indicação - Renato Moutran",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24201,
+      "title": "Programa de Indicação - Bruno",
+      "value": 0.0,
+      "score": 0,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24200,
+      "title": "cliente de indicação - Bruno Amorim",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24197,
+      "title": "Indique e Ganhe - Elimara Oliveira",
+      "value": 0.0,
+      "score": 20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24179,
+      "title": "Indique e Ganhe - Fernando Microara",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24117,
+      "title": "cliente de indicação - Felipe Ferreira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24112,
+      "title": "cliente de indicação - Caio Vaz",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24102,
+      "title": "cliente de indicação - Jarbas",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24096,
+      "title": "Indique e Ganhe - Graziele Ramos",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24095,
+      "title": "cliente de indicação - Carlos Henrique",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24062,
+      "title": "cliente de indicação - Karina Barbon",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24061,
+      "title": "cliente de indicação - Thiago Barreto",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24059,
+      "title": "Indique e Ganhe - Jarbas Leite",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24053,
+      "title": "Programa de Indicação - Matheus Ferreira",
+      "value": 0.0,
+      "score": -40,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24044,
+      "title": "Programa de Indicação - testefabio",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24043,
+      "title": "Programa de Indicação - Fabio Miranda",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24040,
+      "title": "cliente de indicação - Andre",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24029,
+      "title": "cliente de indicação - Thais Carvalho dos",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24027,
+      "title": "Indique e Ganhe - Gustavo Nacimento",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24016,
+      "title": "cliente de indicação - Lais Venturin",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24010,
+      "title": "Indique e Ganhe - Alexandre Marques",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 24009,
+      "title": "cliente de indicação - Luana Zemiani Vieira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23993,
+      "title": "Programa de Indicação - Lucas",
+      "value": 0.0,
+      "score": -40,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23989,
+      "title": "cliente de indicação - Wilson",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23988,
+      "title": "Indique e Ganhe - Rafael Gonçalves",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23981,
+      "title": "cliente de indicação - Gabriel Teste",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23979,
+      "title": "cliente de indicação - Brunno Martins",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23978,
+      "title": "cliente de indicação - Thainy Martins",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23976,
+      "title": "Indique e Ganhe - Henque Gusmão",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23891,
+      "title": "Indique e Ganhe - Harry Mello",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23965,
+      "title": "Indique e Ganhe - Pedro Pacheco Neto",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23960,
+      "title": "cliente de indicação - rafael",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23943,
+      "title": "cliente de indicação - ana luisa",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23954,
+      "title": "cliente de indicação - Roberta Rodrigues Bahia",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23947,
+      "title": "cliente de indicação - Marcelo Sammartino",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23944,
+      "title": "cliente de indicação - Lucas Damasceno",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23942,
+      "title": "cliente de indicação - Adriano",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23939,
+      "title": "Indique e Ganhe - Kelly Pereira",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23937,
+      "title": "Indique e Ganhe - Leonardo Fonseca",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23919,
+      "title": "cliente de indicação - Matheus Braun",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23904,
+      "title": "Indique e Ganhe - Micelio Reis",
+      "value": 4799.0,
+      "score": -20,
+      "products": 2,
+      "product_names": [
+        null,
+        "Mensalidade"
+      ]
+    },
+    {
+      "deal_id": 23906,
+      "title": "cliente de indicação - Elian silva",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23899,
+      "title": "cliente de indicação - Bruna Melles",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23895,
+      "title": "cliente de indicação - Paulo Damas",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23883,
+      "title": "cliente de indicação - Priscila Coelho",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23877,
+      "title": "Indique e Ganhe - Sandro Gonçalves",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 21965,
+      "title": "cliente de indicação - Bianca santos",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22111,
+      "title": "cliente de indicação - Thayla",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22110,
+      "title": "cliente de indicação - Bruna Resoluty",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22252,
+      "title": "cliente de indicação - Jose Brasil",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23687,
+      "title": "cliente de indicação - Eduardo Garcia",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22284,
+      "title": "cliente de indicação - Domingos Luiz",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 21901,
+      "title": "cliente de indicação - Saulo Zaniboni",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23873,
+      "title": "cliente de indicação - Rafael Calisto",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23872,
+      "title": "Indique e Ganhe - Jessica Meneses",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23841,
+      "title": "cliente de indicação - kiane santos",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23840,
+      "title": "cliente de indicação - Gabriel",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23836,
+      "title": "Indique e Ganhe - Rodrigo Oliveira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23835,
+      "title": "cliente de indicação - Giovanna Souza",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23833,
+      "title": "Programa de Indicação - Robinson",
+      "value": 0.0,
+      "score": -40,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23822,
+      "title": "cliente de indicação - Dinho Silva",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23819,
+      "title": "cliente de indicação - Priscilla Ribeiro",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23818,
+      "title": "cliente de indicação - Denise Consuldoc",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23806,
+      "title": "Indique e Ganhe - Alyne Costa",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23798,
+      "title": "cliente de indicação - mayara Dona Gina",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23787,
+      "title": "cliente de indicação - Gilcimar Rodrigues",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23781,
+      "title": "cliente de indicação - IETA MENEZES DOS SANTOS",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23777,
+      "title": "cliente de indicação - Jonathan Balduino",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23775,
+      "title": "Indique e Ganhe - Pedro Becker",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23764,
+      "title": "Programa de Indicação - Gabriela Cardoso",
+      "value": 0.0,
+      "score": -40,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23762,
+      "title": "Indique e Ganhe - Penelope Cardoso",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23759,
+      "title": "cliente de indicação - Hudson Silveira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23758,
+      "title": "Programa de Indicação - Roger Figo",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23732,
+      "title": "Indique e Ganhe - Christiane Reis",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23723,
+      "title": "cliente de indicação - Leticia Moreira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23719,
+      "title": "cliente de indicação - Luis Paulo",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23699,
+      "title": "Indique e Ganhe - Júnior Ferreira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23698,
+      "title": "Indique e Ganhe - Alan Pereira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 23494,
+      "title": "cliente de indicação - Lucas Teles",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22275,
+      "title": "cliente de indicação - Anderson Luis Pereira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22254,
+      "title": "cliente de indicação - diego mayke",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22249,
+      "title": "Indique e Ganhe - Criatiane Abreu",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22241,
+      "title": "cliente de indicação - Larissa Martins",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22239,
+      "title": "Programa de Indicação - Rafael Marghotti",
+      "value": 0.0,
+      "score": -40,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22212,
+      "title": "Programa de Indicação - helen",
+      "value": 0.0,
+      "score": -40,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22211,
+      "title": "Programa de Indicação - Jenifer",
+      "value": 0.0,
+      "score": -40,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22207,
+      "title": "Indique e Ganhe - Paulo Pinhenrio",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22206,
+      "title": "cliente de indicação - Lucca",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22204,
+      "title": "Indique e Ganhe - Rebeca Mello",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22199,
+      "title": "cliente de indicação - Rute Barros Nogueira",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22196,
+      "title": "cliente de indicação - Thais Planejados",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22188,
+      "title": "cliente de indicação - natan Damasceno",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22161,
+      "title": "cliente de indicação - Felipe Andrade",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22183,
+      "title": "Indique e Ganhe - Gabriela Diniz",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22182,
+      "title": "cliente de indicação - Carol Ribeiro",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22154,
+      "title": "cliente de indicação - Jean dono da obra",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22145,
+      "title": "cliente de indicação - ana flavia",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22138,
+      "title": "Indique e Ganhe - Breno Oliveira",
+      "value": 0.0,
+      "score": -20,
+      "products": 0,
+      "product_names": []
+    },
+    {
+      "deal_id": 22136,
+      "title": "cliente de indicação - Rachel Matos",
+      "value": 0.0,
+      "score": -10,
+      "products": 0,
+      "product_names": []
+    }
+  ]
+}

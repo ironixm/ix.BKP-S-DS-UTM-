@@ -1,0 +1,133 @@
+# ╔═════════════════════════════════════════════════════════════════════════════╗
+# ║    ▄▄███▄▄    ┌────────────────────────────────────────────────────────────┐║
+# ║  ▄█▛▘‾ ‾▝▜█▄  │ Module Isolation Check – V1.0.0                            │║
+# ║ ██▘       ▝██ │                                                            │║
+# ║ ██▖       ▗██ ├────────────────────────────────────────────────────────────┤║
+# ║ ███▄_   _▄███ │ By Ir.On                                                   │║
+# ║ █████████████ │ Agent: Copilot | Sessao: branch:main                       │║
+# ║ ██ ▀ ████████ │ commit:f563b5b                                             │║
+# ║ ██ ● ██▀██▀██ │ Ultima modificacao: 2026-02-11 - 12:13                     │║
+# ║ ▜▛   ██ ▜▛ ██ │ ironix.com.br                                              │║
+# ║      ██    ▜▛ ├────────────────────────────────────────────────────────────┤║
+# ║      ▜▛       │ Caminho:                                                   │║
+# ║               │ _docs/mopgled/project_template/.github/workflows/module... │║
+# ║               ├────────────────────────────────────────────────────────────┤║
+# ║               │ Detalhes:                                                  │║
+# ║               │ * V1.0.0 - [sem detalhes]                                  │║
+# ║               │                                                            │║
+# ║               └────────────────────────────────────────────────────────────┘║
+# ╚═════════════════════════════════════════════════════════════════════════════╝
+
+name: Module Isolation Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check_isolation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Detect modified modules
+        id: modules
+        run: |
+          base_ref="${{ github.base_ref }}"
+          
+          # Lista módulos modificados
+          modules=$(git diff --name-only origin/$base_ref...HEAD | grep "^modulos/" | cut -d/ -f2 | sort -u | tr '\n' ',' | sed 's/,$//')
+          echo "modules=$modules" >> $GITHUB_OUTPUT
+          
+          # Módulos isolados (não devem importar de fora)
+          isolated_modules="renomeie:b_love:ix_smartglue:ix_pay:mopgled"
+          
+          if [ -z "$modules" ]; then
+            echo "⏭️  Sem mudanças em modulos/"
+            echo "✅ Check passou - nenhum módulo foi modificado"
+            echo "check_needed=false" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            echo "📦 Módulos modificados: $modules"
+            echo "check_needed=true" >> $GITHUB_OUTPUT
+            echo "isolated_modules=$isolated_modules" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Check import violations
+        if: steps.modules.outputs.check_needed == 'true'
+        run: |
+          modules="${{ steps.modules.outputs.modules }}"
+          isolated="${{ steps.modules.outputs.isolated_modules }}"
+          
+          # Converte lista em array
+          IFS=',' read -ra mod_array <<< "$modules"
+          IFS=':' read -ra iso_array <<< "$isolated"
+          
+          violations=0
+          for module in "${mod_array[@]}"; do
+            # Se o módulo está na lista de isolados
+            if [[ " ${iso_array[@]} " =~ " ${module} " ]]; then
+              echo "🔍 Verificando módulo isolado: $module"
+              
+              # Valida que não importa de módulos indevidos
+              if grep -r "from modulos\.[^$module]" "modulos/$module/" 2>/dev/null | grep -v "__pycache__" | head -5; then
+                echo "⚠️  Possível violação de isolamento em $module"
+              fi
+              
+              # Valida que não importa de core/factory (permitido: core.module_loader, core.routes_loader)
+              if grep -r "from core.factory import\|from core import factory" "modulos/$module/" 2>/dev/null | grep -v "__pycache__"; then
+                echo "❌ ERRO: $module não deve importar de core.factory!"
+                ((violations++))
+              fi
+            fi
+          done
+          
+          if [ $violations -gt 0 ]; then
+            echo "❌ Encontradas $violations violações de isolamento"
+            exit 1
+          fi
+          echo "✅ Nenhuma violação de isolamento detectada"
+      
+      - name: Comment on PR (success)
+        if: success() && steps.modules.outputs.check_needed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `✅ **Module Isolation Check Passou**\n\nMódulos modificados: ${{ steps.modules.outputs.modules }}\n\nSem violações de isolamento detectadas.`
+            })
+      
+      - name: Comment on PR (failure)
+        if: failure() && steps.modules.outputs.check_needed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❌ **Module Isolation Check Falhou**\n\nMódulos isolados não devem importar de outros módulos ou de core.factory.\n\nCorreja os imports e faça push novamente.`
+            })
+
+#   ▗▅▅▖   
+# ▄▛▘‾‾▝▜▄ 
+# █▖    ▗█   © 2026 Copyright
+# ███▅▅███   Ir.On
+# ██●█████ 
+# ▜▛  █▜▛█   "Feito com muito carinho."
+#     █  ▀ 
+#     ▀    

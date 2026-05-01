@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Ad Ops • MadMode</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  table { width: 100%; font-size: 13px; }
+  th, td { padding: 6px 8px; border-bottom: 1px solid #1f2937; text-align: left; vertical-align: top; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:600; }
+  .s-pending   { background:#1e3a8a; color:#bfdbfe; }
+  .s-running   { background:#7c2d12; color:#fed7aa; }
+  .s-verifying { background:#581c87; color:#e9d5ff; }
+  .s-done      { background:#064e3b; color:#a7f3d0; }
+  .s-failed    { background:#7f1d1d; color:#fecaca; }
+  .s-cancelled { background:#374151; color:#d1d5db; }
+  .ch-gads { background:#1e3a8a; color:#bfdbfe; }
+  .ch-meta { background:#831843; color:#fbcfe8; }
+  details > summary { cursor:pointer; }
+</style>
+</head>
+<body class="bg-gray-950 text-gray-100">
+<div class="max-w-screen-2xl mx-auto p-6">
+  <header class="flex items-center justify-between mb-4">
+    <div>
+      <h1 class="text-2xl font-bold">🎯 Ad Ops</h1>
+      <p class="text-sm text-gray-400">Operações de mídia agendadas (Google Ads + Meta)</p>
+    </div>
+    <div class="flex gap-2">
+      <a href="/madmode/" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded text-sm">← Dashboard</a>
+      <button id="btn-refresh" class="px-3 py-2 bg-emerald-700 hover:bg-emerald-600 rounded text-sm">↻ Atualizar</button>
+      <button id="btn-new" class="px-3 py-2 bg-blue-700 hover:bg-blue-600 rounded text-sm">+ Nova op</button>
+    </div>
+  </header>
+
+  <div class="flex gap-2 mb-4 text-sm">
+    <select id="f-status" class="bg-gray-800 px-2 py-1 rounded">
+      <option value="">Todos status</option>
+      <option value="pending">pending</option>
+      <option value="running">running</option>
+      <option value="verifying">verifying</option>
+      <option value="done">done</option>
+      <option value="failed">failed</option>
+      <option value="cancelled">cancelled</option>
+    </select>
+    <select id="f-channel" class="bg-gray-800 px-2 py-1 rounded">
+      <option value="">Todos canais</option>
+      <option value="gads">gads</option>
+      <option value="meta">meta</option>
+    </select>
+  </div>
+
+  <div class="bg-gray-900 rounded p-4 overflow-x-auto">
+    <table id="ops-table">
+      <thead class="text-gray-400 text-xs uppercase">
+        <tr>
+          <th>Quando</th><th>Canal</th><th>Ação</th><th>Alvo</th><th>Params</th>
+          <th>Status</th><th>Resultado</th><th>Verify</th><th></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <p id="empty" class="text-center text-gray-500 py-6 hidden">Nenhuma operação.</p>
+  </div>
+</div>
+
+<!-- Modal Nova op -->
+<div id="modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center">
+  <div class="bg-gray-900 rounded-lg p-6 w-full max-w-lg">
+    <h2 class="text-lg font-bold mb-4">Nova operação</h2>
+    <form id="form-new" class="space-y-3 text-sm">
+      <div class="grid grid-cols-2 gap-2">
+        <label>Canal
+          <select name="channel" class="w-full bg-gray-800 px-2 py-1 rounded mt-1">
+            <option value="gads">gads</option><option value="meta">meta</option>
+          </select>
+        </label>
+        <label>Ação
+          <select name="action" class="w-full bg-gray-800 px-2 py-1 rounded mt-1">
+            <option value="set_budget">set_budget</option>
+            <option value="pause">pause</option>
+            <option value="enable">enable</option>
+            <option value="audit">audit</option>
+          </select>
+        </label>
+        <label>Tipo alvo
+          <select name="target_type" class="w-full bg-gray-800 px-2 py-1 rounded mt-1">
+            <option value="campaign">campaign (gads)</option>
+            <option value="adset">adset (meta)</option>
+          </select>
+        </label>
+        <label>ID do alvo
+          <input name="target_id" class="w-full bg-gray-800 px-2 py-1 rounded mt-1" placeholder="numérico">
+        </label>
+      </div>
+      <label class="block">Nome legível
+        <input name="target_name" required class="w-full bg-gray-800 px-2 py-1 rounded mt-1" placeholder="ex: BKP - Search Geral">
+      </label>
+      <label class="block">Daily BRL (se set_budget)
+        <input name="daily_brl" type="number" step="0.01" class="w-full bg-gray-800 px-2 py-1 rounded mt-1">
+      </label>
+      <label class="block">Agendar para (vazio = agora)
+        <input name="scheduled_for" type="datetime-local" class="w-full bg-gray-800 px-2 py-1 rounded mt-1">
+      </label>
+      <div class="grid grid-cols-3 gap-2">
+        <label>Verify após (min)
+          <input name="verify_after_min" type="number" class="w-full bg-gray-800 px-2 py-1 rounded mt-1">
+        </label>
+        <label>Métrica
+          <select name="verify_metric" class="w-full bg-gray-800 px-2 py-1 rounded mt-1">
+            <option value="">(nenhuma)</option>
+            <option value="cost_24h_min">cost_24h_min</option>
+            <option value="conv_24h_min">conv_24h_min</option>
+          </select>
+        </label>
+        <label>Threshold
+          <input name="verify_threshold" type="number" step="0.01" class="w-full bg-gray-800 px-2 py-1 rounded mt-1">
+        </label>
+      </div>
+      <label class="block">Nota
+        <input name="note" class="w-full bg-gray-800 px-2 py-1 rounded mt-1">
+      </label>
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" id="btn-cancel" class="px-3 py-2 bg-gray-700 rounded">Cancelar</button>
+        <button type="submit" class="px-3 py-2 bg-emerald-700 rounded">Criar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+function fmt(dt) {
+  if (!dt) return "-";
+  return new Date(dt).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+}
+async function loadOps() {
+  const qs = new URLSearchParams();
+  if ($("#f-status").value) qs.set("status", $("#f-status").value);
+  if ($("#f-channel").value) qs.set("channel", $("#f-channel").value);
+  const r = await fetch("/madmode/ad-ops/api/ops?" + qs);
+  const j = await r.json();
+  const tbody = $("#ops-table tbody"); tbody.innerHTML = "";
+  $("#empty").classList.toggle("hidden", j.ops.length > 0);
+  for (const op of j.ops) {
+    const tr = document.createElement("tr");
+    const params = JSON.stringify(op.params || {});
+    const result = op.result ? `<details><summary>ver</summary><pre class="text-xs whitespace-pre-wrap">${JSON.stringify(op.result,null,1)}</pre></details>` : "-";
+    const verify = op.verify_metric
+      ? `${op.verify_metric}≥${op.verify_threshold} (${op.verify_after_min||0}min)` : "-";
+    const actions = [];
+    if (op.status === "pending") {
+      actions.push(`<button data-run="${op.id}" class="text-emerald-400 hover:underline mr-2">▶ run</button>`);
+      actions.push(`<button data-cancel="${op.id}" class="text-red-400 hover:underline">✕ cancel</button>`);
+    } else if (op.status === "failed" || op.status === "cancelled") {
+      actions.push(`<button data-run="${op.id}" class="text-amber-400 hover:underline">↻ retry</button>`);
+    }
+    tr.innerHTML = `
+      <td class="text-xs">${fmt(op.scheduled_for)}<br><span class="text-gray-500">${op.executed_at ? "exec: "+fmt(op.executed_at) : ""}</span></td>
+      <td><span class="pill ch-${op.channel}">${op.channel}</span></td>
+      <td>${op.action}</td>
+      <td><strong>${op.target_name}</strong><br><span class="text-xs text-gray-500">${op.target_type}/${op.target_id||"?"}</span></td>
+      <td class="text-xs">${params}</td>
+      <td><span class="pill s-${op.status}">${op.status}</span></td>
+      <td>${result}</td>
+      <td class="text-xs">${verify}</td>
+      <td>${actions.join("")}</td>
+    `;
+    tbody.appendChild(tr);
+  }
+  tbody.querySelectorAll("[data-run]").forEach(b => b.onclick = async () => {
+    if (!confirm("Executar agora?")) return;
+    await fetch(`/madmode/ad-ops/api/ops/${b.dataset.run}/run-now`, {method:"POST"});
+    loadOps();
+  });
+  tbody.querySelectorAll("[data-cancel]").forEach(b => b.onclick = async () => {
+    await fetch(`/madmode/ad-ops/api/ops/${b.dataset.cancel}/cancel`, {method:"POST"});
+    loadOps();
+  });
+}
+$("#btn-refresh").onclick = loadOps;
+$("#f-status").onchange = loadOps;
+$("#f-channel").onchange = loadOps;
+$("#btn-new").onclick = () => $("#modal").classList.replace("hidden","flex");
+$("#btn-cancel").onclick = () => $("#modal").classList.replace("flex","hidden");
+$("#form-new").onsubmit = async (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const o = Object.fromEntries(fd);
+  const payload = {
+    channel: o.channel, action: o.action,
+    target_type: o.target_type, target_id: o.target_id || null,
+    target_name: o.target_name, note: o.note || null,
+    params: o.daily_brl ? { daily_brl: parseFloat(o.daily_brl) } : {},
+  };
+  if (o.scheduled_for) {
+    payload.scheduled_for = new Date(o.scheduled_for).toISOString();
+  }
+  if (o.verify_after_min) payload.verify_after_min = parseInt(o.verify_after_min);
+  if (o.verify_metric) payload.verify_metric = o.verify_metric;
+  if (o.verify_threshold) payload.verify_threshold = parseFloat(o.verify_threshold);
+  const r = await fetch("/madmode/ad-ops/api/ops", {
+    method: "POST", headers: {"Content-Type":"application/json"},
+    body: JSON.stringify(payload),
+  });
+  const j = await r.json();
+  if (!j.ok) { alert("Erro: " + (j.error || "?")); return; }
+  $("#modal").classList.replace("flex","hidden");
+  e.target.reset();
+  loadOps();
+};
+setInterval(loadOps, 30000);
+loadOps();
+</script>
+</body>
+</html>

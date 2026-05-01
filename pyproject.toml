@@ -1,0 +1,55 @@
+# ╔═════════════════════════════════════════════════════════════════╗
+# ║    ▄▄███▄▄    ┌────────────────────────────────────────────────┐║
+# ║  ▄█▛▘‾ ‾▝▜█▄  │ Pyproject – V1.0.0                             │║
+# ║ ██▘       ▝██ │                                                │║
+# ║ ██▖       ▗██ ├────────────────────────────────────────────────┤║
+# ║ ███▄_   _▄███ │ By Ir.On                                       │║
+# ║ █████████████ │ Agent: Copilot | Sessao: branch:main           │║
+# ║ ██ ▀ ████████ │ Ultima modificacao: 2026-02-03 - 15:41         │║
+# ║ ██ ● ██▀██▀██ │ ironix.com.br                                  │║
+# ║ ▜▛   ██ ▜▛ ██ ├────────────────────────────────────────────────┤║
+# ║      ██    ▜▛ │ Caminho:                                       │║
+# ║      ▜▛       │ pyproject.toml                                 │║
+# ║               ├────────────────────────────────────────────────┤║
+# ║               │ Detalhes:                                      │║
+# ║               │ * V1.0.0 - [sem detalhes]                      │║
+# ║               │                                                │║
+# ║               └────────────────────────────────────────────────┘║
+# ╚═════════════════════════════════════════════════════════════════╝
+
+[tool.poetry]
+name = "python-template"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.11.0,<3.12"
+flask = "^3.0.0"
+flask-login = "^0.6.3"
+gunicorn = "^21.2.0"
+requests = "^2.32.5"
+psycopg = {version = "^3.2.0", extras = ["binary", "pool"]}
+
+[tool.pyright]
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+useLibraryCodeForTypes = true
+exclude = [".cache"]
+
+[tool.ruff]
+# https://beta.ruff.rs/docs/configuration/
+select = ['E', 'W', 'F', 'I', 'B', 'C4', 'ARG', 'SIM']
+ignore = ['W291', 'W292', 'W293']
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+#   ▗▅▅▖   
+# ▄▛▘‾‾▝▜▄ 
+# █▖    ▗█   © 2026 Copyright
+# ███▅▅███   Ir.On
+# ██●█████ 
+# ▜▛  █▜▛█   "Feito com muito carinho."
+#     █  ▀ 
+#     ▀    

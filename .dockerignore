@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+.replit
+replit.nix
+.cache/
+_docs/
+modulos/
+_services/
+node_modules/
+*.command
+*.code-workspace

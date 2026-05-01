@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MadMode · ix.BKP-S</title>
+<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  body { background:#0b0f17; color:#e5e7eb; font-family: ui-sans-serif, system-ui; }
+  .card { background:#111827; border:1px solid #1f2937; border-radius:12px; padding:16px; }
+  .ok { color:#10b981; } .bad { color:#ef4444; } .warn { color:#f59e0b; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:600;}
+  .tab { padding:8px 16px; cursor:pointer; border-bottom:2px solid transparent; }
+  .tab.active { border-color:#10b981; color:#10b981; }
+  table { width:100%; font-size:13px; }
+  th { text-align:left; padding:6px 8px; color:#9ca3af; font-weight:600; border-bottom:1px solid #1f2937;}
+  td { padding:6px 8px; border-bottom:1px solid #111827; }
+  input, select { background:#1f2937; border:1px solid #374151; color:#e5e7eb; border-radius:6px; padding:6px 10px; }
+  button { background:#10b981; color:#0b0f17; padding:8px 14px; border-radius:8px; font-weight:600; cursor:pointer;}
+  button.ghost { background:transparent; border:1px solid #374151; color:#e5e7eb; }
+  .tooltip { position:relative; }
+  .tooltip:hover::after { content:attr(data-tip); position:absolute; left:0; top:100%; background:#1f2937; padding:6px 10px; border-radius:6px; font-size:11px; color:#e5e7eb; white-space:nowrap; z-index:50; border:1px solid #374151;}
+</style>
+</head>
+<body class="p-6">
+<div class="max-w-7xl mx-auto">
+  <header class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">🎛️  MadMode</h1>
+      <p class="text-sm text-gray-400">Painel administrativo · ix.BKP-S(DS+UTM)</p>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="text-sm text-gray-400" id="last-updated">—</div>
+      <a href="/madmode/logout" class="text-xs ghost border border-gray-700 px-2 py-1 rounded text-gray-300 hover:text-white">Sair</a>
+    </div>
+  </header>
+
+  <div id="global-error" class="hidden mb-4 px-3 py-2 rounded bg-red-900/40 border border-red-700 text-red-200 text-sm"></div>
+
+  <nav class="flex gap-2 mb-6 border-b border-gray-800">
+    <a href="/madmode/status" class="tab" data-tab="status">Status</a>
+    <a href="/madmode/eventos" class="tab" data-tab="events">Eventos</a>
+    <a href="/madmode/deals" class="tab" data-tab="deals">Deals Recentes</a>
+    <a href="/madmode/manual" class="tab" data-tab="manual">Manual Run</a>
+    <a href="/madmode/ad-ops/" class="tab" style="color:#10b981">🎯 Ad Ops</a>
+  </nav>
+
+  <!-- STATUS -->
+  <section id="tab-status">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" id="kpi-grid"></div>
+    <div class="grid md:grid-cols-2 gap-4 mb-6">
+      <div class="card">
+        <h2 class="font-semibold mb-3">🩺 Health Checks</h2>
+        <div id="health"></div>
+      </div>
+      <div class="card">
+        <h2 class="font-semibold mb-3">📊 Qualidade dos Dados (amostra Pipedrive)</h2>
+        <div id="quality"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2 class="font-semibold mb-3">🔌 Webhooks Pipedrive (apontando para bzl.alx-i.com)</h2>
+      <table id="webhooks-table"><thead><tr><th>ID</th><th>Evento</th><th>URL</th><th>Versão</th><th>Status</th></tr></thead><tbody></tbody></table>
+    </div>
+
+    <div class="card mt-4">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="font-semibold">🧹 Notas duplicadas (Pipedrive)</h2>
+        <div class="flex gap-2">
+          <button class="ghost text-sm" onclick="estimateDedup()">↻ Estimar</button>
+          <button class="text-sm" onclick="goManual('dedup')">Limpar agora</button>
+        </div>
+      </div>
+      <div id="dedup-card" class="text-sm text-gray-400">Sem amostra ainda — clique em "Estimar".</div>
+
+      <div class="mt-4 pt-4 border-t border-gray-800">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-sm font-semibold text-gray-300">📊 Índice de duplicação (últimos 7 dias)</h3>
+          <button class="ghost text-xs" onclick="loadDedupStats()">↻</button>
+        </div>
+        <div id="dedup-stats-card" class="text-sm text-gray-400">carregando…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="tab-events" class="hidden">
+    <div class="card mb-4">
+      <div class="flex flex-wrap gap-3 items-end mb-4">
+        <label>Janela (h): <input id="ev-hours" type="number" value="24" min="1" max="720" class="w-20"></label>
+        <label>Tipo:
+          <select id="ev-type">
+            <option value="">Todos</option>
+            <option value="conversion_sent">conversion_sent (Meta/GA4/GAds)</option>
+            <option value="deal_score">deal_score</option>
+            <option value="deal_score_override">deal_score_override</option>
+            <option value="scheduler_deal_error">scheduler_deal_error</option>
+            <option value="scheduler_dedup_error">scheduler_dedup_error</option>
+            <option value="scheduler_quota_pause">scheduler_quota_pause</option>
+          </select>
+        </label>
+        <label>Agrupar por:
+          <select id="ev-group">
+            <option value="type">Tipo</option>
+            <option value="source">Origem</option>
+            <option value="trigger">Trigger</option>
+          </select>
+        </label>
+        <button onclick="evOffset=0; loadEvents()">Atualizar</button>
+        <a id="csv-link" class="ghost border border-gray-700 px-3 py-2 rounded text-sm" download>📥 Exportar CSV</a>
+      </div>
+      <canvas id="events-chart" height="100"></canvas>
+    </div>
+    <div class="card">
+      <h2 class="font-semibold mb-3">Histórico</h2>
+      <table id="events-table"><thead><tr><th>Timestamp</th><th>Tipo</th><th>Plataforma</th><th>Evento</th><th>Trigger</th><th>Deal</th><th>Status</th></tr></thead><tbody></tbody></table>
+      <div class="flex items-center justify-between mt-3 text-sm">
+        <div id="events-info" class="text-gray-400"></div>
+        <div class="flex gap-2">
+          <button id="ev-prev" class="ghost border border-gray-700 px-3 py-1 rounded">← Anterior</button>
+          <button id="ev-next" class="ghost border border-gray-700 px-3 py-1 rounded">Próximo →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEALS -->
+  <section id="tab-deals" class="hidden">
+    <div class="card">
+      <h2 class="font-semibold mb-3">Últimas Atualizações de Deals</h2>
+      <table id="deals-table"><thead><tr><th>Deal</th><th>Stage</th><th>Score</th><th>Source</th><th>Quando</th><th></th></tr></thead><tbody></tbody></table>
+      <div class="flex items-center justify-between mt-3 text-sm">
+        <div id="deals-info" class="text-gray-400"></div>
+        <div class="flex gap-2">
+          <button id="dl-prev" class="ghost border border-gray-700 px-3 py-1 rounded">← Anterior</button>
+          <button id="dl-next" class="ghost border border-gray-700 px-3 py-1 rounded">Próximo →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANUAL RUN -->
+  <section id="tab-manual" class="hidden">
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card">
+        <h2 class="font-semibold mb-3">📅 Criar Agendamento</h2>
+        <form id="job-form" class="space-y-3">
+          <div class="tooltip" data-tip="Pipedrive: 100 req/10s. Cada deal consome ~4 chamadas. Preset: 60 deals/lote.">
+            <label class="block text-sm mb-1">Deals por lote (batch_size)</label>
+            <input id="f-batch" type="number" value="60" min="1" max="500" class="w-full">
+          </div>
+          <div class="tooltip" data-tip="Frequência mínima recomendada: 10min. Mais agressivo = risco de quota.">
+            <label class="block text-sm mb-1">Frequência (minutos)</label>
+            <input id="f-freq" type="number" value="10" min="1" max="1440" class="w-full">
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm mb-1">Data início (corte)</label>
+              <input id="f-from" type="date" class="w-full">
+            </div>
+            <div>
+              <label class="block text-sm mb-1">Data fim (corte)</label>
+              <input id="f-to" type="date" class="w-full">
+            </div>
+          </div>
+          <div class="tooltip" data-tip="Campo do Pipedrive usado para filtrar e ordenar (asc).">
+            <label class="block text-sm mb-1">Tipo de data (campo)</label>
+            <select id="f-field" class="w-full">
+              <option value="update_time">update_time (última atualização)</option>
+              <option value="add_time">add_time (criação)</option>
+              <option value="stage_change_time">stage_change_time</option>
+            </select>
+          </div>
+          <div id="f-validation" class="text-sm"></div>
+          <div class="flex gap-2">
+            <button type="button" onclick="validateConfig()" class="ghost">Validar</button>
+            <button type="submit" id="f-submit">Criar Agendamento</button>
+          </div>
+        </form>
+        <div class="mt-4 text-xs text-gray-500">
+          Limite Pipedrive: <span id="pd-limit">—</span> req/dia · Recomendado máx: <span id="pd-rec">—</span> (70%)
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="font-semibold mb-3">⏰ Jobs Ativos</h2>
+        <table id="jobs-table"><thead><tr><th>ID</th><th>Lote</th><th>Freq</th><th>Período</th><th>Status</th><th>Processed</th><th>Próx</th><th></th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+
+    <div class="card mt-4">
+      <h2 class="font-semibold mb-3">⚡ Pré-preenchimento Campos "Deal Score"</h2>
+      <p class="text-xs text-gray-500 mb-3">Backfill dos campos novos do cliente (Lead indicado, CRM Preferencial, Cargo Decisor, Plataforma Integrada, Qtd dias para agendar). <b>Não sobrescreve campos editados manualmente</b> — guard via <code>/deals/{id}/flow</code> + bot user_id.</p>
+      <div class="grid md:grid-cols-5 gap-3">
+        <div>
+          <label class="block text-sm mb-1">Limite de deals</label>
+          <input id="pf-limit" type="number" value="200" min="1" max="10000" class="w-full">
+        </div>
+        <div>
+          <label class="block text-sm mb-1">Status</label>
+          <select id="pf-status" class="w-full">
+            <option value="open">open</option>
+            <option value="all_not_deleted">all_not_deleted</option>
+            <option value="won">won</option>
+            <option value="lost">lost</option>
+          </select>
+        </div>
+        <div class="tooltip" data-tip="Filtra somente determinados campos. Vazio = todos. Ex: lead_indicado,cargo_decisor">
+          <label class="block text-sm mb-1">Only (csv)</label>
+          <input id="pf-only" type="text" placeholder="(todos)" class="w-full">
+        </div>
+        <div class="flex items-end">
+          <label class="flex items-center gap-2 text-sm">
+            <input id="pf-headcount" type="checkbox"> Qtd MKT/Comercial (heurística)
+          </label>
+        </div>
+        <div class="flex items-end">
+          <label class="flex items-center gap-2 text-sm">
+            <input id="pf-dryrun" type="checkbox" checked> Dry-run
+          </label>
+        </div>
+      </div>
+      <div class="flex gap-2 mt-3">
+        <button type="button" onclick="runPrefill()" id="pf-run">▶ Executar</button>
+        <button type="button" class="ghost" onclick="refreshPrefillStatus()">↻ Atualizar status</button>
+      </div>
+      <div id="pf-status-box" class="mt-3 text-sm"></div>
+      <pre id="pf-log" class="mt-2 bg-gray-900 text-green-300 text-xs p-2 rounded h-48 overflow-auto hidden"></pre>
+    </div>
+
+    <div class="card mt-4" id="card-dedup">
+      <h2 class="font-semibold mb-3">🧹 Limpar Notas Duplicadas (DealScore)</h2>
+      <p class="text-sm text-gray-400 mb-3">
+        Varre todas as notas do Pipedrive (paginado, ~2s entre páginas) e mantém apenas a
+        nota automática mais recente por deal. Respeita rate limit. Deals sem duplicatas são ignorados.
+      </p>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="tooltip" data-tip="Vazio = todos os deals (modo bulk). ID = limpa apenas um deal específico.">
+          <label class="block text-sm mb-1">Deal ID (opcional)</label>
+          <input id="dd-deal" type="text" placeholder="(todos)" class="w-full">
+        </div>
+      </div>
+      <div class="flex gap-2 mt-3">
+        <button type="button" onclick="runDedup()" id="dd-run">▶ Executar limpeza</button>
+        <button type="button" class="ghost" onclick="refreshDedupStatus()">↻ Status</button>
+        <button type="button" class="ghost" onclick="estimateDedup()">📊 Estimar duplicação</button>
+      </div>
+      <div id="dd-status-box" class="mt-3 text-sm"></div>
+      <pre id="dd-log" class="mt-2 bg-gray-900 text-green-300 text-xs p-2 rounded h-48 overflow-auto hidden"></pre>
+    </div>
+  </section>
+</div>
+
+<script>
+async function fetchJSON(url, opts){
+  const r = await fetch(url, opts);
+  if(r.status === 401){ window.location = '/madmode/login?next=' + encodeURIComponent(location.pathname); throw new Error('401'); }
+  if(!r.ok){
+    let body = '';
+    try { body = (await r.text()).slice(0, 200); } catch(_){}
+    throw new Error(`${r.status} ${r.statusText} ${body}`);
+  }
+  return r.json();
+}
+function showError(msg){
+  const el = document.getElementById('global-error');
+  el.textContent = '⚠ ' + msg;
+  el.classList.remove('hidden');
+}
+function clearError(){ document.getElementById('global-error').classList.add('hidden'); }
+function fmt(v){ return v==null?'—':v; }
+function pct(v){ return v==null?'—':v+'%'; }
+function badge(ok){ return `<span class="pill ${ok?'bg-green-900 text-green-300':'bg-red-900 text-red-300'}">${ok?'OK':'FAIL'}</span>`; }
+function timeAgo(iso){ if(!iso) return '—'; const d=new Date(iso); const m=Math.floor((Date.now()-d.getTime())/60000); if(m<1)return 'agora';if(m<60)return m+'min atrás';const h=Math.floor(m/60);if(h<24)return h+'h atrás';return Math.floor(h/24)+'d atrás';}
+function fmtBR(iso){ if(!iso) return ''; try{ return new Date(iso).toLocaleString('pt-BR', {timeZone:'America/Sao_Paulo', hour12:false}); }catch(e){ return iso; } }
+function fmtBRHour(s){ if(!s) return ''; try{ const iso = s.includes('T') ? s : s.replace(' ','T')+':00Z'; return new Date(iso).toLocaleString('pt-BR', {timeZone:'America/Sao_Paulo', hour12:false, day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'}); }catch(e){ return s; } }
+
+// Skeleton inicial enquanto /api/overview carrega
+function renderSkeleton(){
+  document.getElementById('kpi-grid').innerHTML = Array(4).fill(0).map(()=>
+    `<div class="card text-center"><div class="text-xs text-gray-500 uppercase">carregando…</div><div class="text-3xl font-bold mt-1 animate-pulse text-gray-700">···</div></div>`
+  ).join('');
+  document.getElementById('health').innerHTML = '<div class="text-gray-500 text-sm py-3">carregando health checks…</div>';
+  document.getElementById('quality').innerHTML = '<div class="text-gray-500 text-sm py-3">carregando amostra Pipedrive… (pode levar ~10s)</div>';
+}
+
+// Tabs (com URL bonita /madmode/<tab>)
+const TAB_PATHS = {status:'/madmode/status', events:'/madmode/eventos', deals:'/madmode/deals', manual:'/madmode/manual'};
+function activateTab(name, push){
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active', x.dataset.tab===name));
+  ['status','events','deals','manual'].forEach(n=>document.getElementById('tab-'+n).classList.toggle('hidden', n!==name));
+  if(name==='events') loadEvents();
+  if(name==='deals') loadDeals();
+  if(name==='manual') loadJobs();
+  if(push && TAB_PATHS[name]) history.pushState({tab:name}, '', TAB_PATHS[name]);
+}
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click', e=>{
+    if (!t.dataset.tab) return; // link externo (ex: Ad Ops) — deixa navegar normal
+    e.preventDefault(); activateTab(t.dataset.tab, true);
+  });
+});
+window.addEventListener('popstate', e=>{
+  const m = location.pathname.match(/\/madmode\/([^\/]+)/);
+  const aliases = {status:'status', eventos:'events', events:'events', deals:'deals', 'deals-recentes':'deals', recentes:'deals', manual:'manual', 'manual-run':'manual', jobs:'manual'};
+  activateTab(aliases[(m&&m[1]||'').toLowerCase()] || 'status', false);
+});
+// Aba inicial vinda do servidor
+window.addEventListener('DOMContentLoaded', ()=> activateTab('{{ active_tab|default("status") }}', false));
+
+async function loadStatus(){
+  let d;
+  try {
+    d = await fetchJSON('/madmode/api/overview');
+    clearError();
+  } catch(e){
+    showError('Falha ao carregar /api/overview: ' + e.message);
+    document.getElementById('kpi-grid').innerHTML = '<div class="card col-span-full text-center text-red-300">Erro ao carregar overview. Verifique health checks.</div>';
+    return;
+  }
+  document.getElementById('last-updated').textContent = 'Atualizado: ' + new Date().toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo'});
+  const o = d.overview || {};
+  document.getElementById('kpi-grid').innerHTML = [
+    ['Deals 24h', o.deals_24h],
+    ['Deals 7d', o.deals_7d],
+    ['Persons 24h', o.persons_24h],
+    ['Score médio 24h', o.avg_score_24h?.toFixed(1) ?? '—'],
+  ].map(([k,v])=>`<div class="card text-center"><div class="text-xs text-gray-500 uppercase">${k}</div><div class="text-3xl font-bold mt-1">${fmt(v)}</div></div>`).join('');
+
+  const h = d.health || {};
+  const wbh = h.webhooks || {list:[], ok:false, ours_active:0, ours_total:0};
+  document.getElementById('health').innerHTML = [
+    ['Webhook Pipedrive', wbh.ok, `${wbh.ours_active}/${wbh.ours_total} ativos`],
+    ['Meta CAPI', h.meta?.ok, h.meta?.token_set?'token ok':'token ausente'],
+    ['GA4', h.ga4?.ok, h.ga4?.secret_set?'secret ok':'secret ausente'],
+    ['Google Ads', h.gads?.ok, h.gads?.missing?.length?('faltam: '+h.gads.missing.join(', ')):'5 vars ok'],
+    ['Events log', h.events_log?.ok, h.events_log?.source==='postgres' ? `${h.events_log?.events_24h||0} ev/24h · ${h.events_log?.age_min||0}min` : `${h.events_log?.size_kb||0}kb · ${h.events_log?.age_min||0}min`],
+    ['Último evento', o.last_event_age_min!=null && o.last_event_age_min<120, o.last_event_age_min!=null?o.last_event_age_min.toFixed(0)+'min atrás':'sem eventos'],
+  ].map(([k,ok,extra])=>`<div class="flex justify-between py-2 border-b border-gray-800"><span>${k}</span><span>${badge(ok)} <span class="text-xs text-gray-500 ml-2">${extra}</span></span></div>`).join('');
+
+  const q = d.quality || {};
+  if(q.error){
+    document.getElementById('quality').innerHTML = `<div class="bad">Erro: ${q.error}</div>`;
+  } else {
+    document.getElementById('quality').innerHTML = [
+      ['Amostra deals', q.total_sample],
+      ['Com valor', pct(q.pct_with_value)],
+      ['Com person', pct(q.pct_with_person)],
+      ['Com org', pct(q.pct_with_org)],
+      ['Com stage', pct(q.pct_with_stage)],
+      ['Email válido (sample persons)', pct(q.pct_valid_email)],
+      ['Phone válido', pct(q.pct_valid_phone)],
+    ].map(([k,v])=>`<div class="flex justify-between py-1"><span class="text-gray-400">${k}</span><b>${v}</b></div>`).join('');
+  }
+
+  const wb = wbh.list || [];
+  document.querySelector('#webhooks-table tbody').innerHTML = wb.length ? wb.map(w=>`
+    <tr><td>${w.id}</td><td>${w.event}</td><td class="text-xs">${w.url}</td><td>${w.version}</td><td>${badge(w.active)}</td></tr>
+  `).join('') : '<tr><td colspan=5 class="text-center text-gray-500 py-4">Nenhum webhook nosso registrado!</td></tr>';
+}
+
+let evChart;
+let evOffset = 0;
+const EV_PAGE = 50;
+let dlOffset = 0;
+const DL_PAGE = 50;
+
+async function loadEvents(){
+  const hours = document.getElementById('ev-hours').value;
+  const group = document.getElementById('ev-group').value;
+  const d = await fetchJSON(`/madmode/api/events/series?hours=${hours}&group_by=${group}`);
+  document.getElementById('csv-link').href = `/madmode/api/events/csv?hours=${hours}`;
+  const ctx = document.getElementById('events-chart');
+  if(evChart) evChart.destroy();
+  const colors = ['#10b981','#3b82f6','#f59e0b','#ef4444','#8b5cf6','#ec4899','#06b6d4','#84cc16'];
+  evChart = new Chart(ctx, {type:'bar', data:{labels:d.labels.map(fmtBRHour), datasets:d.series.map((s,i)=>({label:s.label, data:s.data, backgroundColor:colors[i%colors.length]}))}, options:{responsive:true, scales:{x:{stacked:true, ticks:{color:'#9ca3af'}}, y:{stacked:true, ticks:{color:'#9ca3af'}}}, plugins:{legend:{labels:{color:'#e5e7eb'}}}}});
+  await loadEventsPage();
+}
+
+async function loadEventsPage(){
+  const hours = document.getElementById('ev-hours').value;
+  const t = (document.getElementById('ev-type')||{}).value || '';
+  const r = await fetchJSON(`/madmode/api/events/list?hours=${hours}&limit=${EV_PAGE}&offset=${evOffset}${t?`&type=${encodeURIComponent(t)}`:''}`);
+  const items = r.items || r;
+  const total = r.total ?? items.length;
+  document.querySelector('#events-table tbody').innerHTML = items.map(e=>{
+    const p = e.payload || {};
+    const plat = p.platform || (e.type==='conversion_sent' ? '?' : '');
+    const platBadge = plat ? ({meta:'<span class="pill bg-blue-900 text-blue-300">Meta</span>',ga4:'<span class="pill bg-orange-900 text-orange-300">GA4</span>',gads:'<span class="pill bg-yellow-900 text-yellow-300">GAds</span>'}[plat] || plat) : (e.source||'');
+    const evName = p.event_name || '';
+    const trig = p.trigger || e.trigger || '';
+    let st = '';
+    if(e.type==='conversion_sent'){
+      st = p.ok ? `<span class="ok">✓ ${p.status||''}</span>` : `<span class="bad">✗ ${p.status||p.error||''}</span>`;
+    } else if(e.score!=null){ st = e.score; }
+    return `<tr><td class="text-xs">${fmtBR(e.timestamp)}</td><td>${e.type||''}</td><td>${platBadge}</td><td class="text-xs">${evName}</td><td class="text-xs">${trig}</td><td>${e.deal_id||''}</td><td class="text-xs">${st}</td></tr>`;
+  }).join('');
+  const from = total ? evOffset+1 : 0;
+  const to = evOffset + items.length;
+  document.getElementById('events-info').textContent = `${from}-${to} de ${total}`;
+  document.getElementById('ev-prev').disabled = evOffset <= 0;
+  document.getElementById('ev-next').disabled = (evOffset + items.length) >= total;
+}
+
+async function loadDeals(){
+  const r = await fetchJSON(`/madmode/api/recent-deals?limit=${DL_PAGE}&offset=${dlOffset}`);
+  const items = r.items || r;
+  document.querySelector('#deals-table tbody').innerHTML = items.map(x=>`
+    <tr>
+      <td><b>${x.deal_id}</b></td><td>${x.stage_id||'—'}</td><td>${x.score!=null?x.score:'—'}</td>
+      <td>${x.source||'—'}</td><td>${timeAgo(x.timestamp)}</td>
+      <td><a href="${x.url}" target="_blank" class="text-green-400">↗</a></td>
+    </tr>`).join('');
+  const from = items.length ? dlOffset+1 : 0;
+  const to = dlOffset + items.length;
+  document.getElementById('deals-info').textContent = `${from}-${to} (página de ${DL_PAGE})`;
+  document.getElementById('dl-prev').disabled = dlOffset <= 0;
+  document.getElementById('dl-next').disabled = items.length < DL_PAGE;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const evp = document.getElementById('ev-prev');
+  const evn = document.getElementById('ev-next');
+  if(evp) evp.addEventListener('click', () => { evOffset = Math.max(0, evOffset - EV_PAGE); loadEventsPage(); });
+  if(evn) evn.addEventListener('click', () => { evOffset += EV_PAGE; loadEventsPage(); });
+  const dlp = document.getElementById('dl-prev');
+  const dln = document.getElementById('dl-next');
+  if(dlp) dlp.addEventListener('click', () => { dlOffset = Math.max(0, dlOffset - DL_PAGE); loadDeals(); });
+  if(dln) dln.addEventListener('click', () => { dlOffset += DL_PAGE; loadDeals(); });
+});
+
+async function validateConfig(){
+  const data = {batch_size:+document.getElementById('f-batch').value, freq_minutes:+document.getElementById('f-freq').value};
+  const r = await fetchJSON('/madmode/api/scheduler/validate', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+  const div = document.getElementById('f-validation');
+  const submit = document.getElementById('f-submit');
+  if(r.blocked){
+    div.innerHTML = `<div class="bad">⛔ BLOQUEADO: ${r.estimated_daily_tokens.toLocaleString()} req/dia > limite ${r.limit.toLocaleString()}</div>`;
+    submit.disabled = true; submit.style.opacity = .4;
+  } else if(!r.ok){
+    div.innerHTML = `<div class="warn">⚠️ ${r.warning}</div>`;
+    submit.disabled = false; submit.style.opacity = 1;
+  } else {
+    div.innerHTML = `<div class="ok">✅ ${r.estimated_daily_tokens.toLocaleString()} req/dia (limite ${r.limit.toLocaleString()})</div>`;
+    submit.disabled = false; submit.style.opacity = 1;
+  }
+  return r;
+}
+
+document.getElementById('job-form').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const v = await validateConfig();
+  if(v.blocked) return;
+  const body = {
+    batch_size: +document.getElementById('f-batch').value,
+    freq_minutes: +document.getElementById('f-freq').value,
+    date_from: document.getElementById('f-from').value,
+    date_to: document.getElementById('f-to').value,
+    date_field: document.getElementById('f-field').value,
+  };
+  const r = await fetch('/madmode/api/scheduler/jobs', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
+  if(r.ok){ alert('Agendamento criado!'); loadJobs(); } else { const e=await r.json(); alert('Erro: '+e.error); }
+});
+
+async function loadJobs(){
+  const d = await fetchJSON('/madmode/api/scheduler/jobs');
+  document.getElementById('pd-limit').textContent = d.preset.daily_limit.toLocaleString();
+  document.getElementById('pd-rec').textContent = d.preset.recommended_max.toLocaleString();
+  document.querySelector('#jobs-table tbody').innerHTML = d.jobs.length ? d.jobs.map(j=>`
+    <tr>
+      <td class="text-xs">${j.id}</td>
+      <td>${j.batch_size}</td><td>${j.freq_minutes}min</td>
+      <td class="text-xs">${j.date_from||'—'}<br>${j.date_to||'—'}</td>
+      <td><span class="pill ${j.status==='running'?'bg-yellow-900 text-yellow-300':j.status==='completed'?'bg-green-900 text-green-300':j.status==='cancelled'?'bg-gray-700 text-gray-300':'bg-blue-900 text-blue-300'}">${j.status}</span></td>
+      <td>${j.processed||0}${j.errors?` <a href="#" class="bad underline" onclick="event.preventDefault(); showJobErrors('${j.id}')">(${j.errors} err)</a>`:''}</td>
+      <td class="text-xs">${j.next_run_at?new Date(j.next_run_at).toLocaleTimeString('pt-BR',{timeZone:'America/Sao_Paulo'}):'—'}</td>
+      <td>${(j.status==='completed'||j.status==='cancelled') ? `<button class="ghost text-xs" onclick="resumeJob('${j.id}')">retomar</button>` : `<button class="ghost text-xs" onclick="cancelJob('${j.id}')">cancelar</button>`}</td>
+    </tr>`).join('') : '<tr><td colspan=8 class="text-center text-gray-500 py-4">Nenhum agendamento.</td></tr>';
+}
+
+async function resumeJob(id){
+  const reset = confirm('Retomar job '+id+'?\n\nOK = continua de onde parou\nCancelar = aborta\n\n(Para zerar o cursor, segure Shift ao confirmar não é suportado — use a CLI)');
+  if(!reset) return;
+  await fetch('/madmode/api/scheduler/jobs/'+id+'/resume', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({reset_cursor:false})});
+  loadJobs();
+}
+
+async function cancelJob(id){
+  if(!confirm('Cancelar job '+id+'?')) return;
+  await fetch('/madmode/api/scheduler/jobs/'+id, {method:'DELETE'});
+  loadJobs();
+}
+
+async function showJobErrors(id){
+  let modal = document.getElementById('errors-modal');
+  if(!modal){
+    modal = document.createElement('div');
+    modal.id = 'errors-modal';
+    modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+    modal.innerHTML = `<div style="background:#1f2937;border:1px solid #374151;border-radius:8px;max-width:1100px;width:100%;max-height:85vh;overflow:auto;padding:20px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <h2 class="font-semibold" id="errors-title">Erros do Job</h2>
+        <button onclick="document.getElementById('errors-modal').remove()" class="ghost border border-gray-700 px-3 py-1 rounded">✕ Fechar</button>
+      </div>
+      <div id="errors-body">Carregando…</div>
+    </div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener('click', e => { if(e.target===modal) modal.remove(); });
+  }
+  document.getElementById('errors-title').textContent = 'Erros do Job '+id;
+  document.getElementById('errors-body').textContent = 'Carregando…';
+  try{
+    const r = await fetchJSON('/madmode/api/scheduler/jobs/'+id+'/errors?limit=200');
+    if(!r.items?.length){ document.getElementById('errors-body').innerHTML = '<div class="text-gray-400 py-4 text-center">Nenhum erro registrado.</div>'; return; }
+    document.getElementById('errors-body').innerHTML = `
+      <div class="text-gray-400 text-sm mb-2">${r.count} eventos</div>
+      <table class="w-full text-sm">
+        <thead><tr><th class="text-left p-2">Quando</th><th class="text-left p-2">Tipo</th><th class="text-left p-2">Deal</th><th class="text-left p-2">Erro</th></tr></thead>
+        <tbody>${r.items.map(e=>`
+          <tr class="border-t border-gray-700">
+            <td class="p-2 text-xs whitespace-nowrap">${fmtBR(e.timestamp)}</td>
+            <td class="p-2 text-xs">${e.type||''}</td>
+            <td class="p-2 text-xs">${e.deal_id||'—'}</td>
+            <td class="p-2 text-xs" style="word-break:break-word;max-width:600px;">${(e.error||'').replace(/</g,'&lt;')}${e.quota_pause_s?` <span class="text-yellow-400">(pause ${e.quota_pause_s}s)</span>`:''}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }catch(err){
+    document.getElementById('errors-body').innerHTML = '<div class="bad py-4">Falha ao carregar: '+err+'</div>';
+  }
+}
+
+// ----- Prefill -----
+let _pfPollTimer = null;
+async function runPrefill(){
+  const body = {
+    limit: +document.getElementById('pf-limit').value,
+    status: document.getElementById('pf-status').value,
+    only: document.getElementById('pf-only').value,
+    with_headcount: document.getElementById('pf-headcount').checked,
+    dry_run: document.getElementById('pf-dryrun').checked,
+  };
+  if(!body.dry_run && !confirm(`Executar prefill em até ${body.limit} deals (status=${body.status})? Não-dry-run grava no Pipedrive.`)) return;
+  const btn = document.getElementById('pf-run'); btn.disabled = true;
+  try {
+    const r = await fetch('/madmode/api/prefill/run', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
+    const d = await r.json();
+    if(!d.ok){ alert('Erro: '+(d.error||'?')); btn.disabled=false; return; }
+    document.getElementById('pf-log').classList.remove('hidden');
+    if(_pfPollTimer) clearInterval(_pfPollTimer);
+    _pfPollTimer = setInterval(refreshPrefillStatus, 2000);
+    refreshPrefillStatus();
+  } catch(e){ alert('Falha: '+e); }
+  btn.disabled = false;
+}
+
+async function refreshPrefillStatus(){
+  try {
+    const s = await fetchJSON('/madmode/api/prefill/status');
+    const box = document.getElementById('pf-status-box');
+    const dur = s.started_at ? Math.round((new Date(s.finished_at||Date.now()) - new Date(s.started_at))/1000) : 0;
+    box.innerHTML = `<span class="pill ${s.running?'bg-yellow-900 text-yellow-300':'bg-gray-700 text-gray-300'}">${s.running?'⏳ rodando':(s.exit_code===0?'✅ ok':s.exit_code===null?'⏸ idle':'❌ exit '+s.exit_code)}</span>
+      <b>vistos:</b> ${s.processed} · <b>atualizados:</b> ${s.updated} · <b>skip vazio:</b> ${s.skipped_empty} · <b>skip manual:</b> ${s.skipped_manual} · <b>erros:</b> ${s.errors} · <b>${dur}s</b>`;
+    const log = document.getElementById('pf-log');
+    log.textContent = (s.last_log_lines||[]).join('\n');
+    log.scrollTop = log.scrollHeight;
+    if(!s.running && _pfPollTimer){ clearInterval(_pfPollTimer); _pfPollTimer = null; }
+  } catch(e){}
+}
+
+// ----- Notes Dedup -----
+let _ddPollTimer = null;
+async function loadDedupStats(){
+  const card = document.getElementById('dedup-stats-card');
+  card.innerHTML = '<span class="text-gray-500">carregando…</span>';
+  try {
+    const d = await fetchJSON('/madmode/api/dedup-stats?days=7');
+    const cls = d.duplicate_rate >= 30 ? 'text-red-400'
+              : d.duplicate_rate >= 10 ? 'text-yellow-400'
+              : 'text-green-400';
+    const errCls = d.errors > 0 ? 'text-red-400' : 'text-gray-300';
+    card.innerHTML = `
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-center">
+        <div><div class="text-xs text-gray-500 uppercase">Runs</div><div class="text-2xl font-bold">${d.runs}</div><div class="text-xs text-gray-500">execuções</div></div>
+        <div><div class="text-xs text-gray-500 uppercase">Deals scaneados</div><div class="text-2xl font-bold">${d.deals_scanned}</div></div>
+        <div><div class="text-xs text-gray-500 uppercase">Notas deletadas</div><div class="text-2xl font-bold ${cls}">${d.notes_deleted}</div></div>
+        <div><div class="text-xs text-gray-500 uppercase">Erros</div><div class="text-2xl font-bold ${errCls}">${d.errors}</div></div>
+        <div><div class="text-xs text-gray-500 uppercase">Taxa duplicação</div><div class="text-2xl font-bold ${cls}">${d.duplicate_rate}%</div><div class="text-xs text-gray-500">deletadas/scaneados</div></div>
+      </div>`;
+  } catch(e){ card.innerHTML = `<div class="bad">Falha: ${e.message}</div>`; }
+}
+function goManual(focus){
+  document.querySelector('.tab[data-tab="manual"]').click();
+  if(focus==='dedup'){ setTimeout(()=>document.getElementById('card-dedup').scrollIntoView({behavior:'smooth'}), 100); }
+}
+async function estimateDedup(){
+  const card = document.getElementById('dedup-card');
+  card.innerHTML = '<span class="text-gray-500">estimando…</span>';
+  try {
+    const r = await fetch('/madmode/api/notes/dedup/estimate', {method:'POST', headers:{'Content-Type':'application/json'}, body:'{}'});
+    const d = await r.json();
+    if(d.error){ card.innerHTML = `<div class="bad">Erro: ${d.error}</div>`; return; }
+    const cls = d.ratio_pct >= 30 ? 'text-red-400' : d.ratio_pct >= 10 ? 'text-yellow-400' : 'text-green-400';
+    card.innerHTML = `
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
+        <div><div class="text-xs text-gray-500 uppercase">Amostra</div><div class="text-2xl font-bold">${d.sample_notes}</div><div class="text-xs text-gray-500">notas lidas</div></div>
+        <div><div class="text-xs text-gray-500 uppercase">Auto-notes</div><div class="text-2xl font-bold">${d.auto_notes}</div><div class="text-xs text-gray-500">${d.deals_in_sample} deals</div></div>
+        <div><div class="text-xs text-gray-500 uppercase">Deals c/ duplicatas</div><div class="text-2xl font-bold ${cls}">${d.deals_with_dupes}</div></div>
+        <div><div class="text-xs text-gray-500 uppercase">Índice duplicação</div><div class="text-2xl font-bold ${cls}">${d.ratio_pct}%</div><div class="text-xs text-gray-500">${d.extra_dupes} excedentes</div></div>
+      </div>`;
+  } catch(e){ card.innerHTML = `<div class="bad">Falha: ${e.message}</div>`; }
+}
+async function runDedup(){
+  const dealId = (document.getElementById('dd-deal').value||'').trim();
+  if(!dealId && !confirm('Rodar limpeza em TODOS os deals (modo bulk)? Pode levar ~minutos.')) return;
+  const btn = document.getElementById('dd-run'); btn.disabled = true;
+  try {
+    const body = dealId ? {deal_id: dealId} : {};
+    const r = await fetch('/madmode/api/notes/dedup/run', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
+    const d = await r.json();
+    if(!d.ok){ alert('Erro: '+(d.error||'?')); btn.disabled=false; return; }
+    document.getElementById('dd-log').classList.remove('hidden');
+    if(_ddPollTimer) clearInterval(_ddPollTimer);
+    _ddPollTimer = setInterval(refreshDedupStatus, 2000);
+    refreshDedupStatus();
+  } catch(e){ alert('Falha: '+e); }
+  btn.disabled = false;
+}
+async function refreshDedupStatus(){
+  try {
+    const s = await fetchJSON('/madmode/api/notes/dedup/status');
+    const box = document.getElementById('dd-status-box');
+    const dur = s.started_at ? Math.round((new Date(s.finished_at||Date.now()) - new Date(s.started_at))/1000) : 0;
+    box.innerHTML = `<span class="pill ${s.running?'bg-yellow-900 text-yellow-300':'bg-gray-700 text-gray-300'}">${s.running?'⏳ rodando':(s.exit_code===0?'✅ ok':s.exit_code===null?'⏸ idle':'❌ exit '+s.exit_code)}</span>
+      <b>deals c/ duplicatas:</b> ${s.deals_with_dupes} · <b>notas deletadas:</b> ${s.notes_deleted} · <b>erros:</b> ${s.errors} · <b>${dur}s</b>`;
+    const log = document.getElementById('dd-log');
+    log.textContent = (s.last_log_lines||[]).join('\n');
+    log.scrollTop = log.scrollHeight;
+    if(!s.running && _ddPollTimer){ clearInterval(_ddPollTimer); _ddPollTimer = null; }
+  } catch(e){}
+}
+
+// Init + auto-refresh status
+renderSkeleton();
+loadStatus();
+setInterval(loadStatus, 30000);
+['f-batch','f-freq'].forEach(id=>{ const el=document.getElementById(id); if(el) el.addEventListener('change', validateConfig); });
+refreshPrefillStatus();
+loadDedupStats();
+setInterval(loadDedupStats, 60000);
+</script>
+</body>
+</html>
