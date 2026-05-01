@@ -11,7 +11,7 @@ COPY pyproject.toml ./
 RUN pip install --no-cache-dir flask flask-login gunicorn requests google-ads "psycopg[binary,pool]>=3.2"
 
 # Código da aplicação
-COPY main.py logger.py mappings.py parsers.py pd_api.py \
+COPY main.py logger.py mappings.py parsers.py pd_api.py agendor_api.py \
      notes_builder.py product_match.py ltv.py conversions.py ./
 COPY dealscore/ dealscore/
 COPY modules/ modules/
