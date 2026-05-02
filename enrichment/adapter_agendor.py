@@ -42,7 +42,20 @@ PERSON_CUSTOM_FIELDS = {
 
 
 def get_org(org_id) -> Optional[dict]:
-    return get_organization(org_id)
+    """Retorna org Agendor com keys flat (acessamos `_raw_agendor` se existir).
+
+    `_normalize_org` em agendor_api.py reduz o objeto a {id, name, _raw_agendor}.
+    Aqui devolvemos um dict que combina o normalizado com o raw, para que
+    `org.get('website')`, `org.get('cnpj')`, `org.get('legalName')` etc funcionem.
+    """
+    o = get_organization(org_id)
+    if not o:
+        return None
+    raw = o.get("_raw_agendor") or {}
+    merged = dict(raw)
+    merged.update({k: v for k, v in o.items() if k != "_raw_agendor" and v not in (None, "")})
+    merged["_raw_agendor"] = raw
+    return merged
 
 
 def org_needs_enrichment(org: dict) -> bool:
@@ -50,14 +63,14 @@ def org_needs_enrichment(org: dict) -> bool:
     if not org:
         return False
     return not (org.get("legalName")
-                and org.get("address", {}).get("city")
+                and (org.get("address") or {}).get("city")
                 and org.get("sector"))
 
 
 def org_cnpj(org: dict) -> Optional[str]:
     if not org:
         return None
-    return org.get("cnpj")
+    return org.get("cnpj") or (org.get("_raw_agendor") or {}).get("cnpj")
 
 
 def update_org_with_enrichment(org_id, enriched: dict) -> dict:
