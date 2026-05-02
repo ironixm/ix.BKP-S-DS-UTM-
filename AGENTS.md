@@ -18,6 +18,7 @@
 | **Profile** | `ix-wp.profile.json` |
 | **Jobs/Backlog** | `JOBS.md` |
 | **Arquitetura** | `AGENT.md` |
+| **Agendor Webhooks** | `docs/agendor-webhooks.md` (gestão via API — UI não existe) |
 
 ## Módulos Ativos
 

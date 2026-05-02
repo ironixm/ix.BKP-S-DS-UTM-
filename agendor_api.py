@@ -245,3 +245,59 @@ def get_deal_products(deal_id):
 def add_product_to_deal(deal_id, product_id, item_price, quantity=1):
     body = {"product": product_id, "value": item_price, "quantity": quantity}
     return _request(f"/deals/{deal_id}/products", method="POST", json=body)
+
+
+# =====================================================
+# WEBHOOKS / SUBSCRIPTIONS
+# Endpoint: https://api.agendor.com.br/integrations/subscriptions
+# (NÃO está sob /v3 — usa root da API)
+# Doc: https://ajuda.agendor.com.br/pt-BR/articles/6281963
+# =====================================================
+
+WEBHOOKS_URL = "https://api.agendor.com.br/integrations/subscriptions"
+
+AGENDOR_EVENTS = [
+    "on_activity_created",
+    "on_organization_created", "on_organization_updated", "on_organization_deleted",
+    "on_person_created", "on_person_updated", "on_person_deleted",
+    "on_deal_created", "on_deal_updated", "on_deal_deleted",
+    "on_deal_stage_updated", "on_deal_won", "on_deal_lost",
+]
+
+
+def list_webhooks() -> list:
+    """GET /integrations/subscriptions — retorna lista de webhooks ativos."""
+    r = SESSION.get(WEBHOOKS_URL, timeout=20)
+    r.raise_for_status()
+    return (r.json() or {}).get("data") or []
+
+
+def create_webhook(target_url: str, event: str) -> dict:
+    """POST /integrations/subscriptions — cria 1 webhook para 1 evento."""
+    if event not in AGENDOR_EVENTS:
+        raise ValueError(f"Evento inválido: {event}. Use um de {AGENDOR_EVENTS}")
+    r = SESSION.post(WEBHOOKS_URL, json={"target_url": target_url, "event": event}, timeout=20)
+    r.raise_for_status()
+    return (r.json() or {}).get("data") or {}
+
+
+def delete_webhook(webhook_id: int) -> bool:
+    """DELETE /integrations/subscriptions/<id>."""
+    r = SESSION.delete(f"{WEBHOOKS_URL}/{int(webhook_id)}", timeout=20)
+    return r.status_code in (200, 204)
+
+
+def ensure_webhooks(target_url: str, events: list = None) -> dict:
+    """Idempotente: garante que existe 1 webhook por evento listado para a target_url.
+    Retorna {created: [...], existing: [...]}.
+    """
+    events = events or AGENDOR_EVENTS
+    existing = list_webhooks()
+    have = {(w.get("event"), w.get("target_url")) for w in existing}
+    created, kept = [], []
+    for ev in events:
+        if (ev, target_url) in have:
+            kept.append(ev)
+        else:
+            created.append(create_webhook(target_url, ev))
+    return {"created": created, "existing": kept}
