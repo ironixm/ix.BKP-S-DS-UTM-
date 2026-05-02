@@ -90,6 +90,49 @@ def _normalize_phone(phone: str) -> str:
     return clean
 
 
+_BR_UF = {"AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG",
+          "PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"}
+
+
+def _normalize_state(s: str | None) -> str | None:
+    if not s:
+        return None
+    s = s.strip()
+    if len(s) == 2 and s.upper() in _BR_UF:
+        return s.lower()
+    return s.lower()
+
+
+def _normalize_zip(z: str | None) -> str | None:
+    if not z:
+        return None
+    return "".join(c for c in z if c.isdigit())[:8] or None
+
+
+def _extract_geo_from_deal(deal: dict | None) -> dict:
+    """Extrai city/state/zip/country da org vinculada (Agendor/Pipedrive)."""
+    out: dict = {"country": "br"}
+    if not deal:
+        return out
+    org = deal.get("organization") or deal.get("org_id") or deal.get("org")
+    if isinstance(org, int):
+        try:
+            from agendor_api import get_organization  # type: ignore
+            o = get_organization(org)
+            org = (o or {}).get("_raw_agendor") or o
+        except Exception:
+            org = None
+    if not isinstance(org, dict):
+        return out
+    raw = org.get("_raw_agendor") or org
+    addr = raw.get("address") if isinstance(raw.get("address"), dict) else None
+    if addr:
+        out["city"] = addr.get("city") or addr.get("municipio")
+        out["state"] = addr.get("state") or addr.get("uf")
+        out["zip"] = addr.get("postalCode") or addr.get("cep")
+    return {k: v for k, v in out.items() if v}
+
+
 def _extract_person_data(person: dict | None) -> dict:
     """Extrai email, phone, nome — funciona com Pipedrive e Agendor."""
     if not person:
@@ -137,8 +180,18 @@ def _send_meta_event(
     name: str | None = None,
     fbc: str | None = None,
     fbp: str | None = None,
+    fbclid: str | None = None,
     external_id: str | None = None,
     event_source_url: str | None = None,
+    event_id: str | None = None,
+    client_ip: str | None = None,
+    client_user_agent: str | None = None,
+    city: str | None = None,
+    state: str | None = None,
+    zip_code: str | None = None,
+    country: str | None = "br",
+    date_of_birth: str | None = None,
+    gender: str | None = None,
 ) -> dict | None:
     pixel_id = os.environ.get("META_PIXEL_ID")
     token    = os.environ.get("META_ACCESS_TOKEN")
@@ -155,12 +208,35 @@ def _send_meta_event(
         user_data["fn"] = [_sha256(parts[0])]
         if len(parts) > 1:
             user_data["ln"] = [_sha256(" ".join(parts[1:]))]
+    if city:
+        user_data["ct"] = [_sha256("".join(c for c in city.lower() if c.isalnum()))]
+    st = _normalize_state(state)
+    if st:
+        user_data["st"] = [_sha256(st)]
+    zp = _normalize_zip(zip_code)
+    if zp:
+        user_data["zp"] = [_sha256(zp)]
+    if country:
+        user_data["country"] = [_sha256(country.lower()[:2])]
+    if date_of_birth:
+        user_data["db"] = [_sha256("".join(c for c in date_of_birth if c.isdigit()))]
+    if gender:
+        user_data["ge"] = [_sha256(gender.strip().lower()[:1])]
     if fbc:
         user_data["fbc"] = fbc
+    elif fbclid:
+        user_data["fbc"] = f"fb.1.{int(time.time()*1000)}.{fbclid}"
     if fbp:
         user_data["fbp"] = fbp
     if external_id:
         user_data["external_id"] = [_sha256(str(external_id))]
+    if client_ip:
+        user_data["client_ip_address"] = client_ip
+    if client_user_agent:
+        user_data["client_user_agent"] = client_user_agent
+
+    if not event_id and external_id:
+        event_id = f"{event_name}.{external_id}"
 
     event: dict = {
         "event_name": event_name,
@@ -168,8 +244,10 @@ def _send_meta_event(
         "action_source": "system_generated",
         "user_data": user_data,
         "custom_data": {"value": value, "currency": currency,
-                        "lead_event_source": "Pipedrive", "event_source": "crm"},
+                        "lead_event_source": "Agendor", "event_source": "crm"},
     }
+    if event_id:
+        event["event_id"] = event_id
     if is_custom:
         event["data_processing_options"] = []
     if event_source_url:
@@ -352,6 +430,12 @@ def fire_funnel_event(
     name    = pdata.get("name") or None
     deal_id = str(deal.get("id") or "")
     gclid   = deal.get("gclid") or None
+    fbclid  = deal.get("fbclid") or None
+    fbc     = deal.get("fbc") or None
+    fbp     = deal.get("fbp") or None
+    client_ip = deal.get("client_ip") or deal.get("_client_ip")
+    client_ua = deal.get("client_user_agent") or deal.get("_client_user_agent")
+    geo = _extract_geo_from_deal(deal)
 
     results: dict = {}
 
@@ -363,6 +447,10 @@ def fire_funnel_event(
             event_name=meta_event, is_custom=is_custom,
             value=value, email=email, phone=phone, name=name,
             external_id=deal_id,
+            fbc=fbc, fbp=fbp, fbclid=fbclid,
+            client_ip=client_ip, client_user_agent=client_ua,
+            city=geo.get("city"), state=geo.get("state"),
+            zip_code=geo.get("zip"), country=geo.get("country", "br"),
         )
 
     # ── GA4 Measurement Protocol ───────────────────────────
