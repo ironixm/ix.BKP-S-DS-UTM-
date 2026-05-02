@@ -763,6 +763,29 @@ def webhook_pipedrive(event_name=None):
     if not raw_id and isinstance(payload.get("previous"), dict):
         raw_id = payload["previous"].get("id")
 
+    # ───────────────────────────────────────────────────────────
+    # ENRICHMENT: webhooks de org/person disparam pipeline async
+    # (não passam pelo fluxo de deal/conversões).
+    # ───────────────────────────────────────────────────────────
+    meta = payload.get("meta") or {}
+    entity = meta.get("entity")
+    if entity in ("organization", "person") and raw_id:
+        try:
+            import threading
+            from enrichment import enrich_organization, enrich_person
+            target = enrich_organization if entity == "organization" else enrich_person
+            t = threading.Thread(target=target, args=(raw_id,),
+                                 kwargs={"mode": "auto"}, daemon=True)
+            t.start()
+            return jsonify({
+                "status": "enrichment_queued",
+                "entity": entity, "entity_id": raw_id,
+            }), 200
+        except Exception as _e:
+            print(f"[enrichment] dispatch FAIL: {_e}", flush=True)
+            return jsonify({"status": "enrichment_error",
+                            "error": str(_e)}), 200
+
     deal_id = safe_deal_id(raw_id)
 
     if not deal_id:

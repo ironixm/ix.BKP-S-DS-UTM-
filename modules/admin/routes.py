@@ -21,7 +21,13 @@ _TAB_ALIASES = {
 }
 
 
-_VALID_TABS = {"status","eventos","events","deals","manual","jobs","recentes"}
+_VALID_TABS = {"status","eventos","events","deals","manual","jobs","recentes","enrichment","enrich"}
+
+
+_TAB_ALIASES = {
+    **_TAB_ALIASES,
+    "enrichment": "enrichment", "enrich": "enrichment",
+}
 
 
 @bp.route("/")
@@ -320,3 +326,30 @@ def api_debug_storage():
         except Exception:
             pass
     return jsonify(info)
+
+
+# ===== Enrichment =====
+
+@bp.route("/api/enrichment/run", methods=["POST"])
+@require_admin
+def api_enrichment_run():
+    """Roda enrichment manualmente. Body JSON: {entity, id, mode?}."""
+    from enrichment import enrich_organization, enrich_person
+    data = request.get_json(silent=True) or {}
+    entity = (data.get("entity") or "").lower()
+    eid = data.get("id")
+    mode = (data.get("mode") or "auto").lower()
+    if entity not in ("organization", "person") or not eid:
+        return jsonify({"error": "entity must be organization|person and id required"}), 400
+    fn = enrich_organization if entity == "organization" else enrich_person
+    try:
+        return jsonify(fn(eid, mode=mode))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@bp.route("/api/enrichment/stats")
+@require_admin
+def api_enrichment_stats():
+    """Stats agregadas dos últimos N eventos enrichment_*."""
+    return jsonify(metrics.enrichment_stats(window_hours=int(request.args.get("hours", 168))))

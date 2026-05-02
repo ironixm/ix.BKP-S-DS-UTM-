@@ -476,3 +476,57 @@ def events_count(event_type: str | None = None, source: str | None = None,
             if not ts or ts < cutoff: continue
         n += 1
     return n
+
+
+# ===== Enrichment stats =====
+
+def enrichment_stats(window_hours: int = 168) -> dict:
+    """Agrega últimos eventos `enrichment_*` para o painel.
+
+    Retorna: totals por entity/source, taxa de sucesso, últimas 50 runs.
+    """
+    events = _read_events(max_lines=5000)
+    cutoff = _now_utc().timestamp() - (window_hours * 3600)
+    runs: list[dict] = []
+    by_source: dict[str, int] = {}
+    by_entity = {"organization": 0, "person": 0}
+    fails = 0
+    for ev in events:
+        et = ev.get("event") or ev.get("type")
+        if et not in ("enrichment_org", "enrichment_person"):
+            continue
+        ts = _parse_ts(ev)
+        if ts and ts.timestamp() < cutoff:
+            continue
+        payload = ev.get("payload") or ev.get("data") or {}
+        entity = payload.get("entity") or ("organization" if et == "enrichment_org" else "person")
+        by_entity[entity] = by_entity.get(entity, 0) + 1
+        for src in (payload.get("sources") or []):
+            by_source[src] = by_source.get(src, 0) + 1
+        if not payload.get("ok"):
+            fails += 1
+        runs.append({
+            "ts": ev.get("timestamp"),
+            "entity": entity,
+            "entity_id": payload.get("entity_id"),
+            "sources": payload.get("sources") or [],
+            "fields": payload.get("fields_collected") or [],
+            "duration_ms": payload.get("duration_ms"),
+            "apply": payload.get("apply") or {},
+        })
+    runs.sort(key=lambda r: r.get("ts") or "", reverse=True)
+    total = len(runs)
+    return {
+        "window_hours": window_hours,
+        "total_runs": total,
+        "by_entity": by_entity,
+        "by_source": by_source,
+        "fails": fails,
+        "success_rate": round(((total - fails) / total) * 100, 1) if total else 0,
+        "ninjapear_credits_estimate": (
+            by_source.get("ninjapear_details", 0) * 2
+            + by_source.get("ninjapear_disposable", 0) * 0
+            + by_source.get("ninjapear_logo", 0) * 0
+        ),
+        "recent": runs[:50],
+    }
