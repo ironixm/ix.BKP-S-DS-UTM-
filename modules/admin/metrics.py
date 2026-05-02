@@ -280,6 +280,25 @@ def _check_log() -> dict:
 
 
 def _check_webhooks() -> dict:
+    # Agendor não expõe gerência de webhooks via REST API pública — checagem é manual.
+    if os.environ.get("AGENDOR_TOKEN") and not os.environ.get("PIPEDRIVE_API_TOKEN"):
+        # Considera "ok" se já recebemos pelo menos 1 evento agendor nas últimas 24h.
+        try:
+            from modules import db as _db
+            with _db.conn_ctx() as c, c.cursor() as cur:
+                cur.execute("SELECT COUNT(*) FROM events WHERE source='agendor' AND ts > NOW() - INTERVAL '24 hours'")
+                cnt = (cur.fetchone() or [0])[0] or 0
+        except Exception:
+            cnt = 0
+        return {
+            "ok": cnt > 0,
+            "crm": "agendor",
+            "events_24h": int(cnt),
+            "ours_total": 1 if cnt > 0 else 0,
+            "ours_active": 1 if cnt > 0 else 0,
+            "msg": "configure no Agendor (Integrações → Webhooks) → bkp.alx-i.com/webhook/agendor/" if cnt == 0 else f"{cnt} eventos recebidos em 24h",
+            "list": [],
+        }
     try:
         from pd_api import _request
         r = _request("/webhooks")
@@ -288,6 +307,7 @@ def _check_webhooks() -> dict:
         active = [h for h in relevant if h.get("is_active")]
         return {
             "ok": len(active) > 0,
+            "crm": "pipedrive",
             "total_pipedrive": len(hooks),
             "ours_total": len(relevant),
             "ours_active": len(active),

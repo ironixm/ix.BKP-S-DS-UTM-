@@ -56,12 +56,12 @@
         <div id="health"></div>
       </div>
       <div class="card">
-        <h2 class="font-semibold mb-3">📊 Qualidade dos Dados (amostra Pipedrive)</h2>
+        <h2 class="font-semibold mb-3">📊 Qualidade dos Dados (amostra Agendor)</h2>
         <div id="quality"></div>
       </div>
     </div>
     <div class="card">
-      <h2 class="font-semibold mb-3">🔌 Webhooks Pipedrive (apontando para bzl.alx-i.com)</h2>
+      <h2 class="font-semibold mb-3">🔌 Webhooks Agendor (apontando para bkp.alx-i.com/webhook/agendor/)</h2>
       <table id="webhooks-table"><thead><tr><th>ID</th><th>Evento</th><th>URL</th><th>Versão</th><th>Status</th></tr></thead><tbody></tbody></table>
     </div>
 
@@ -330,8 +330,12 @@ async function loadStatus(){
 
   const h = d.health || {};
   const wbh = h.webhooks || {list:[], ok:false, ours_active:0, ours_total:0};
+  const crmLabel = wbh.crm === 'agendor' ? 'Agendor' : 'Pipedrive';
+  const wbhExtra = wbh.crm === 'agendor'
+    ? (wbh.events_24h>0 ? `${wbh.events_24h} ev/24h` : (wbh.msg||'configurar manualmente'))
+    : `${wbh.ours_active}/${wbh.ours_total} ativos`;
   document.getElementById('health').innerHTML = [
-    ['Webhook Pipedrive', wbh.ok, `${wbh.ours_active}/${wbh.ours_total} ativos`],
+    [`Webhook ${crmLabel}`, wbh.ok, wbhExtra],
     ['Meta CAPI', h.meta?.ok, h.meta?.token_set?'token ok':'token ausente'],
     ['GA4', h.ga4?.ok, h.ga4?.secret_set?'secret ok':'secret ausente'],
     ['Google Ads', h.gads?.ok, h.gads?.missing?.length?('faltam: '+h.gads.missing.join(', ')):'5 vars ok'],
