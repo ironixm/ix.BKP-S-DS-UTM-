@@ -290,13 +290,13 @@ def _check_webhooks() -> dict:
                 cnt = (cur.fetchone() or [0])[0] or 0
         except Exception:
             cnt = 0
-        # Lista webhooks registrados na Agendor
+        # Lista webhooks registrados na Agendor (todos apontando para nosso domínio)
         registered = []
-        target_url = "https://bkp.alx-i.com/webhook/agendor/"
+        target_prefix = "https://bkp.alx-i.com/webhook/agendor"
         try:
             from agendor_api import list_webhooks
             all_hooks = list_webhooks()
-            registered = [h for h in all_hooks if (h.get("target_url") or "") == target_url]
+            registered = [h for h in all_hooks if (h.get("target_url") or "").startswith(target_prefix)]
         except Exception as e:
             registered = []
         return {

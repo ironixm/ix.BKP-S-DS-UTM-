@@ -58,12 +58,15 @@ from datetime import datetime
 # Cada entrada: stage_id → {meta, ga4, gads}
 # meta: None = não dispara | str = nome do evento | (str, True) = evento custom
 # gads: None = não dispara | str = env var com o Conversion Action ID
+#
+# ⚠️ Stage IDs do Agendor BKP (Funil "Funil de Vendas" id=713891).
+# Documentação: docs/agendor-bkp-eventos.md
 STAGE_EVENT_MAP: dict[int, dict] = {
-    139: {"meta": "Lead",                     "ga4": "generate_lead",  "gads": None},
-    13:  {"meta": "CompleteRegistration",     "ga4": "qualify_lead",   "gads": None},
-    47:  {"meta": "Schedule",                 "ga4": "schedule",       "gads": "GADS_CONV_DEMO_AGENDADA"},
-    16:  {"meta": "SubmitApplication",        "ga4": "view_proposal",  "gads": None},
-    17:  {"meta": ("Proposal", True),         "ga4": "begin_checkout", "gads": "GADS_CONV_NEGOCIACAO_INICIADA"},
+    3735676: {"meta": "Lead",                  "ga4": "generate_lead", "gads": None},                              # Leads
+    2914195: {"meta": "CompleteRegistration",  "ga4": "qualify_lead",  "gads": "GADS_CONV_DEMO_AGENDADA"},         # Contato 1 (MQL)
+    2914196: {"meta": "SubmitApplication",     "ga4": "working_lead",  "gads": "GADS_CONV_NEGOCIACAO_INICIADA"},   # Contato 2 (SQL)
+    2914197: {"meta": "Schedule",              "ga4": "schedule",      "gads": "GADS_CONV_DEMO_AGENDADA"},         # Apresentação (OPTY)
+    2914198: {"meta": ("Proposal", True),      "ga4": "view_proposal", "gads": "GADS_CONV_NEGOCIACAO_INICIADA"},   # Fechamento (Negociação)
 }
 
 # Eventos de status won/lost
@@ -362,15 +365,12 @@ def fire_funnel_event(
 # ─────────────────────────────────────────────────────────────
 
 def detect_triggers(payload: dict) -> list[str]:
-    """A partir do payload do webhook Pipedrive, retorna lista de triggers a disparar.
+    """A partir do payload do webhook (Pipedrive ou Agendor), retorna triggers a disparar.
 
-    Detecta:
-    - Criação de deal (added.deal / create.deal) → "stage_{current_stage}" da stage inicial
-    - Mudança de stage_id → "stage_{new_id}"
-    - Mudança de status para won  → "status_won"
-    - Mudança de status para lost → "status_lost"
-
-    Suporta tanto v1.0 (previous = snapshot completo) quanto v2.0 (previous = delta/null em create).
+    Suporta:
+    - Pipedrive v1.0 (previous = snapshot completo)
+    - Pipedrive v2.0 (previous = delta)
+    - Agendor (meta.agendor_event indica o tipo via path da URL)
     """
     current  = payload.get("current") or {}
     previous = payload.get("previous") or {}
@@ -382,14 +382,30 @@ def detect_triggers(payload: dict) -> list[str]:
         or (payload.get("event") or "").split(".")[0]
         or ""
     ).lower()
-    is_create = action in ("create", "added") or (is_v2 and not previous)
-    triggers = []
 
     curr_stage  = current.get("stage_id")
+    curr_status = current.get("status")
+
+    # ─── AGENDOR: o "event" vem no path → meta.agendor_event ───
+    ag_event = (meta.get("agendor_event") or "").lower()
+    if ag_event:
+        if not ag_event.startswith("on_deal_"):
+            return []
+        if ag_event == "on_deal_won":
+            return ["status_won"]
+        if ag_event == "on_deal_lost":
+            return ["status_lost"]
+        if ag_event in ("on_deal_created", "on_deal_stage_updated"):
+            return [f"stage_{curr_stage}"] if curr_stage else []
+        return []  # on_deal_updated / on_deal_deleted → sem conversão
+
+    # ─── PIPEDRIVE (legado) ───
+    is_create = action in ("create", "added") or (is_v2 and not previous)
+    triggers = []
     prev_stage  = previous.get("stage_id")
+    prev_status = previous.get("status")
 
     if is_create and curr_stage:
-        # Deal recém-criado: dispara o evento da stage de entrada (geralmente "Lead")
         triggers.append(f"stage_{curr_stage}")
     else:
         stage_changed = (
@@ -399,11 +415,7 @@ def detect_triggers(payload: dict) -> list[str]:
         if curr_stage and stage_changed:
             triggers.append(f"stage_{curr_stage}")
 
-    curr_status = current.get("status")
-    prev_status = previous.get("status")
     if is_create:
-        # Em create, status já vem populado mas previous é vazio → só dispara se won/lost
-        # (não disparar Purchase só porque o deal nasceu open, óbvio)
         if curr_status in ("won", "lost"):
             triggers.append(f"status_{curr_status}")
     else:

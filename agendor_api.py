@@ -287,17 +287,29 @@ def delete_webhook(webhook_id: int) -> bool:
     return r.status_code in (200, 204)
 
 
-def ensure_webhooks(target_url: str, events: list = None) -> dict:
-    """Idempotente: garante que existe 1 webhook por evento listado para a target_url.
-    Retorna {created: [...], existing: [...]}.
+def ensure_webhooks(target_url: str, events: list = None, per_event_path: bool = True) -> dict:
+    """Idempotente: garante que existe 1 webhook por evento.
+
+    Se per_event_path=True (default), cada evento recebe URL própria:
+    `<target_url>/<event>/`. Isso permite que o handler descubra o tipo do
+    evento via path (Agendor não envia 'event' no body).
+
+    Retorna {created: [...], existing: [...], deleted_old: [...]}.
     """
     events = events or AGENDOR_EVENTS
+    base = target_url.rstrip("/")
     existing = list_webhooks()
     have = {(w.get("event"), w.get("target_url")) for w in existing}
-    created, kept = [], []
+    created, kept, deleted = [], [], []
     for ev in events:
-        if (ev, target_url) in have:
+        url = f"{base}/{ev}/" if per_event_path else f"{base}/"
+        if (ev, url) in have:
             kept.append(ev)
         else:
-            created.append(create_webhook(target_url, ev))
-    return {"created": created, "existing": kept}
+            created.append(create_webhook(url, ev))
+        # Remove versões antigas do mesmo evento que não batam com a URL nova
+        for w in existing:
+            if w.get("event") == ev and w.get("target_url") != url and base in (w.get("target_url") or ""):
+                if delete_webhook(w["id"]):
+                    deleted.append(w["id"])
+    return {"created": created, "existing": kept, "deleted_old": deleted}

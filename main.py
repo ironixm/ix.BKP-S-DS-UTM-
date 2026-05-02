@@ -681,11 +681,13 @@ def products_list():
 # WEBHOOK PIPEDRIVE (COM DELAY DEFENSIVO)
 # =====================================================
 @app.route("/webhook/pipedrive/", methods=["POST"])
-@app.route("/webhook/agendor/", methods=["POST"])
-def webhook_pipedrive():
+@app.route("/webhook/agendor/", methods=["POST"], defaults={"event_name": None})
+@app.route("/webhook/agendor/<event_name>/", methods=["POST"])
+@app.route("/webhook/agendor/<event_name>", methods=["POST"])
+def webhook_pipedrive(event_name=None):
     payload = request.get_json(silent=True) or {}
 
-    print("\n=== WEBHOOK RECEBIDO ===")
+    print(f"\n=== WEBHOOK RECEBIDO (event={event_name}) ===")
     print(json.dumps(payload, indent=2, ensure_ascii=False))
 
     # 🔹 LOG IMEDIATO (antes de qualquer normalização) para health check
@@ -693,31 +695,57 @@ def webhook_pipedrive():
     try:
         log_event("webhook_received", {
             "source": "agendor",
+            "agendor_event": event_name,
             "raw_payload": payload,
         })
     except Exception as _le:
         print(f"[webhook] log_event FAIL: {_le}", flush=True)
 
+    # ───────────────────────────────────────────────────────────
     # Normaliza payload Agendor → formato v1.0 (event+current)
-    # Agendor envia: { "event": "deal_create"|"deal_update"|..., "deal": {...} }
-    # ou: { "type": "...", "data": {...} } dependendo da versão
-    if ("deal" in payload or "person" in payload) and "current" not in payload:
-        ev = payload.get("event") or payload.get("type") or "deal.update"
-        entity = "deal" if "deal" in payload else "person"
-        # split em action.entity
-        if "_" in ev:
-            action = ev.split("_")[-1]
-        else:
-            action = ev.split(".")[0] if "." in ev else "update"
+    # Agendor REAL envia: { "data": { id, dealStage:{id}, dealStatus:{id,name}, ... } }
+    # SEM campo "event" — o tipo do webhook vem na URL (path).
+    # Mapeamento: docs/agendor-bkp-eventos.md
+    # ───────────────────────────────────────────────────────────
+    if "data" in payload and "current" not in payload:
+        data = payload.get("data") or {}
+        # Achata dealStage/dealStatus para o formato esperado por detect_triggers/get_deal
+        flat = dict(data)
+        if isinstance(data.get("dealStage"), dict):
+            flat["stage_id"] = data["dealStage"].get("id")
+        if isinstance(data.get("dealStatus"), dict):
+            ds_id = data["dealStatus"].get("id")
+            # 1=ongoing, 2=won, 3=lost (mapping Agendor)
+            flat["status"] = {1: "open", 2: "won", 3: "lost"}.get(ds_id, "open")
+        # event_name vem do path: on_deal_created → action=create entity=deal
+        ev = (event_name or "").lower()
+        action_map = {
+            "on_deal_created": ("create", "deal"),
+            "on_deal_updated": ("update", "deal"),
+            "on_deal_stage_updated": ("change_stage", "deal"),
+            "on_deal_won": ("won", "deal"),
+            "on_deal_lost": ("lost", "deal"),
+            "on_deal_deleted": ("delete", "deal"),
+            "on_person_created": ("create", "person"),
+            "on_person_updated": ("update", "person"),
+            "on_person_deleted": ("delete", "person"),
+            "on_organization_created": ("create", "organization"),
+            "on_organization_updated": ("update", "organization"),
+            "on_organization_deleted": ("delete", "organization"),
+            "on_activity_created": ("create", "activity"),
+        }
+        action, entity = action_map.get(ev, ("update", "deal"))
         payload = {
             "event": f"{action}.{entity}",
-            "current": payload.get(entity) or {},
-            "previous": payload.get("previous") or {},
-            "meta": {"action": action, "entity": entity, "source": "agendor"},
+            "current": flat,
+            "previous": {},
+            "meta": {
+                "action": action, "entity": entity,
+                "source": "agendor", "agendor_event": ev,
+            },
         }
 
-    # Normaliza payload v2.0 (meta+data) para o formato v1.0 (event+current)
-    # esperado pelo restante do fluxo (incluindo conversions.detect_triggers).
+    # Compat legado v2.0 (meta+data)
     if "meta" in payload and "data" in payload and "current" not in payload:
         meta = payload.get("meta") or {}
         payload = {
