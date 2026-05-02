@@ -113,6 +113,17 @@ except Exception as _e:
     print(f"⚠️  ad_ops não inicializou: {_e}")
     traceback.print_exc()
 
+# Registrar módulo lead_forms (Meta Lead Ads + GAds Lead Form ingestion)
+try:
+    from modules.lead_forms import public_bp as _lf_pub, admin_bp as _lf_admin
+    app.register_blueprint(_lf_pub)
+    app.register_blueprint(_lf_admin)
+    print("[main] lead_forms registrado", flush=True)
+except Exception as _e:
+    import traceback
+    print(f"⚠️  lead_forms não inicializou: {_e}")
+    traceback.print_exc()
+
 # =====================================================
 from dealscore.deal_score_rules import (
     score_to_emoji,

@@ -162,6 +162,33 @@ def update_deal(deal_id, payload):
     return _request(f"/deals/{deal_id}", method="PUT", json=ag_payload)
 
 
+def create_organization(payload: dict) -> dict | None:
+    """POST /organizations. payload: {name, cnpj?, website?, ...}"""
+    return _request("/organizations", method="POST", json=payload)
+
+
+def create_person(payload: dict) -> dict | None:
+    """POST /people. payload: {name, organization?, contact: {email, mobile, whatsapp, work}, ...}"""
+    return _request("/people", method="POST", json=payload)
+
+
+def create_deal_for_person(person_id: int, payload: dict) -> dict | None:
+    """POST /people/{personId}/deals. payload: {title, value?, dealStage?, dealStatusText?, ...}"""
+    return _request(f"/people/{person_id}/deals", method="POST", json=payload)
+
+
+def search_person_by_email(email: str) -> dict | None:
+    """Busca person por email. Retorna primeiro match ou None."""
+    if not email:
+        return None
+    try:
+        data = _request("/people", params={"contact_email": email, "per_page": 5}) or {}
+        items = data.get("data") or []
+        return items[0] if items else None
+    except Exception:
+        return None
+
+
 def get_deals_by_filter(filter_id, start=0, limit=100):
     """Agendor não tem 'filters' como Pipedrive. Retorna deals paginados."""
     return get_deals(start=start, limit=limit)
