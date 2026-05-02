@@ -280,9 +280,9 @@ def _check_log() -> dict:
 
 
 def _check_webhooks() -> dict:
-    # Agendor não expõe gerência de webhooks via REST API pública — checagem é manual.
+    # Agendor: gerencia via API REST /integrations/subscriptions
     if os.environ.get("AGENDOR_TOKEN") and not os.environ.get("PIPEDRIVE_API_TOKEN"):
-        # Considera "ok" se já recebemos pelo menos 1 evento agendor nas últimas 24h.
+        cnt = 0
         try:
             from modules import db as _db
             with _db.conn_ctx() as c, c.cursor() as cur:
@@ -290,14 +290,31 @@ def _check_webhooks() -> dict:
                 cnt = (cur.fetchone() or [0])[0] or 0
         except Exception:
             cnt = 0
+        # Lista webhooks registrados na Agendor
+        registered = []
+        target_url = "https://bkp.alx-i.com/webhook/agendor/"
+        try:
+            from agendor_api import list_webhooks
+            all_hooks = list_webhooks()
+            registered = [h for h in all_hooks if (h.get("target_url") or "") == target_url]
+        except Exception as e:
+            registered = []
         return {
-            "ok": cnt > 0,
+            "ok": cnt > 0 and len(registered) > 0,
             "crm": "agendor",
             "events_24h": int(cnt),
-            "ours_total": 1 if cnt > 0 else 0,
-            "ours_active": 1 if cnt > 0 else 0,
-            "msg": "configure no Agendor (Integrações → Webhooks) → bkp.alx-i.com/webhook/agendor/" if cnt == 0 else f"{cnt} eventos recebidos em 24h",
-            "list": [],
+            "ours_total": len(registered),
+            "ours_active": len(registered),
+            "msg": (
+                "0 webhooks registrados na Agendor — rodar agendor_api.ensure_webhooks(URL)"
+                if not registered
+                else (f"{len(registered)} webhooks registrados, {cnt} eventos em 24h" if cnt > 0
+                      else f"{len(registered)} webhooks registrados, aguardando 1º evento")
+            ),
+            "list": [
+                {"id": h.get("id"), "event": h.get("event"), "url": h.get("target_url")}
+                for h in registered
+            ],
         }
     try:
         from pd_api import _request
