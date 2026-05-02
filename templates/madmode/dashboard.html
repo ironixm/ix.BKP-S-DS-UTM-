@@ -62,7 +62,7 @@
     </div>
     <div class="card">
       <h2 class="font-semibold mb-3">🔌 Webhooks Agendor (apontando para bkp.alx-i.com/webhook/agendor/)</h2>
-      <table id="webhooks-table"><thead><tr><th>ID</th><th>Evento</th><th>URL</th><th>Versão</th><th>Status</th></tr></thead><tbody></tbody></table>
+      <table id="webhooks-table"><thead><tr><th>ID</th><th>Evento</th><th>URL</th></tr></thead><tbody></tbody></table>
     </div>
 
     <div class="card mt-4">
@@ -360,7 +360,7 @@ async function loadStatus(){
 
   const wb = wbh.list || [];
   document.querySelector('#webhooks-table tbody').innerHTML = wb.length ? wb.map(w=>`
-    <tr><td>${w.id}</td><td>${w.event}</td><td class="text-xs">${w.url}</td><td>${w.version}</td><td>${badge(w.active)}</td></tr>
+    <tr><td>${w.id}</td><td>${w.event}</td><td class="text-xs">${w.url}</td></tr>
   `).join('') : '<tr><td colspan=5 class="text-center text-gray-500 py-4">Nenhum webhook nosso registrado!</td></tr>';
 }
 
