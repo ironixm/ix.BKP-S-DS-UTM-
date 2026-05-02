@@ -278,6 +278,13 @@
         <div id="enrich-sources" class="text-sm">—</div>
       </div>
     </div>
+    <div class="card mb-6">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="font-semibold">🩺 Status das Fontes (live)</h2>
+        <button onclick="loadSourcesStatus()" class="text-xs">↻ Re-checar</button>
+      </div>
+      <div id="enrich-sources-status" class="text-sm">⏳ Carregando…</div>
+    </div>
     <div class="card">
       <h2 class="font-semibold mb-3">🕒 Últimas execuções</h2>
       <table id="enrich-table">
@@ -744,6 +751,32 @@ async function runEnrich(){
     out.textContent = 'Erro: '+e.message;
   }
 }
+async function loadSourcesStatus(){
+  const el = document.getElementById('enrich-sources-status');
+  if(!el) return;
+  el.innerHTML = '⏳ Verificando fontes…';
+  try {
+    const d = await fetchJSON('/madmode/api/enrichment/sources');
+    const rows = (d.sources||[]).map(s => {
+      let icon, color;
+      if (!s.enabled) { icon='⚪'; color='text-gray-500'; }
+      else if (s.ok) { icon='🟢'; color='text-green-400'; }
+      else { icon='🔴'; color='text-red-400'; }
+      return `<tr>
+        <td class="py-1 pr-2">${icon}</td>
+        <td class="py-1 pr-3 font-medium">${s.label}</td>
+        <td class="py-1 pr-3 text-gray-400">${s.quota||'—'}</td>
+        <td class="py-1 ${color} text-xs">${s.detail||''}</td>
+      </tr>`;
+    }).join('');
+    el.innerHTML = `<table class="w-full text-xs"><tbody>${rows}</tbody></table>
+      <div class="text-xs text-gray-500 mt-2">Probe em ${d.elapsed_ms}ms</div>`;
+  } catch(e){
+    el.innerHTML = '<span class="text-red-400">Erro: '+e.message+'</span>';
+  }
+}
+const _origLoadEnrich = loadEnrichment;
+loadEnrichment = async function(){ await _origLoadEnrich(); loadSourcesStatus(); };
 </script>
 </body>
 </html>

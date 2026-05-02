@@ -353,3 +353,14 @@ def api_enrichment_run():
 def api_enrichment_stats():
     """Stats agregadas dos últimos N eventos enrichment_*."""
     return jsonify(metrics.enrichment_stats(window_hours=int(request.args.get("hours", 168))))
+
+
+@bp.route("/api/enrichment/sources")
+@require_admin
+def api_enrichment_sources():
+    """Status/cota de cada fonte externa (BrasilAPI, NinjaPear, etc)."""
+    from enrichment.sources_status import get_sources_status
+    try:
+        return jsonify(get_sources_status())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
