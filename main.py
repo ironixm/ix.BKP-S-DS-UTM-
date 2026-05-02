@@ -688,6 +688,16 @@ def webhook_pipedrive():
     print("\n=== WEBHOOK RECEBIDO ===")
     print(json.dumps(payload, indent=2, ensure_ascii=False))
 
+    # 🔹 LOG IMEDIATO (antes de qualquer normalização) para health check
+    # e para inspecionar o formato real do Agendor.
+    try:
+        log_event("webhook_received", {
+            "source": "agendor",
+            "raw_payload": payload,
+        })
+    except Exception as _le:
+        print(f"[webhook] log_event FAIL: {_le}", flush=True)
+
     # Normaliza payload Agendor → formato v1.0 (event+current)
     # Agendor envia: { "event": "deal_create"|"deal_update"|..., "deal": {...} }
     # ou: { "type": "...", "data": {...} } dependendo da versão
