@@ -852,6 +852,7 @@ def webhook_pipedrive(event_name=None):
                         "value": ltv_value if trigger == "status_won" else 0.0,
                         "ok": bool((pres or {}).get("ok")),
                         "status": (pres or {}).get("status"),
+                        "reason": (pres or {}).get("reason"),
                         "error": (pres or {}).get("error"),
                     })
             except Exception as _le:

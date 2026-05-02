@@ -91,19 +91,35 @@ def _normalize_phone(phone: str) -> str:
 
 
 def _extract_person_data(person: dict | None) -> dict:
-    """Extrai email, phone, nome do objeto person do Pipedrive."""
+    """Extrai email, phone, nome — funciona com Pipedrive e Agendor."""
     if not person:
         return {}
-    result = {}
+    result = {"name": person.get("name") or ""}
+
+    # ── Agendor: contact.email (str), contact.mobile/whatsapp/work (str) ──
+    contact = person.get("contact")
+    if isinstance(contact, dict):
+        result["email"] = contact.get("email") or ""
+        result["phone"] = (
+            contact.get("whatsapp") or contact.get("mobile") or contact.get("work") or ""
+        )
+        return result
+
+    # ── Pipedrive: email/phone são arrays de {value, ...} ──
     emails = person.get("email") or []
     if emails:
         e = emails[0]
         result["email"] = (e.get("value") if isinstance(e, dict) else e) or ""
+    elif isinstance(person.get("email"), str):
+        result["email"] = person.get("email")
+
     phones = person.get("phone") or []
     if phones:
         p = phones[0]
         result["phone"] = (p.get("value") if isinstance(p, dict) else p) or ""
-    result["name"] = person.get("name") or ""
+    elif isinstance(person.get("phone"), str):
+        result["phone"] = person.get("phone")
+
     return result
 
 
@@ -229,12 +245,19 @@ def _send_gads_conversion(
     action_id    = os.environ.get(conv_action_env)
 
     if not all([customer_id, dev_token, client_id, client_secret, refresh_token, action_id]):
-        print(f"⚠️ [GAds] credenciais incompletas para {conv_action_env}")
-        return None
+        missing = [k for k,v in {
+            "GOOGLE_ADS_CUSTOMER_ID": customer_id, "GOOGLE_ADS_DEV_TOKEN": dev_token,
+            "GOOGLE_ADS_CLIENT_ID": client_id, "GOOGLE_ADS_CLIENT_SECRET": client_secret,
+            "GOOGLE_ADS_REFRESH_TOKEN": refresh_token, conv_action_env: action_id,
+        }.items() if not v]
+        print(f"⚠️ [GAds] credenciais incompletas para {conv_action_env} — faltando: {missing}")
+        return {"ok": False, "status": "skipped", "reason": "missing_credentials",
+                "missing": missing, "action_id": action_id}
 
     if not gclid and not email:
         print(f"⚠️ [GAds] sem gclid nem email — conversão ignorada ({conv_action_env})")
-        return None
+        return {"ok": False, "status": "skipped", "reason": "no_gclid_or_email",
+                "action_id": action_id}
 
     try:
         from google.ads.googleads.client import GoogleAdsClient
