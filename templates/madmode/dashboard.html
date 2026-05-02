@@ -61,6 +61,13 @@
         <div id="quality"></div>
       </div>
     </div>
+    <div class="card mb-6">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="font-semibold">🩺 Status das Fontes de Enriquecimento (live)</h2>
+        <button onclick="loadSourcesStatus()" class="text-xs">↻ Re-checar</button>
+      </div>
+      <div id="enrich-sources-status" class="text-sm">⏳ Carregando…</div>
+    </div>
     <div class="card">
       <h2 class="font-semibold mb-3">🔌 Webhooks Agendor (apontando para bkp.alx-i.com/webhook/agendor/)</h2>
       <table id="webhooks-table"><thead><tr><th>ID</th><th>Evento</th><th>URL</th></tr></thead><tbody></tbody></table>
@@ -281,9 +288,8 @@
     <div class="card mb-6">
       <div class="flex items-center justify-between mb-3">
         <h2 class="font-semibold">🩺 Status das Fontes (live)</h2>
-        <button onclick="loadSourcesStatus()" class="text-xs">↻ Re-checar</button>
       </div>
-      <div id="enrich-sources-status" class="text-sm">⏳ Carregando…</div>
+      <div class="text-sm text-gray-500">Veja em <a href="/madmode/status" class="underline">Status</a>.</div>
     </div>
     <div class="card">
       <h2 class="font-semibold mb-3">🕒 Últimas execuções</h2>
@@ -695,7 +701,9 @@ async function refreshDedupStatus(){
 // Init + auto-refresh status
 renderSkeleton();
 loadStatus();
+loadSourcesStatus();
 setInterval(loadStatus, 30000);
+setInterval(loadSourcesStatus, 60000);
 ['f-batch','f-freq'].forEach(id=>{ const el=document.getElementById(id); if(el) el.addEventListener('change', validateConfig); });
 refreshPrefillStatus();
 loadDedupStats();
@@ -776,7 +784,7 @@ async function loadSourcesStatus(){
   }
 }
 const _origLoadEnrich = loadEnrichment;
-loadEnrichment = async function(){ await _origLoadEnrich(); loadSourcesStatus(); };
+loadEnrichment = async function(){ await _origLoadEnrich(); };
 </script>
 </body>
 </html>

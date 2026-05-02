@@ -160,16 +160,26 @@ def _probe_scraping() -> dict:
 
 
 def get_sources_status() -> dict:
+    from concurrent.futures import ThreadPoolExecutor
     started = time.time()
-    sources = [
-        _probe_brasilapi(),
-        _probe_minhareceita(),
-        _probe_receitaws(),
-        _probe_scraping(),
-        _probe_ninjapear(),
-        _probe_google_cse(),
-        _probe_whatsapp(),
+    probes = [
+        _probe_brasilapi,
+        _probe_minhareceita,
+        _probe_receitaws,
+        _probe_scraping,
+        _probe_ninjapear,
+        _probe_google_cse,
+        _probe_whatsapp,
     ]
+    sources: list[dict] = []
+    with ThreadPoolExecutor(max_workers=len(probes)) as ex:
+        futs = [ex.submit(p) for p in probes]
+        for f in futs:
+            try:
+                sources.append(f.result(timeout=_TIMEOUT + 2))
+            except Exception as e:
+                sources.append({"id": "unknown", "label": "?", "enabled": False,
+                                "ok": False, "detail": f"erro probe: {e}"})
     return {
         "sources": sources,
         "elapsed_ms": int((time.time() - started) * 1000),
