@@ -50,6 +50,11 @@ import hashlib
 import requests
 from datetime import datetime
 
+from mappings import (
+    DEAL_FONTE_KEY, DEAL_CANAL_KEY, DEAL_CAMPANHA_KEY,
+    DEAL_CONTEUDO_KEY, DEAL_ANUNCIO_ISOLADO,
+)
+
 
 # ─────────────────────────────────────────────────────────────
 # MAPEAMENTO DE ESTÁGIOS → EVENTOS
@@ -274,6 +279,13 @@ def _send_ga4_event(
     currency: str = "BRL",
     client_id: str | None = None,
     deal_id: str | None = None,
+    utm_source: str | None = None,
+    utm_medium: str | None = None,
+    utm_campaign: str | None = None,
+    utm_content: str | None = None,
+    utm_term: str | None = None,
+    gclid: str | None = None,
+    ga_session_id: str | None = None,
 ) -> dict | None:
     measurement_id = os.environ.get("GA4_MEASUREMENT_ID")
     api_secret     = os.environ.get("GA4_API_SECRET")
@@ -284,6 +296,17 @@ def _send_ga4_event(
     if deal_id:
         params["deal_id"] = deal_id
         params["transaction_id"] = f"pd_{deal_id}"
+
+    if utm_source:   params["campaign_source"]  = utm_source
+    if utm_medium:   params["campaign_medium"]  = utm_medium
+    if utm_campaign: params["campaign_name"]    = utm_campaign
+    if utm_content:  params["campaign_content"] = utm_content
+    if utm_term:     params["campaign_term"]    = utm_term
+    if gclid:        params["gclid"]            = gclid
+    if ga_session_id:
+        params["session_id"] = ga_session_id
+    elif deal_id:
+        params["session_id"] = f"pd_{deal_id}"
 
     payload = {
         "client_id": client_id or f"pd.{deal_id or int(time.time())}",
@@ -437,6 +460,14 @@ def fire_funnel_event(
     client_ua = deal.get("client_user_agent") or deal.get("_client_user_agent")
     geo = _extract_geo_from_deal(deal)
 
+    # Extrai UTMs dos custom fields do Agendor/Pipedrive
+    utm_source   = deal.get(DEAL_FONTE_KEY) or deal.get("utm_source") or None
+    utm_medium   = deal.get(DEAL_CANAL_KEY) or deal.get("utm_medium") or None
+    utm_campaign = deal.get(DEAL_CAMPANHA_KEY) or deal.get("utm_campaign") or None
+    utm_content  = deal.get(DEAL_CONTEUDO_KEY) or deal.get(DEAL_ANUNCIO_ISOLADO) or deal.get("utm_content") or None
+    ga_client_id = deal.get("ga_client_id") or deal.get("ga_cid") or None
+    ga_session_id = deal.get("ga_session_id") or None
+
     results: dict = {}
 
     # ── Meta CAPI ──────────────────────────────────────────
@@ -458,6 +489,10 @@ def fire_funnel_event(
     if ga4_event:
         results["ga4"] = _send_ga4_event(
             event_name=ga4_event, value=value, deal_id=deal_id,
+            client_id=ga_client_id,
+            utm_source=utm_source, utm_medium=utm_medium,
+            utm_campaign=utm_campaign, utm_content=utm_content,
+            gclid=gclid, ga_session_id=ga_session_id,
         )
 
     # ── Google Ads Offline ─────────────────────────────────
